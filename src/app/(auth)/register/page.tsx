@@ -1,9 +1,12 @@
-import React from 'react'
+import RegistrationPage from "@/components/auth/registrtionForm";
+import React from "react";
 
 const page = () => {
-  return (
-    <div>registration page</div>
-  )
-}
+	return (
+		<div>
+			<RegistrationPage />
+		</div>
+	);
+};
 
-export default page
+export default page;
