@@ -27,7 +27,7 @@ export default function Home() {
 					/>
 					<div className="container  px-4 z-10">
 						<div className="grid md:grid-cols-2 gap-12 md:items-center ">
-							<div className="space-y-6 lg:pl-4">
+							<div className="space-y-6 lg:pl-4 pt-0">
 								<h1 className="w-full text-5xl md:text-6xl lg:text-8xl font-bold  md:font-bold leading-tight tracking-tight">
 									Dream big, Invest smart
 								</h1>

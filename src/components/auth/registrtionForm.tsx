@@ -11,6 +11,7 @@ import { Button } from "@/components/ui/button";
 import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
 import { Navbar } from "./navbarAuth";
 import { AnimatedInput } from "./animated-input";
+import { useRouter } from "next/navigation";
 
 const formSchema = z.object({
 	firstName: z.string().min(2, "First name must be at least 2 characters"),
@@ -29,7 +30,6 @@ export default function RegistrationPage() {
 	const [currentSlide, setCurrentSlide] = useState(0);
 	const [isLoading, setIsLoading] = useState(false);
 	const [isSlideValid, setIsSlideValid] = useState(false);
-
 	const form = useForm<z.infer<typeof formSchema>>({
 		resolver: zodResolver(formSchema),
 		defaultValues: {
@@ -40,6 +40,20 @@ export default function RegistrationPage() {
 		},
 		mode: "onTouched",
 	});
+	const router = useRouter();
+
+	const handleSubmit = (event: React.MouseEvent<HTMLButtonElement>) => {
+		event.preventDefault();
+
+		if (!isSlideValid || isLoading) return;
+
+		setIsLoading(true);
+
+		// Simulate a delay (optional) to show the loading state
+		setTimeout(() => {
+			router.push("/home"); // Redirect to home page
+		}, 1000);
+	};
 
 	// Check if current slide is valid
 	useEffect(() => {
@@ -298,20 +312,21 @@ export default function RegistrationPage() {
 									</Button>
 								)}
 								{currentSlide === 2 && (
-									<Button
-										type="submit"
-										className="w-full bg-green-600 hover:bg-green-700 disabled:bg-gray-300 disabled:text-gray-400 rounded-3xl px-8 py-6 transition-all duration-300"
+									<button
+										type="button"
+										onClick={handleSubmit}
+										className="w-full bg-green-600 hover:bg-green-700 disabled:bg-gray-300 disabled:text-gray-400 rounded-3xl px-8 py-3 transition-all duration-300"
 										disabled={!isSlideValid || isLoading}
 									>
 										{isLoading ? (
-											<>
+											<div className="flex items-center justify-center">
 												<Loader2 className="mr-2 h-4 w-4 animate-spin" />{" "}
 												Creating Account...
-											</>
+											</div>
 										) : (
-											"Create Account"
+											<span className="text-white">Create Account</span>
 										)}
-									</Button>
+									</button>
 								)}
 							</div>
 						</form>

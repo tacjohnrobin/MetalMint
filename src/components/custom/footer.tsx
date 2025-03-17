@@ -14,7 +14,7 @@ export default function Footer() {
 		<footer className="w-full bg-[#FFFCF9] border-gray-100 pt-12 pb-6 md:pb-12 lg:pb-24">
 			{/* Main footer links section */}
 			<div className="container mx-auto px-4 md:px-6">
-				<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+				<div className="text-sx md:text-md grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-8">
 					{/* Company Column */}
 					<div>
 						<h3 className="font-semibold text-gray-900 mb-4">Company</h3>
@@ -151,7 +151,9 @@ export default function Footer() {
 					{/* Contact Us Column */}
 					<div>
 						<h3 className="font-semibold text-gray-900 mb-4">Contact us</h3>
-						<p className="text-gray-700 mb-4">support@metalmint.com</p>
+						<p className="text-gray-700 mb-4 text-sm md:text-md">
+							support@metalmint.com
+						</p>
 						<div className="flex space-x-4 mb-6">
 							<Link
 								href="#"

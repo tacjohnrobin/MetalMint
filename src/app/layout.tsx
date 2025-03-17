@@ -30,7 +30,7 @@ export const metadata: Metadata = {
 	description:
 		"Metalmint is a premier platform for secure and efficient gold trading.",
 	icons: {
-		icon: "/icons/favi.svgcons/", // Ensure you have a brand favicon
+		icon: "/icons/favi.svg", // Ensure you have a brand favicon
 	},
 	openGraph: {
 		title: "Metalmint | Trusted Gold Trading",
