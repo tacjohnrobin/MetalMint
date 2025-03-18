@@ -1,0 +1,1011 @@
+INFO 2025-03-17 14:53:17,118 autoreload Watching for file changes with StatReloader
+ERROR 2025-03-17 15:03:21,725 views Registration failed: {'email': [ErrorDetail(string='This field is required.', code='required')], 'first_name': [ErrorDetail(string='This field is required.', code='required')], 'last_name': [ErrorDetail(string='This field is required.', code='required')], 'mobile_number': [ErrorDetail(string='This field is required.', code='required')], 'password': [ErrorDetail(string='This field is required.', code='required')]}
+WARNING 2025-03-17 15:03:21,785 log Bad Request: /api/auth/register/
+WARNING 2025-03-17 15:03:21,787 basehttp "POST /api/auth/register/ HTTP/1.1" 400 201
+ERROR 2025-03-17 15:03:31,534 views Registration failed: {'email': [ErrorDetail(string='This field is required.', code='required')], 'first_name': [ErrorDetail(string='This field is required.', code='required')], 'last_name': [ErrorDetail(string='This field is required.', code='required')], 'mobile_number': [ErrorDetail(string='This field is required.', code='required')], 'password': [ErrorDetail(string='This field is required.', code='required')]}
+WARNING 2025-03-17 15:03:31,549 log Bad Request: /api/auth/register/
+WARNING 2025-03-17 15:03:31,549 basehttp "POST /api/auth/register/ HTTP/1.1" 400 201
+ERROR 2025-03-17 15:05:30,653 log Internal Server Error: /api/auth/register/
+Traceback (most recent call last):
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/django/views/decorators/csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "/Users/jakendai/Developer/MetalMint/backend/authentication/views.py", line 37, in post
+    user = serializer.save()
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/rest_framework/serializers.py", line 212, in save
+    self.instance = self.create(validated_data)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/contextlib.py", line 79, in inner
+    return func(*args, **kwds)
+  File "/Users/jakendai/Developer/MetalMint/backend/authentication/serializers.py", line 127, in create
+    user.save()
+  File "/Users/jakendai/Developer/MetalMint/backend/user/models.py", line 141, in save
+    self.full_clean()
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/django/db/models/base.py", line 1502, in full_clean
+    raise ValidationError(errors)
+django.core.exceptions.ValidationError: {'country': ['This field cannot be blank.'], 'city': ['This field cannot be blank.'], 'marketing_prefs': ['This field cannot be blank.']}
+ERROR 2025-03-17 15:05:30,696 basehttp "POST /api/auth/register/ HTTP/1.1" 500 120466
+INFO 2025-03-17 15:20:26,537 autoreload /Users/jakendai/Developer/MetalMint/backend/user/models.py changed, reloading.
+INFO 2025-03-17 15:21:02,170 autoreload Watching for file changes with StatReloader
+INFO 2025-03-17 15:43:16,614 autoreload /Users/jakendai/Developer/MetalMint/backend/user/models.py changed, reloading.
+INFO 2025-03-17 15:43:36,028 autoreload Watching for file changes with StatReloader
+ERROR 2025-03-17 15:44:36,016 log Internal Server Error: /api/auth/register/
+Traceback (most recent call last):
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/django/views/decorators/csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "/Users/jakendai/Developer/MetalMint/backend/authentication/views.py", line 37, in post
+    user = serializer.save()
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/rest_framework/serializers.py", line 212, in save
+    self.instance = self.create(validated_data)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/contextlib.py", line 79, in inner
+    return func(*args, **kwds)
+  File "/Users/jakendai/Developer/MetalMint/backend/authentication/serializers.py", line 127, in create
+    user.save()
+  File "/Users/jakendai/Developer/MetalMint/backend/user/models.py", line 140, in save
+    self.full_clean()
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/django/db/models/base.py", line 1502, in full_clean
+    raise ValidationError(errors)
+django.core.exceptions.ValidationError: {'country': ['This field cannot be blank.'], 'city': ['This field cannot be blank.']}
+ERROR 2025-03-17 15:44:36,040 basehttp "POST /api/auth/register/ HTTP/1.1" 500 119903
+ERROR 2025-03-17 16:00:02,235 log Internal Server Error: /api/auth/register/
+Traceback (most recent call last):
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/django/views/decorators/csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "/Users/jakendai/Developer/MetalMint/backend/authentication/views.py", line 37, in post
+    user = serializer.save()
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/rest_framework/serializers.py", line 212, in save
+    self.instance = self.create(validated_data)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/contextlib.py", line 79, in inner
+    return func(*args, **kwds)
+  File "/Users/jakendai/Developer/MetalMint/backend/authentication/serializers.py", line 127, in create
+    user.save()
+  File "/Users/jakendai/Developer/MetalMint/backend/user/models.py", line 140, in save
+    self.full_clean()
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/django/db/models/base.py", line 1502, in full_clean
+    raise ValidationError(errors)
+django.core.exceptions.ValidationError: {'country': ['This field cannot be blank.'], 'city': ['This field cannot be blank.']}
+ERROR 2025-03-17 16:00:02,257 basehttp "POST /api/auth/register/ HTTP/1.1" 500 120231
+INFO 2025-03-17 16:22:13,359 autoreload /Users/jakendai/Developer/MetalMint/backend/user/models.py changed, reloading.
+INFO 2025-03-17 16:22:53,187 autoreload Watching for file changes with StatReloader
+INFO 2025-03-17 16:23:00,330 autoreload /Users/jakendai/Developer/MetalMint/backend/user/models.py changed, reloading.
+INFO 2025-03-17 16:23:02,663 autoreload Watching for file changes with StatReloader
+INFO 2025-03-17 16:23:09,277 autoreload /Users/jakendai/Developer/MetalMint/backend/user/models.py changed, reloading.
+INFO 2025-03-17 16:23:12,701 autoreload Watching for file changes with StatReloader
+INFO 2025-03-17 16:23:14,903 autoreload /Users/jakendai/Developer/MetalMint/backend/user/models.py changed, reloading.
+INFO 2025-03-17 16:23:17,872 autoreload Watching for file changes with StatReloader
+INFO 2025-03-17 16:23:20,610 autoreload /Users/jakendai/Developer/MetalMint/backend/user/models.py changed, reloading.
+INFO 2025-03-17 16:23:22,609 autoreload Watching for file changes with StatReloader
+INFO 2025-03-17 16:23:26,132 autoreload /Users/jakendai/Developer/MetalMint/backend/user/models.py changed, reloading.
+INFO 2025-03-17 16:23:28,947 autoreload Watching for file changes with StatReloader
+INFO 2025-03-17 16:23:40,893 autoreload /Users/jakendai/Developer/MetalMint/backend/user/models.py changed, reloading.
+INFO 2025-03-17 16:23:44,767 autoreload Watching for file changes with StatReloader
+INFO 2025-03-17 16:23:47,266 autoreload /Users/jakendai/Developer/MetalMint/backend/user/models.py changed, reloading.
+INFO 2025-03-17 16:23:50,370 autoreload Watching for file changes with StatReloader
+INFO 2025-03-17 16:23:54,948 autoreload /Users/jakendai/Developer/MetalMint/backend/user/models.py changed, reloading.
+INFO 2025-03-17 16:23:58,031 autoreload Watching for file changes with StatReloader
+INFO 2025-03-17 16:24:07,302 autoreload /Users/jakendai/Developer/MetalMint/backend/user/models.py changed, reloading.
+INFO 2025-03-17 16:24:09,118 autoreload Watching for file changes with StatReloader
+INFO 2025-03-17 16:24:11,587 autoreload /Users/jakendai/Developer/MetalMint/backend/user/models.py changed, reloading.
+INFO 2025-03-17 16:24:13,419 autoreload Watching for file changes with StatReloader
+INFO 2025-03-17 16:24:14,976 autoreload /Users/jakendai/Developer/MetalMint/backend/user/models.py changed, reloading.
+INFO 2025-03-17 16:24:17,167 autoreload Watching for file changes with StatReloader
+INFO 2025-03-17 16:24:25,427 autoreload /Users/jakendai/Developer/MetalMint/backend/user/models.py changed, reloading.
+INFO 2025-03-17 16:24:28,352 autoreload Watching for file changes with StatReloader
+INFO 2025-03-17 16:24:31,843 autoreload /Users/jakendai/Developer/MetalMint/backend/user/models.py changed, reloading.
+INFO 2025-03-17 16:24:33,666 autoreload Watching for file changes with StatReloader
+INFO 2025-03-17 16:24:35,732 autoreload /Users/jakendai/Developer/MetalMint/backend/user/models.py changed, reloading.
+INFO 2025-03-17 16:24:38,179 autoreload Watching for file changes with StatReloader
+INFO 2025-03-17 16:24:40,989 autoreload /Users/jakendai/Developer/MetalMint/backend/user/models.py changed, reloading.
+INFO 2025-03-17 16:24:44,112 autoreload Watching for file changes with StatReloader
+INFO 2025-03-17 16:24:53,887 autoreload /Users/jakendai/Developer/MetalMint/backend/user/models.py changed, reloading.
+INFO 2025-03-17 16:24:55,884 autoreload Watching for file changes with StatReloader
+INFO 2025-03-17 16:25:11,793 autoreload /Users/jakendai/Developer/MetalMint/backend/user/models.py changed, reloading.
+INFO 2025-03-17 16:25:14,419 autoreload Watching for file changes with StatReloader
+INFO 2025-03-17 16:25:28,154 autoreload /Users/jakendai/Developer/MetalMint/backend/user/models.py changed, reloading.
+INFO 2025-03-17 16:25:46,505 autoreload Watching for file changes with StatReloader
+ERROR 2025-03-17 16:27:05,007 log Internal Server Error: /api/auth/register/
+Traceback (most recent call last):
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/django/views/decorators/csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "/Users/jakendai/Developer/MetalMint/backend/authentication/views.py", line 37, in post
+    user = serializer.save()
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/rest_framework/serializers.py", line 212, in save
+    self.instance = self.create(validated_data)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/contextlib.py", line 79, in inner
+    return func(*args, **kwds)
+  File "/Users/jakendai/Developer/MetalMint/backend/authentication/serializers.py", line 127, in create
+    user.save()
+  File "/Users/jakendai/Developer/MetalMint/backend/user/models.py", line 146, in save
+    self.generate_client_id()
+  File "/Users/jakendai/Developer/MetalMint/backend/user/models.py", line 157, in generate_client_id
+    last_user = User.objects.select_for_update().order_by('-id').first()
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/django/db/models/query.py", line 1659, in order_by
+    obj.query.add_ordering(*field_names)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/django/db/models/sql/query.py", line 2221, in add_ordering
+    self.names_to_path(item.split(LOOKUP_SEP), self.model._meta)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/django/db/models/sql/query.py", line 1724, in names_to_path
+    raise FieldError(
+django.core.exceptions.FieldError: Cannot resolve keyword 'id' into field. Choices are: city, client_id, country, created_at, date_joined, date_of_birth, document_expiry, email, first_name, groups, investments, is_active, is_deleted, is_staff, is_superuser, jurisdiction, kyc_status, kyc_verification, last_activity, last_login, last_modified, last_name, logentry, mobile_number, otps, outstandingtoken, password, pkid, portfolio_snapshots, profile, risk_level, stripe_account_id, stripe_customer_id, terms_accepted, total_invested, transactions, usd_balance, user_permissions, username, usxw_balance, verification_status, verified_kycs
+ERROR 2025-03-17 16:27:05,019 basehttp "POST /api/auth/register/ HTTP/1.1" 500 137565
+INFO 2025-03-17 16:29:47,317 autoreload /Users/jakendai/Developer/MetalMint/backend/user/models.py changed, reloading.
+INFO 2025-03-17 16:30:06,365 autoreload Watching for file changes with StatReloader
+ERROR 2025-03-17 16:30:26,701 models Failed to create Stripe customer for morty@gmail.com: Unexpected error communicating with Stripe.  If this problem persists,
+let us know at support@stripe.com.
+
+(Network error: ConnectionError: HTTPSConnectionPool(host='api.stripe.com', port=443): Max retries exceeded with url: /v1/customers (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x115e84c10>: Failed to establish a new connection: [Errno 8] nodename nor servname provided, or not known')))
+ERROR 2025-03-17 16:30:28,081 log Internal Server Error: /api/auth/register/
+Traceback (most recent call last):
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/urllib3/connection.py", line 174, in _new_conn
+    conn = connection.create_connection(
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/urllib3/util/connection.py", line 72, in create_connection
+    for res in socket.getaddrinfo(host, port, family, socket.SOCK_STREAM):
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/socket.py", line 967, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+socket.gaierror: [Errno 8] nodename nor servname provided, or not known
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/urllib3/connectionpool.py", line 715, in urlopen
+    httplib_response = self._make_request(
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/urllib3/connectionpool.py", line 404, in _make_request
+    self._validate_conn(conn)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/urllib3/connectionpool.py", line 1060, in _validate_conn
+    conn.connect()
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/urllib3/connection.py", line 363, in connect
+    self.sock = conn = self._new_conn()
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/urllib3/connection.py", line 186, in _new_conn
+    raise NewConnectionError(
+urllib3.exceptions.NewConnectionError: <urllib3.connection.HTTPSConnection object at 0x115e84c10>: Failed to establish a new connection: [Errno 8] nodename nor servname provided, or not known
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/requests/adapters.py", line 486, in send
+    resp = conn.urlopen(
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/urllib3/connectionpool.py", line 801, in urlopen
+    retries = retries.increment(
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/urllib3/util/retry.py", line 594, in increment
+    raise MaxRetryError(_pool, url, error or ResponseError(cause))
+urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='api.stripe.com', port=443): Max retries exceeded with url: /v1/customers (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x115e84c10>: Failed to establish a new connection: [Errno 8] nodename nor servname provided, or not known'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/stripe/_http_client.py", line 484, in _request_internal
+    result = cast(
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/requests/sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/requests/sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/requests/adapters.py", line 519, in send
+    raise ConnectionError(e, request=request)
+requests.exceptions.ConnectionError: HTTPSConnectionPool(host='api.stripe.com', port=443): Max retries exceeded with url: /v1/customers (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x115e84c10>: Failed to establish a new connection: [Errno 8] nodename nor servname provided, or not known'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/jakendai/Developer/MetalMint/backend/user/models.py", line 184, in create_stripe_customer
+    customer = stripe.Customer.create(
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/stripe/_customer.py", line 1429, in create
+    cls._static_request(
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/stripe/_api_resource.py", line 131, in _static_request
+    return _APIRequestor._global_instance().request(
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/stripe/_api_requestor.py", line 166, in request
+    rbody, rcode, rheaders = requestor.request_raw(
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/stripe/_api_requestor.py", line 520, in request_raw
+    ) = self._get_http_client().request_with_retries(
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/stripe/_http_client.py", line 272, in request_with_retries
+    return self._request_with_retries_internal(
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/stripe/_http_client.py", line 359, in _request_with_retries_internal
+    raise connection_error
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/stripe/_http_client.py", line 326, in _request_with_retries_internal
+    response = self.request(method, url, headers, post_data)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/stripe/_http_client.py", line 420, in request
+    return self._request_internal(
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/stripe/_http_client.py", line 516, in _request_internal
+    self._handle_request_error(e)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/stripe/_http_client.py", line 571, in _handle_request_error
+    raise APIConnectionError(msg, should_retry=should_retry)
+stripe._error.APIConnectionError: Unexpected error communicating with Stripe.  If this problem persists,
+let us know at support@stripe.com.
+
+(Network error: ConnectionError: HTTPSConnectionPool(host='api.stripe.com', port=443): Max retries exceeded with url: /v1/customers (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x115e84c10>: Failed to establish a new connection: [Errno 8] nodename nor servname provided, or not known')))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/django/views/decorators/csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "/Users/jakendai/Developer/MetalMint/backend/authentication/views.py", line 37, in post
+    user = serializer.save()
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/rest_framework/serializers.py", line 212, in save
+    self.instance = self.create(validated_data)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/contextlib.py", line 79, in inner
+    return func(*args, **kwds)
+  File "/Users/jakendai/Developer/MetalMint/backend/authentication/serializers.py", line 127, in create
+    user.save()
+  File "/Users/jakendai/Developer/MetalMint/backend/user/models.py", line 151, in save
+    self.create_stripe_customer()
+  File "/Users/jakendai/Developer/MetalMint/backend/user/models.py", line 197, in create_stripe_customer
+    raise ValidationError(f"Payment profile creation failed: {str(e)}")
+django.core.exceptions.ValidationError: ["Payment profile creation failed: Unexpected error communicating with Stripe.  If this problem persists,\nlet us know at support@stripe.com.\n\n(Network error: ConnectionError: HTTPSConnectionPool(host='api.stripe.com', port=443): Max retries exceeded with url: /v1/customers (Caused by NewConnectionError('<urllib3.connection.HTTPSConnection object at 0x115e84c10>: Failed to establish a new connection: [Errno 8] nodename nor servname provided, or not known')))"]
+ERROR 2025-03-17 16:30:28,092 basehttp "POST /api/auth/register/ HTTP/1.1" 500 274982
+INFO 2025-03-17 16:33:18,739 models Stripe customer cus_RxboYJY4zg8XgV created for morty@gmail.com
+INFO 2025-03-17 16:33:33,714 serializers Welcome email sent to morty@gmail.com
+INFO 2025-03-17 16:33:36,564 basehttp "POST /api/auth/register/ HTTP/1.1" 201 296
+ERROR 2025-03-17 16:38:29,024 views Login failed: {'email': [ErrorDetail(string='This field is required.', code='required')], 'password': [ErrorDetail(string='This field is required.', code='required')]}
+WARNING 2025-03-17 16:38:29,086 log Unauthorized: /api/auth/login/
+WARNING 2025-03-17 16:38:29,087 basehttp "POST /api/auth/login/ HTTP/1.1" 401 32
+ERROR 2025-03-17 16:39:03,491 views Login failed: 'UserManager' object has no attribute 'get_by_natural_key'
+WARNING 2025-03-17 16:39:03,494 log Unauthorized: /api/auth/login/
+WARNING 2025-03-17 16:39:03,498 basehttp "POST /api/auth/login/ HTTP/1.1" 401 32
+ERROR 2025-03-17 16:42:20,147 views Login failed: 'UserManager' object has no attribute 'get_by_natural_key'
+WARNING 2025-03-17 16:42:20,157 log Unauthorized: /api/auth/login/
+WARNING 2025-03-17 16:42:20,158 basehttp "POST /api/auth/login/ HTTP/1.1" 401 32
+INFO 2025-03-17 16:50:01,813 autoreload /Users/jakendai/Developer/MetalMint/backend/authentication/serializers.py changed, reloading.
+INFO 2025-03-17 16:59:54,493 autoreload Watching for file changes with StatReloader
+INFO 2025-03-17 17:08:49,003 autoreload /Users/jakendai/Developer/MetalMint/backend/authentication/serializers.py changed, reloading.
+INFO 2025-03-17 17:10:21,040 autoreload Watching for file changes with StatReloader
+INFO 2025-03-17 17:12:47,595 basehttp "POST /api/auth/login/ HTTP/1.1" 200 523
+WARNING 2025-03-17 17:26:05,035 log Bad Request: /api/auth/logout/
+WARNING 2025-03-17 17:26:05,070 basehttp "POST /api/auth/logout/ HTTP/1.1" 400 38
+ERROR 2025-03-17 17:26:51,593 log Internal Server Error: /api/auth/logout/
+Traceback (most recent call last):
+  File "/Users/jakendai/Developer/MetalMint/backend/authentication/views.py", line 72, in post
+    logger.info(f"User {request.user.email} logged out successfully")
+AttributeError: 'AnonymousUser' object has no attribute 'email'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/django/views/decorators/csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "/Users/jakendai/Developer/MetalMint/backend/authentication/views.py", line 75, in post
+    logger.error(f"Logout failed for {request.user.email}: {str(e)}")
+AttributeError: 'AnonymousUser' object has no attribute 'email'
+ERROR 2025-03-17 17:26:51,618 basehttp "POST /api/auth/logout/ HTTP/1.1" 500 101390
+ERROR 2025-03-17 17:45:14,137 log Internal Server Error: /api/auth/register/
+Traceback (most recent call last):
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/django/views/decorators/csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "/Users/jakendai/Developer/MetalMint/backend/authentication/views.py", line 37, in post
+    user = serializer.save()
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/rest_framework/serializers.py", line 212, in save
+    self.instance = self.create(validated_data)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/contextlib.py", line 79, in inner
+    return func(*args, **kwds)
+  File "/Users/jakendai/Developer/MetalMint/backend/authentication/serializers.py", line 127, in create
+    user.save()
+  File "/Users/jakendai/Developer/MetalMint/backend/user/models.py", line 144, in save
+    self.generate_client_id()
+  File "/Users/jakendai/Developer/MetalMint/backend/user/models.py", line 156, in generate_client_id
+    sequence = (last_user.id + 1) if last_user else 1001
+AttributeError: 'User' object has no attribute 'id'
+ERROR 2025-03-17 17:45:14,206 basehttp "POST /api/auth/register/ HTTP/1.1" 500 119082
+INFO 2025-03-17 17:45:58,661 autoreload /Users/jakendai/Developer/MetalMint/backend/user/models.py changed, reloading.
+INFO 2025-03-17 17:47:34,203 autoreload Watching for file changes with StatReloader
+INFO 2025-03-17 19:09:26,942 models Stripe customer cus_RxeLSMMtB69Q1N created for summer@gmail.com
+INFO 2025-03-17 19:09:32,986 serializers Welcome email sent to summer@gmail.com
+INFO 2025-03-17 19:09:33,030 basehttp "POST /api/auth/register/ HTTP/1.1" 201 299
+INFO 2025-03-17 19:10:12,629 basehttp "POST /api/auth/login/ HTTP/1.1" 200 523
+ERROR 2025-03-17 19:11:08,284 log Internal Server Error: /api/auth/logout/
+Traceback (most recent call last):
+  File "/Users/jakendai/Developer/MetalMint/backend/authentication/views.py", line 72, in post
+    logger.info(f"User {request.user.email} logged out successfully")
+AttributeError: 'AnonymousUser' object has no attribute 'email'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/django/views/decorators/csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "/Users/jakendai/Developer/MetalMint/backend/authentication/views.py", line 75, in post
+    logger.error(f"Logout failed for {request.user.email}: {str(e)}")
+AttributeError: 'AnonymousUser' object has no attribute 'email'
+ERROR 2025-03-17 19:11:08,306 basehttp "POST /api/auth/logout/ HTTP/1.1" 500 101390
+INFO 2025-03-17 19:17:41,112 autoreload /Users/jakendai/Developer/MetalMint/backend/authentication/views.py changed, reloading.
+INFO 2025-03-17 19:19:02,172 autoreload Watching for file changes with StatReloader
+ERROR 2025-03-17 19:22:01,931 views Logout failed for summer@gmail.com: Token is blacklisted
+WARNING 2025-03-17 19:22:01,935 log Bad Request: /api/auth/logout/
+WARNING 2025-03-17 19:22:01,941 basehttp "POST /api/auth/logout/ HTTP/1.1" 400 37
+INFO 2025-03-17 19:22:15,122 basehttp "POST /api/auth/login/ HTTP/1.1" 200 523
+INFO 2025-03-17 19:22:43,121 views User summer@gmail.com logged out successfully
+INFO 2025-03-17 19:22:43,124 basehttp "POST /api/auth/logout/ HTTP/1.1" 200 37
+INFO 2025-03-17 19:23:26,021 models Stripe customer cus_RxeZjT2shhSOhm created for beth@gmail.com
+INFO 2025-03-17 19:23:30,620 serializers Welcome email sent to beth@gmail.com
+INFO 2025-03-17 19:23:30,627 basehttp "POST /api/auth/register/ HTTP/1.1" 201 293
+INFO 2025-03-17 19:23:51,620 basehttp "POST /api/auth/login/ HTTP/1.1" 200 523
+INFO 2025-03-17 19:25:25,579 views Account deleted for beth@gmail.com
+INFO 2025-03-17 19:25:25,584 basehttp "DELETE /api/auth/account/delete/ HTTP/1.1" 200 42
+INFO 2025-03-17 19:26:08,251 models Stripe customer cus_RxebAXQZgB3Ks1 created for jerry@gmail.com
+INFO 2025-03-17 19:26:14,064 serializers Welcome email sent to jerry@gmail.com
+INFO 2025-03-17 19:26:14,078 basehttp "POST /api/auth/register/ HTTP/1.1" 201 296
+INFO 2025-03-17 19:26:34,008 basehttp "POST /api/auth/login/ HTTP/1.1" 200 523
+ERROR 2025-03-17 19:27:46,162 log Internal Server Error: /api/otp/send/
+Traceback (most recent call last):
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/Users/jakendai/Developer/MetalMint/backend/middleware/security.py", line 34, in __call__
+    if not request.user.is_authenticated:
+AttributeError: 'WSGIRequest' object has no attribute 'user'
+ERROR 2025-03-17 19:27:46,164 basehttp "POST /api/otp/send/ HTTP/1.1" 500 63988
+ERROR 2025-03-17 19:29:08,291 views Failed to send OTP to jerry@gmail.com: authentication/otp_email.html
+ERROR 2025-03-17 19:29:08,292 log Internal Server Error: /api/auth/otp/send/
+ERROR 2025-03-17 19:29:08,293 basehttp "POST /api/auth/otp/send/ HTTP/1.1" 500 31
+ERROR 2025-03-17 19:36:06,316 views Failed to send OTP to jerry@gmail.com: authentication/otp_email.html
+ERROR 2025-03-17 19:36:06,441 log Internal Server Error: /api/auth/otp/send/
+ERROR 2025-03-17 19:36:06,447 basehttp "POST /api/auth/otp/send/ HTTP/1.1" 500 31
+INFO 2025-03-17 19:39:05,911 autoreload /Users/jakendai/Developer/MetalMint/backend/authentication/views.py changed, reloading.
+INFO 2025-03-17 19:40:29,762 autoreload Watching for file changes with StatReloader
+ERROR 2025-03-17 19:41:45,452 views Failed to send OTP to jerry@gmail.com: authentication/templates/otp_email.html
+ERROR 2025-03-17 19:41:45,455 log Internal Server Error: /api/auth/otp/send/
+ERROR 2025-03-17 19:41:45,456 basehttp "POST /api/auth/otp/send/ HTTP/1.1" 500 31
+INFO 2025-03-17 19:55:51,654 autoreload /Users/jakendai/Developer/MetalMint/backend/finance_banking/settings.py changed, reloading.
+INFO 2025-03-17 20:00:48,472 autoreload Watching for file changes with StatReloader
+INFO 2025-03-17 20:12:35,418 autoreload /Users/jakendai/Developer/MetalMint/backend/authentication/views.py changed, reloading.
+INFO 2025-03-17 20:14:17,454 autoreload Watching for file changes with StatReloader
+INFO 2025-03-17 20:16:12,755 autoreload /Users/jakendai/Developer/MetalMint/backend/authentication/views.py changed, reloading.
+INFO 2025-03-17 20:17:35,690 autoreload Watching for file changes with StatReloader
+INFO 2025-03-17 20:18:30,598 autoreload /Users/jakendai/Developer/MetalMint/backend/authentication/views.py changed, reloading.
+INFO 2025-03-17 20:21:21,309 autoreload Watching for file changes with StatReloader
+INFO 2025-03-17 20:22:37,003 views OTP MM-415804 generated for jerry@gmail.com
+ERROR 2025-03-17 20:22:37,027 views Template rendering failed: authentication/otp_email.html
+Traceback (most recent call last):
+  File "/Users/jakendai/Developer/MetalMint/backend/authentication/views.py", line 116, in post
+    html_message = render_to_string(
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/django/template/loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/django/template/loader.py", line 19, in get_template
+    raise TemplateDoesNotExist(template_name, chain=chain)
+django.template.exceptions.TemplateDoesNotExist: authentication/otp_email.html
+ERROR 2025-03-17 20:22:37,242 views Failed to send OTP to jerry@gmail.com: authentication/otp_email.html
+Traceback (most recent call last):
+  File "/Users/jakendai/Developer/MetalMint/backend/authentication/views.py", line 116, in post
+    html_message = render_to_string(
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/django/template/loader.py", line 61, in render_to_string
+    template = get_template(template_name, using=using)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/django/template/loader.py", line 19, in get_template
+    raise TemplateDoesNotExist(template_name, chain=chain)
+django.template.exceptions.TemplateDoesNotExist: authentication/otp_email.html
+ERROR 2025-03-17 20:22:37,244 log Internal Server Error: /api/auth/otp/send/
+ERROR 2025-03-17 20:22:37,245 basehttp "POST /api/auth/otp/send/ HTTP/1.1" 500 62
+INFO 2025-03-17 20:33:15,784 autoreload /Users/jakendai/Developer/MetalMint/backend/authentication/views.py changed, reloading.
+INFO 2025-03-17 20:42:02,505 autoreload Watching for file changes with StatReloader
+INFO 2025-03-17 20:44:44,568 views OTP MM-105486 generated for jerry@gmail.com
+INFO 2025-03-17 20:44:44,802 views Template rendered successfully for jerry@gmail.com
+INFO 2025-03-17 20:44:51,855 views OTP sent to jerry@gmail.com for purpose VA
+INFO 2025-03-17 20:44:51,966 basehttp "POST /api/auth/otp/send/ HTTP/1.1" 200 35
+INFO 2025-03-17 20:51:08,048 basehttp "POST /api/auth/otp/verify/ HTTP/1.1" 200 72
+WARNING 2025-03-17 20:54:22,325 log Not Found: /api/auth/password/reset/request/
+WARNING 2025-03-17 20:54:22,650 basehttp "POST /api/auth/password/reset/request/ HTTP/1.1" 404 4743
+INFO 2025-03-17 20:55:25,555 views Password reset email sent to jerry@gmail.com
+INFO 2025-03-17 20:55:25,885 basehttp "POST /api/auth/password/reset/ HTTP/1.1" 200 38
+INFO 2025-03-17 20:56:48,679 models Stripe customer cus_Rxg4ogqvtOE5XP created for quboafrica@gmail.com
+INFO 2025-03-17 20:56:53,223 serializers Welcome email sent to quboafrica@gmail.com
+INFO 2025-03-17 20:56:53,320 basehttp "POST /api/auth/register/ HTTP/1.1" 201 304
+INFO 2025-03-17 20:57:11,640 basehttp "POST /api/auth/login/ HTTP/1.1" 200 523
+INFO 2025-03-17 20:57:45,885 views OTP MM-570014 generated for quboafrica@gmail.com
+INFO 2025-03-17 20:57:45,918 views Template rendered successfully for quboafrica@gmail.com
+INFO 2025-03-17 20:57:49,735 views OTP sent to quboafrica@gmail.com for purpose VA
+INFO 2025-03-17 20:57:49,738 basehttp "POST /api/auth/otp/send/ HTTP/1.1" 200 35
+INFO 2025-03-17 21:06:09,790 basehttp "POST /api/auth/otp/verify/ HTTP/1.1" 200 72
+INFO 2025-03-17 21:07:06,235 views Password reset email sent to quboafrica@gmail.com
+INFO 2025-03-17 21:07:06,271 basehttp "POST /api/auth/password/reset/ HTTP/1.1" 200 38
+INFO 2025-03-17 21:15:24,773 views Password reset successful for quboafrica@gmail.com
+INFO 2025-03-17 21:15:24,881 basehttp "POST /api/auth/password/reset/confirm/Ng/cmtuno-18bcc26a4280ee438a1164ec610ab771/ HTTP/1.1" 200 39
+INFO 2025-03-17 21:16:52,166 views Password changed successfully for quboafrica@gmail.com
+INFO 2025-03-17 21:16:52,197 basehttp "POST /api/auth/password/change/ HTTP/1.1" 200 43
+INFO 2025-03-17 21:30:14,054 models Stripe customer cus_RxgbZHQhxoSzwZ created for tacjohnrobin@gmail.com
+INFO 2025-03-17 21:30:17,931 serializers Welcome email sent to tacjohnrobin@gmail.com
+INFO 2025-03-17 21:30:17,935 basehttp "POST /api/auth/register/ HTTP/1.1" 201 305
+INFO 2025-03-17 21:30:32,391 basehttp "POST /api/auth/login/ HTTP/1.1" 200 523
+INFO 2025-03-17 21:30:57,637 views OTP MM-308956 generated for tacjohnrobin@gmail.com
+INFO 2025-03-17 21:30:57,707 views Template rendered successfully for tacjohnrobin@gmail.com
+INFO 2025-03-17 21:31:02,782 views OTP sent to tacjohnrobin@gmail.com for purpose VA
+INFO 2025-03-17 21:31:02,786 basehttp "POST /api/auth/otp/send/ HTTP/1.1" 200 35
+INFO 2025-03-17 21:38:16,163 views OTP MM-996755 generated for tacjohnrobin@gmail.com
+INFO 2025-03-17 21:38:16,217 views Template rendered successfully for tacjohnrobin@gmail.com
+INFO 2025-03-17 21:38:19,903 views OTP sent to tacjohnrobin@gmail.com for purpose VA
+INFO 2025-03-17 21:38:19,913 basehttp "POST /api/auth/otp/send/ HTTP/1.1" 200 35
+INFO 2025-03-17 21:40:49,366 views OTP MM-289283 generated for tacjohnrobin@gmail.com
+INFO 2025-03-17 21:40:49,430 views Template rendered successfully for tacjohnrobin@gmail.com
+INFO 2025-03-17 21:40:55,008 views OTP sent to tacjohnrobin@gmail.com for purpose VA
+INFO 2025-03-17 21:40:55,012 basehttp "POST /api/auth/otp/send/ HTTP/1.1" 200 35
+INFO 2025-03-17 21:41:48,668 views Password reset email sent to tacjohnrobin@gmail.com
+INFO 2025-03-17 21:41:48,701 basehttp "POST /api/auth/password/reset/ HTTP/1.1" 200 38
+ERROR 2025-03-18 07:07:01,687 models Failed to create Stripe customer for michaelndai7@gmail.com: Could not verify Stripe's SSL certificate.  Please make sure that your
+network is not intercepting certificates.  If this problem persists,
+let us know at support@stripe.com.
+
+(Network error: SSLError: HTTPSConnectionPool(host='api.stripe.com', port=443): Max retries exceeded with url: /v1/customers (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1007)'))))
+ERROR 2025-03-18 07:07:06,082 log Internal Server Error: /api/auth/register/
+Traceback (most recent call last):
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/urllib3/connectionpool.py", line 715, in urlopen
+    httplib_response = self._make_request(
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/urllib3/connectionpool.py", line 404, in _make_request
+    self._validate_conn(conn)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/urllib3/connectionpool.py", line 1060, in _validate_conn
+    conn.connect()
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/urllib3/connection.py", line 419, in connect
+    self.sock = ssl_wrap_socket(
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/urllib3/util/ssl_.py", line 449, in ssl_wrap_socket
+    ssl_sock = _ssl_wrap_socket_impl(
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/urllib3/util/ssl_.py", line 493, in _ssl_wrap_socket_impl
+    return ssl_context.wrap_socket(sock, server_hostname=server_hostname)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/ssl.py", line 513, in wrap_socket
+    return self.sslsocket_class._create(
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/ssl.py", line 1104, in _create
+    self.do_handshake()
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/ssl.py", line 1375, in do_handshake
+    self._sslobj.do_handshake()
+ssl.SSLEOFError: [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1007)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/requests/adapters.py", line 486, in send
+    resp = conn.urlopen(
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/urllib3/connectionpool.py", line 801, in urlopen
+    retries = retries.increment(
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/urllib3/util/retry.py", line 594, in increment
+    raise MaxRetryError(_pool, url, error or ResponseError(cause))
+urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='api.stripe.com', port=443): Max retries exceeded with url: /v1/customers (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1007)')))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/stripe/_http_client.py", line 484, in _request_internal
+    result = cast(
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/requests/sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/requests/sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/requests/adapters.py", line 517, in send
+    raise SSLError(e, request=request)
+requests.exceptions.SSLError: HTTPSConnectionPool(host='api.stripe.com', port=443): Max retries exceeded with url: /v1/customers (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1007)')))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/jakendai/Developer/MetalMint/backend/user/models.py", line 182, in create_stripe_customer
+    customer = stripe.Customer.create(
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/stripe/_customer.py", line 1429, in create
+    cls._static_request(
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/stripe/_api_resource.py", line 131, in _static_request
+    return _APIRequestor._global_instance().request(
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/stripe/_api_requestor.py", line 166, in request
+    rbody, rcode, rheaders = requestor.request_raw(
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/stripe/_api_requestor.py", line 520, in request_raw
+    ) = self._get_http_client().request_with_retries(
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/stripe/_http_client.py", line 272, in request_with_retries
+    return self._request_with_retries_internal(
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/stripe/_http_client.py", line 359, in _request_with_retries_internal
+    raise connection_error
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/stripe/_http_client.py", line 326, in _request_with_retries_internal
+    response = self.request(method, url, headers, post_data)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/stripe/_http_client.py", line 420, in request
+    return self._request_internal(
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/stripe/_http_client.py", line 516, in _request_internal
+    self._handle_request_error(e)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/stripe/_http_client.py", line 571, in _handle_request_error
+    raise APIConnectionError(msg, should_retry=should_retry)
+stripe._error.APIConnectionError: Could not verify Stripe's SSL certificate.  Please make sure that your
+network is not intercepting certificates.  If this problem persists,
+let us know at support@stripe.com.
+
+(Network error: SSLError: HTTPSConnectionPool(host='api.stripe.com', port=443): Max retries exceeded with url: /v1/customers (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1007)'))))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/django/views/decorators/csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "/Users/jakendai/Developer/MetalMint/backend/authentication/views.py", line 37, in post
+    user = serializer.save()
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/rest_framework/serializers.py", line 212, in save
+    self.instance = self.create(validated_data)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/contextlib.py", line 79, in inner
+    return func(*args, **kwds)
+  File "/Users/jakendai/Developer/MetalMint/backend/authentication/serializers.py", line 127, in create
+    user.save()
+  File "/Users/jakendai/Developer/MetalMint/backend/user/models.py", line 149, in save
+    self.create_stripe_customer()
+  File "/Users/jakendai/Developer/MetalMint/backend/user/models.py", line 195, in create_stripe_customer
+    raise ValidationError(f"Payment profile creation failed: {str(e)}")
+django.core.exceptions.ValidationError: ["Payment profile creation failed: Could not verify Stripe's SSL certificate.  Please make sure that your\nnetwork is not intercepting certificates.  If this problem persists,\nlet us know at support@stripe.com.\n\n(Network error: SSLError: HTTPSConnectionPool(host='api.stripe.com', port=443): Max retries exceeded with url: /v1/customers (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1007)'))))"]
+ERROR 2025-03-18 07:07:06,102 basehttp "POST /api/auth/register/ HTTP/1.1" 500 283017
+ERROR 2025-03-18 07:12:37,327 models Failed to create Stripe customer for michaelndai7@gmail.com: Could not verify Stripe's SSL certificate.  Please make sure that your
+network is not intercepting certificates.  If this problem persists,
+let us know at support@stripe.com.
+
+(Network error: SSLError: HTTPSConnectionPool(host='api.stripe.com', port=443): Max retries exceeded with url: /v1/customers (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1007)'))))
+ERROR 2025-03-18 07:12:38,278 log Internal Server Error: /api/auth/register/
+Traceback (most recent call last):
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/urllib3/connectionpool.py", line 715, in urlopen
+    httplib_response = self._make_request(
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/urllib3/connectionpool.py", line 404, in _make_request
+    self._validate_conn(conn)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/urllib3/connectionpool.py", line 1060, in _validate_conn
+    conn.connect()
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/urllib3/connection.py", line 419, in connect
+    self.sock = ssl_wrap_socket(
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/urllib3/util/ssl_.py", line 449, in ssl_wrap_socket
+    ssl_sock = _ssl_wrap_socket_impl(
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/urllib3/util/ssl_.py", line 493, in _ssl_wrap_socket_impl
+    return ssl_context.wrap_socket(sock, server_hostname=server_hostname)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/ssl.py", line 513, in wrap_socket
+    return self.sslsocket_class._create(
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/ssl.py", line 1104, in _create
+    self.do_handshake()
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/ssl.py", line 1375, in do_handshake
+    self._sslobj.do_handshake()
+ssl.SSLEOFError: [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1007)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/requests/adapters.py", line 486, in send
+    resp = conn.urlopen(
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/urllib3/connectionpool.py", line 801, in urlopen
+    retries = retries.increment(
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/urllib3/util/retry.py", line 594, in increment
+    raise MaxRetryError(_pool, url, error or ResponseError(cause))
+urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='api.stripe.com', port=443): Max retries exceeded with url: /v1/customers (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1007)')))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/stripe/_http_client.py", line 484, in _request_internal
+    result = cast(
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/requests/sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/requests/sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/requests/adapters.py", line 517, in send
+    raise SSLError(e, request=request)
+requests.exceptions.SSLError: HTTPSConnectionPool(host='api.stripe.com', port=443): Max retries exceeded with url: /v1/customers (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1007)')))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/jakendai/Developer/MetalMint/backend/user/models.py", line 182, in create_stripe_customer
+    customer = stripe.Customer.create(
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/stripe/_customer.py", line 1429, in create
+    cls._static_request(
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/stripe/_api_resource.py", line 131, in _static_request
+    return _APIRequestor._global_instance().request(
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/stripe/_api_requestor.py", line 166, in request
+    rbody, rcode, rheaders = requestor.request_raw(
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/stripe/_api_requestor.py", line 520, in request_raw
+    ) = self._get_http_client().request_with_retries(
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/stripe/_http_client.py", line 272, in request_with_retries
+    return self._request_with_retries_internal(
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/stripe/_http_client.py", line 359, in _request_with_retries_internal
+    raise connection_error
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/stripe/_http_client.py", line 326, in _request_with_retries_internal
+    response = self.request(method, url, headers, post_data)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/stripe/_http_client.py", line 420, in request
+    return self._request_internal(
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/stripe/_http_client.py", line 516, in _request_internal
+    self._handle_request_error(e)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/stripe/_http_client.py", line 571, in _handle_request_error
+    raise APIConnectionError(msg, should_retry=should_retry)
+stripe._error.APIConnectionError: Could not verify Stripe's SSL certificate.  Please make sure that your
+network is not intercepting certificates.  If this problem persists,
+let us know at support@stripe.com.
+
+(Network error: SSLError: HTTPSConnectionPool(host='api.stripe.com', port=443): Max retries exceeded with url: /v1/customers (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1007)'))))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/django/views/decorators/csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "/Users/jakendai/Developer/MetalMint/backend/authentication/views.py", line 37, in post
+    user = serializer.save()
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/rest_framework/serializers.py", line 212, in save
+    self.instance = self.create(validated_data)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/contextlib.py", line 79, in inner
+    return func(*args, **kwds)
+  File "/Users/jakendai/Developer/MetalMint/backend/authentication/serializers.py", line 127, in create
+    user.save()
+  File "/Users/jakendai/Developer/MetalMint/backend/user/models.py", line 149, in save
+    self.create_stripe_customer()
+  File "/Users/jakendai/Developer/MetalMint/backend/user/models.py", line 195, in create_stripe_customer
+    raise ValidationError(f"Payment profile creation failed: {str(e)}")
+django.core.exceptions.ValidationError: ["Payment profile creation failed: Could not verify Stripe's SSL certificate.  Please make sure that your\nnetwork is not intercepting certificates.  If this problem persists,\nlet us know at support@stripe.com.\n\n(Network error: SSLError: HTTPSConnectionPool(host='api.stripe.com', port=443): Max retries exceeded with url: /v1/customers (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1007)'))))"]
+ERROR 2025-03-18 07:12:38,285 basehttp "POST /api/auth/register/ HTTP/1.1" 500 283016
+ERROR 2025-03-18 07:14:09,583 models Failed to create Stripe customer for michaelndai7@gmail.com: Could not verify Stripe's SSL certificate.  Please make sure that your
+network is not intercepting certificates.  If this problem persists,
+let us know at support@stripe.com.
+
+(Network error: SSLError: HTTPSConnectionPool(host='api.stripe.com', port=443): Max retries exceeded with url: /v1/customers (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1007)'))))
+ERROR 2025-03-18 07:14:11,423 log Internal Server Error: /api/auth/register/
+Traceback (most recent call last):
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/urllib3/connectionpool.py", line 715, in urlopen
+    httplib_response = self._make_request(
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/urllib3/connectionpool.py", line 404, in _make_request
+    self._validate_conn(conn)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/urllib3/connectionpool.py", line 1060, in _validate_conn
+    conn.connect()
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/urllib3/connection.py", line 419, in connect
+    self.sock = ssl_wrap_socket(
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/urllib3/util/ssl_.py", line 449, in ssl_wrap_socket
+    ssl_sock = _ssl_wrap_socket_impl(
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/urllib3/util/ssl_.py", line 493, in _ssl_wrap_socket_impl
+    return ssl_context.wrap_socket(sock, server_hostname=server_hostname)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/ssl.py", line 513, in wrap_socket
+    return self.sslsocket_class._create(
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/ssl.py", line 1104, in _create
+    self.do_handshake()
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/ssl.py", line 1375, in do_handshake
+    self._sslobj.do_handshake()
+ssl.SSLEOFError: [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1007)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/requests/adapters.py", line 486, in send
+    resp = conn.urlopen(
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/urllib3/connectionpool.py", line 801, in urlopen
+    retries = retries.increment(
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/urllib3/util/retry.py", line 594, in increment
+    raise MaxRetryError(_pool, url, error or ResponseError(cause))
+urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='api.stripe.com', port=443): Max retries exceeded with url: /v1/customers (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1007)')))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/stripe/_http_client.py", line 484, in _request_internal
+    result = cast(
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/requests/sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/requests/sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/requests/adapters.py", line 517, in send
+    raise SSLError(e, request=request)
+requests.exceptions.SSLError: HTTPSConnectionPool(host='api.stripe.com', port=443): Max retries exceeded with url: /v1/customers (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1007)')))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/jakendai/Developer/MetalMint/backend/user/models.py", line 182, in create_stripe_customer
+    customer = stripe.Customer.create(
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/stripe/_customer.py", line 1429, in create
+    cls._static_request(
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/stripe/_api_resource.py", line 131, in _static_request
+    return _APIRequestor._global_instance().request(
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/stripe/_api_requestor.py", line 166, in request
+    rbody, rcode, rheaders = requestor.request_raw(
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/stripe/_api_requestor.py", line 520, in request_raw
+    ) = self._get_http_client().request_with_retries(
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/stripe/_http_client.py", line 272, in request_with_retries
+    return self._request_with_retries_internal(
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/stripe/_http_client.py", line 359, in _request_with_retries_internal
+    raise connection_error
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/stripe/_http_client.py", line 326, in _request_with_retries_internal
+    response = self.request(method, url, headers, post_data)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/stripe/_http_client.py", line 420, in request
+    return self._request_internal(
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/stripe/_http_client.py", line 516, in _request_internal
+    self._handle_request_error(e)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/stripe/_http_client.py", line 571, in _handle_request_error
+    raise APIConnectionError(msg, should_retry=should_retry)
+stripe._error.APIConnectionError: Could not verify Stripe's SSL certificate.  Please make sure that your
+network is not intercepting certificates.  If this problem persists,
+let us know at support@stripe.com.
+
+(Network error: SSLError: HTTPSConnectionPool(host='api.stripe.com', port=443): Max retries exceeded with url: /v1/customers (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1007)'))))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/django/views/decorators/csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "/Users/jakendai/Developer/MetalMint/backend/authentication/views.py", line 37, in post
+    user = serializer.save()
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/rest_framework/serializers.py", line 212, in save
+    self.instance = self.create(validated_data)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/contextlib.py", line 79, in inner
+    return func(*args, **kwds)
+  File "/Users/jakendai/Developer/MetalMint/backend/authentication/serializers.py", line 127, in create
+    user.save()
+  File "/Users/jakendai/Developer/MetalMint/backend/user/models.py", line 149, in save
+    self.create_stripe_customer()
+  File "/Users/jakendai/Developer/MetalMint/backend/user/models.py", line 195, in create_stripe_customer
+    raise ValidationError(f"Payment profile creation failed: {str(e)}")
+django.core.exceptions.ValidationError: ["Payment profile creation failed: Could not verify Stripe's SSL certificate.  Please make sure that your\nnetwork is not intercepting certificates.  If this problem persists,\nlet us know at support@stripe.com.\n\n(Network error: SSLError: HTTPSConnectionPool(host='api.stripe.com', port=443): Max retries exceeded with url: /v1/customers (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1007)'))))"]
+ERROR 2025-03-18 07:14:11,430 basehttp "POST /api/auth/register/ HTTP/1.1" 500 283018
+ERROR 2025-03-18 07:19:42,938 models Failed to create Stripe customer for michaelndai7@gmail.com: Could not verify Stripe's SSL certificate.  Please make sure that your
+network is not intercepting certificates.  If this problem persists,
+let us know at support@stripe.com.
+
+(Network error: SSLError: HTTPSConnectionPool(host='api.stripe.com', port=443): Max retries exceeded with url: /v1/customers (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1007)'))))
+ERROR 2025-03-18 07:19:44,381 log Internal Server Error: /api/auth/register/
+Traceback (most recent call last):
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/urllib3/connectionpool.py", line 715, in urlopen
+    httplib_response = self._make_request(
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/urllib3/connectionpool.py", line 404, in _make_request
+    self._validate_conn(conn)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/urllib3/connectionpool.py", line 1060, in _validate_conn
+    conn.connect()
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/urllib3/connection.py", line 419, in connect
+    self.sock = ssl_wrap_socket(
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/urllib3/util/ssl_.py", line 449, in ssl_wrap_socket
+    ssl_sock = _ssl_wrap_socket_impl(
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/urllib3/util/ssl_.py", line 493, in _ssl_wrap_socket_impl
+    return ssl_context.wrap_socket(sock, server_hostname=server_hostname)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/ssl.py", line 513, in wrap_socket
+    return self.sslsocket_class._create(
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/ssl.py", line 1104, in _create
+    self.do_handshake()
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/ssl.py", line 1375, in do_handshake
+    self._sslobj.do_handshake()
+ssl.SSLEOFError: [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1007)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/requests/adapters.py", line 486, in send
+    resp = conn.urlopen(
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/urllib3/connectionpool.py", line 801, in urlopen
+    retries = retries.increment(
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/urllib3/util/retry.py", line 594, in increment
+    raise MaxRetryError(_pool, url, error or ResponseError(cause))
+urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='api.stripe.com', port=443): Max retries exceeded with url: /v1/customers (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1007)')))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/stripe/_http_client.py", line 484, in _request_internal
+    result = cast(
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/requests/sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/requests/sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/requests/adapters.py", line 517, in send
+    raise SSLError(e, request=request)
+requests.exceptions.SSLError: HTTPSConnectionPool(host='api.stripe.com', port=443): Max retries exceeded with url: /v1/customers (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1007)')))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/jakendai/Developer/MetalMint/backend/user/models.py", line 182, in create_stripe_customer
+    customer = stripe.Customer.create(
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/stripe/_customer.py", line 1429, in create
+    cls._static_request(
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/stripe/_api_resource.py", line 131, in _static_request
+    return _APIRequestor._global_instance().request(
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/stripe/_api_requestor.py", line 166, in request
+    rbody, rcode, rheaders = requestor.request_raw(
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/stripe/_api_requestor.py", line 520, in request_raw
+    ) = self._get_http_client().request_with_retries(
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/stripe/_http_client.py", line 272, in request_with_retries
+    return self._request_with_retries_internal(
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/stripe/_http_client.py", line 359, in _request_with_retries_internal
+    raise connection_error
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/stripe/_http_client.py", line 326, in _request_with_retries_internal
+    response = self.request(method, url, headers, post_data)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/stripe/_http_client.py", line 420, in request
+    return self._request_internal(
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/stripe/_http_client.py", line 516, in _request_internal
+    self._handle_request_error(e)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/stripe/_http_client.py", line 571, in _handle_request_error
+    raise APIConnectionError(msg, should_retry=should_retry)
+stripe._error.APIConnectionError: Could not verify Stripe's SSL certificate.  Please make sure that your
+network is not intercepting certificates.  If this problem persists,
+let us know at support@stripe.com.
+
+(Network error: SSLError: HTTPSConnectionPool(host='api.stripe.com', port=443): Max retries exceeded with url: /v1/customers (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1007)'))))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/django/views/decorators/csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "/Users/jakendai/Developer/MetalMint/backend/authentication/views.py", line 37, in post
+    user = serializer.save()
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/rest_framework/serializers.py", line 212, in save
+    self.instance = self.create(validated_data)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/contextlib.py", line 79, in inner
+    return func(*args, **kwds)
+  File "/Users/jakendai/Developer/MetalMint/backend/authentication/serializers.py", line 127, in create
+    user.save()
+  File "/Users/jakendai/Developer/MetalMint/backend/user/models.py", line 149, in save
+    self.create_stripe_customer()
+  File "/Users/jakendai/Developer/MetalMint/backend/user/models.py", line 195, in create_stripe_customer
+    raise ValidationError(f"Payment profile creation failed: {str(e)}")
+django.core.exceptions.ValidationError: ["Payment profile creation failed: Could not verify Stripe's SSL certificate.  Please make sure that your\nnetwork is not intercepting certificates.  If this problem persists,\nlet us know at support@stripe.com.\n\n(Network error: SSLError: HTTPSConnectionPool(host='api.stripe.com', port=443): Max retries exceeded with url: /v1/customers (Caused by SSLError(SSLEOFError(8, '[SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1007)'))))"]
+ERROR 2025-03-18 07:19:44,385 basehttp "POST /api/auth/register/ HTTP/1.1" 500 283017
+INFO 2025-03-18 07:23:10,973 models Stripe customer cus_RxqAFUOiZleesI created for michaelndai7@gmail.com
+INFO 2025-03-18 07:23:14,955 serializers Welcome email sent to michaelndai7@gmail.com
+INFO 2025-03-18 07:23:15,538 basehttp "POST /api/auth/register/ HTTP/1.1" 201 304
+INFO 2025-03-18 07:27:17,215 basehttp "POST /api/auth/login/ HTTP/1.1" 200 523
+INFO 2025-03-18 07:30:37,760 views OTP MM-190775 generated for michaelndai7@gmail.com
+INFO 2025-03-18 07:30:37,776 views Template rendered successfully for michaelndai7@gmail.com
+INFO 2025-03-18 07:30:41,968 views OTP sent to michaelndai7@gmail.com for purpose VA
+INFO 2025-03-18 07:30:41,973 basehttp "POST /api/auth/otp/send/ HTTP/1.1" 200 35
+ERROR 2025-03-18 07:34:52,336 views OTP verification failed for quboafrica@gmail.com: {'otp_code': [ErrorDetail(string='Invalid OTP code or purpose', code='invalid')]}
+WARNING 2025-03-18 07:34:52,368 log Bad Request: /api/auth/otp/verify/
+WARNING 2025-03-18 07:34:52,370 basehttp "POST /api/auth/otp/verify/ HTTP/1.1" 400 44
+INFO 2025-03-18 07:34:59,527 basehttp "POST /api/auth/otp/verify/ HTTP/1.1" 200 72
+INFO 2025-03-18 07:35:24,013 views Password reset email sent to michaelndai7@gmail.com
+INFO 2025-03-18 07:35:24,017 basehttp "POST /api/auth/password/reset/ HTTP/1.1" 200 38
+ERROR 2025-03-18 08:01:24,311 log Internal Server Error: /api/users/me/
+Traceback (most recent call last):
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/Users/jakendai/Developer/MetalMint/backend/middleware/security.py", line 34, in __call__
+    if not request.user.is_authenticated:
+AttributeError: 'WSGIRequest' object has no attribute 'user'
+ERROR 2025-03-18 08:01:24,450 basehttp "GET /api/users/me/ HTTP/1.1" 500 63969
+INFO 2025-03-18 08:04:04,896 models Stripe customer cus_RxqpZF86HsiBNQ created for testuser@gmail.com
+INFO 2025-03-18 08:04:09,252 serializers Welcome email sent to testuser@gmail.com
+INFO 2025-03-18 08:04:09,400 basehttp "POST /api/auth/register/ HTTP/1.1" 201 300
