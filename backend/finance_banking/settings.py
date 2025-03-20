@@ -179,10 +179,6 @@ CELERY_RESULT_SERIALIZER = 'json'
 CELERY_TIMEZONE = 'UTC'
 
 CELERY_BEAT_SCHEDULE = {
-    'update_link_visibility_status': {
-        'task': 'task.tasks.update_link_visibility_status',
-        'schedule': crontab(minute='*/1'),  # Every minute
-    },
     'process_daily_payouts': {
         'task': 'investments.tasks.process_daily_payouts',
         'schedule': crontab(hour=0, minute=0),  # Daily at midnight
