@@ -6,32 +6,6 @@ services:
       context: .
       dockerfile: Dockerfile
     command: gunicorn --bind 0.0.0.0:8000 --workers 3 finance_banking.wsgi:application
-    env_file:
-      - .env  # Load the .env file
-    environment:
-      - DJANGO_SETTINGS_MODULE=finance_banking.settings
-      - SECRET_KEY=${SECRET_KEY}
-      - DEBUG=${DEBUG}
-      - ALLOWED_HOSTS=${ALLOWED_HOSTS}
-      - DB_NAME=${DB_NAME}
-      - DB_USER=${DB_USER}
-      - DB_PASSWORD=${DB_PASSWORD}
-      - DB_HOST=db
-      - DB_PORT=5434  # Updated to 5434
-      - CELERY_BROKER_URL=redis://redis:6379/0
-      - CELERY_RESULT_BACKEND=redis://redis:6379/0
-      - STRIPE_SECRET_KEY=${STRIPE_SECRET_KEY}
-      - STRIPE_PUBLISHABLE_KEY=${STRIPE_PUBLISHABLE_KEY}
-      - STRIPE_WEBHOOK_SECRET=${STRIPE_WEBHOOK_SECRET}
-      - FIELD_ENCRYPTION_KEY=${FIELD_ENCRYPTION_KEY}
-      - GOLD_API_KEY=${GOLD_API_KEY}
-      - EMAIL_HOST=${EMAIL_HOST}
-      - EMAIL_PORT=${EMAIL_PORT}
-      - EMAIL_HOST_USER=${EMAIL_HOST_USER}
-      - EMAIL_HOST_PASSWORD=${EMAIL_HOST_PASSWORD}
-      - EMAIL_USE_TLS=${EMAIL_USE_TLS}
-      - EMAIL_USE_SSL=${EMAIL_USE_SSL}
-      - DEFAULT_FROM_EMAIL=${DEFAULT_FROM_EMAIL}
     volumes:
       - .:/app
       - static_volume:/app/static
@@ -48,17 +22,6 @@ services:
       context: .
       dockerfile: Dockerfile
     command: celery -A finance_banking worker -l info
-    env_file:
-      - .env  # Load the .env file
-    environment:
-      - DJANGO_SETTINGS_MODULE=finance_banking.settings
-      - CELERY_BROKER_URL=redis://redis:6379/0
-      - CELERY_RESULT_BACKEND=redis://redis:6379/0
-      - DB_NAME=${DB_NAME}
-      - DB_USER=${DB_USER}
-      - DB_PASSWORD=${DB_PASSWORD}
-      - DB_HOST=db
-      - DB_PORT=5434  # Updated to 5434
     volumes:
       - .:/app
     depends_on:
@@ -71,17 +34,6 @@ services:
       context: .
       dockerfile: Dockerfile
     command: celery -A finance_banking beat -l info
-    env_file:
-      - .env  # Load the .env file
-    environment:
-      - DJANGO_SETTINGS_MODULE=finance_banking.settings
-      - CELERY_BROKER_URL=redis://redis:6379/0
-      - CELERY_RESULT_BACKEND=redis://redis:6379/0
-      - DB_NAME=${DB_NAME}
-      - DB_USER=${DB_USER}
-      - DB_PASSWORD=${DB_PASSWORD}
-      - DB_HOST=db
-      - DB_PORT=5434  # Updated to 5434
     volumes:
       - .:/app
     depends_on:
@@ -91,16 +43,14 @@ services:
 
   db:
     image: postgres:13
-    env_file:
-      - .env  # Load the .env file
     environment:
-      - POSTGRES_DB=${DB_NAME}
-      - POSTGRES_USER=${DB_USER}
-      - POSTGRES_PASSWORD=${DB_PASSWORD}
+      - POSTGRES_DB=metal_mint
+      - POSTGRES_USER=metal_mint_user
+      - POSTGRES_PASSWORD=wCh29&HE&T83
     volumes:
       - postgres_data:/var/lib/postgresql/data
     ports:
-      - "5434:5432"  # Map host port 5434 to container port 5432 (Postgres default)
+      - "5434:5432"
     restart: unless-stopped
 
   redis:
