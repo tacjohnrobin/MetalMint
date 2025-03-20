@@ -1979,3 +1979,4 @@ WARNING 2025-03-20 07:29:29,301 basehttp "POST /api/users/me/kyc/ HTTP/1.1" 400 
 ERROR 2025-03-20 07:32:55,706 views KYC submission failed for lesama36@gmail.com: {'document_type': [ErrorDetail(string='This field is required.', code='required')], 'document_front': [ErrorDetail(string='No file was submitted.', code='required')]}
 WARNING 2025-03-20 07:32:55,727 log Bad Request: /api/users/me/kyc/
 WARNING 2025-03-20 07:32:55,728 basehttp "POST /api/users/me/kyc/?document_type=PASSPORT&document_front=passport_front.jpg&selfie=selfie.jpg HTTP/1.1" 400 89
+INFO 2025-03-20 08:29:57,384 autoreload Watching for file changes with StatReloader
