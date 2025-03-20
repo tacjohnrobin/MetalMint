@@ -96,7 +96,7 @@ DATABASES = {
         'USER': 'metal_mint_user',
         'PASSWORD': 'wCh29&HE&T83',
         'HOST': 'db',
-        'PORT': '5434',
+        'PORT': '5432',
     }
 }
 
