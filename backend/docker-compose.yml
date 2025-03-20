@@ -6,6 +6,8 @@ services:
       context: .
       dockerfile: Dockerfile
     command: gunicorn --bind 0.0.0.0:8000 --workers 3 finance_banking.wsgi:application
+    env_file:
+      - .env  # Load the .env file
     environment:
       - DJANGO_SETTINGS_MODULE=finance_banking.settings
       - SECRET_KEY=${SECRET_KEY}
@@ -15,7 +17,7 @@ services:
       - DB_USER=${DB_USER}
       - DB_PASSWORD=${DB_PASSWORD}
       - DB_HOST=db
-      - DB_PORT=5432
+      - DB_PORT=5434  # Updated to 5434
       - CELERY_BROKER_URL=redis://redis:6379/0
       - CELERY_RESULT_BACKEND=redis://redis:6379/0
       - STRIPE_SECRET_KEY=${STRIPE_SECRET_KEY}
@@ -46,6 +48,8 @@ services:
       context: .
       dockerfile: Dockerfile
     command: celery -A finance_banking worker -l info
+    env_file:
+      - .env  # Load the .env file
     environment:
       - DJANGO_SETTINGS_MODULE=finance_banking.settings
       - CELERY_BROKER_URL=redis://redis:6379/0
@@ -54,7 +58,7 @@ services:
       - DB_USER=${DB_USER}
       - DB_PASSWORD=${DB_PASSWORD}
       - DB_HOST=db
-      - DB_PORT=5432
+      - DB_PORT=5434  # Updated to 5434
     volumes:
       - .:/app
     depends_on:
@@ -66,7 +70,9 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    command: celery -A finance_banking beat -l info  # Use in-memory scheduler
+    command: celery -A finance_banking beat -l info
+    env_file:
+      - .env  # Load the .env file
     environment:
       - DJANGO_SETTINGS_MODULE=finance_banking.settings
       - CELERY_BROKER_URL=redis://redis:6379/0
@@ -75,7 +81,7 @@ services:
       - DB_USER=${DB_USER}
       - DB_PASSWORD=${DB_PASSWORD}
       - DB_HOST=db
-      - DB_PORT=5432
+      - DB_PORT=5434  # Updated to 5434
     volumes:
       - .:/app
     depends_on:
@@ -85,6 +91,8 @@ services:
 
   db:
     image: postgres:13
+    env_file:
+      - .env  # Load the .env file
     environment:
       - POSTGRES_DB=${DB_NAME}
       - POSTGRES_USER=${DB_USER}
@@ -92,7 +100,7 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
     ports:
-      - "5432:5432"
+      - "5434:5432"  # Map host port 5434 to container port 5432 (Postgres default)
     restart: unless-stopped
 
   redis:

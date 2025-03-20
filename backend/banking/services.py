@@ -18,7 +18,7 @@ class PaymentService:
                 currency='usd',
                 customer=user.stripe_customer_id,
                 payment_method_types=['card'],
-                metadata={'user_id': str(user.client_id)}
+                metadata={'user_id': str(user.pkid)}
             )
             return intent
         except stripe.error.StripeError as e:

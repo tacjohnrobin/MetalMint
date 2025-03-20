@@ -1980,3 +1980,6 @@ ERROR 2025-03-20 07:32:55,706 views KYC submission failed for lesama36@gmail.com
 WARNING 2025-03-20 07:32:55,727 log Bad Request: /api/users/me/kyc/
 WARNING 2025-03-20 07:32:55,728 basehttp "POST /api/users/me/kyc/?document_type=PASSPORT&document_front=passport_front.jpg&selfie=selfie.jpg HTTP/1.1" 400 89
 INFO 2025-03-20 08:29:57,384 autoreload Watching for file changes with StatReloader
+INFO 2025-03-20 08:33:05,245 autoreload Watching for file changes with StatReloader
+INFO 2025-03-20 08:37:39,662 autoreload /Users/jakendai/Developer/MetalMint/backend/banking/services.py changed, reloading.
+INFO 2025-03-20 08:37:47,398 autoreload Watching for file changes with StatReloader
