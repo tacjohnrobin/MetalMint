@@ -34,8 +34,8 @@ RUN pip install -r requirements.txt
 # Copy project files
 COPY . .
 
-# Collect static files (run in compose if needed in production)
-# RUN python manage.py collectstatic --noinput
+# Create non-root user for Celery
+RUN useradd -m -r celeryuser && chown celeryuser:celeryuser /app
 
 # Expose port
 EXPOSE 8000

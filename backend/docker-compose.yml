@@ -24,6 +24,7 @@ services:
       context: .
       dockerfile: Dockerfile
     command: celery -A finance_banking worker -l info
+    user: celeryuser  # Updated to use non-root user
     volumes:
       - .:/app
     depends_on:
@@ -38,6 +39,7 @@ services:
       context: .
       dockerfile: Dockerfile
     command: celery -A finance_banking beat -l info
+    user: celeryuser  # Updated to use non-root user
     volumes:
       - .:/app
     depends_on:
@@ -50,15 +52,15 @@ services:
   db:
     image: postgres:13
     environment:
-      - POSTGRES_DB=metal_mint
-      - POSTGRES_USER=metal_mint_user
+      - POSTGRES_DB=finance_db        # Updated database name
+      - POSTGRES_USER=finance_user    # Updated user name
       - POSTGRES_PASSWORD=wCh29&HE&T83
     volumes:
       - postgres_data:/var/lib/postgresql/data
     ports:
       - "5434:5432"
-    healthcheck:  # Add health check
-      test: ["CMD-SHELL", "pg_isready -U metal_mint_user"]
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U finance_user"]  # Updated user in healthcheck
       interval: 5s
       timeout: 5s
       retries: 5

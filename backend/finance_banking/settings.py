@@ -88,17 +88,20 @@ SECURE_CROSS_ORIGIN_OPENER_POLICY = None
 
 WSGI_APPLICATION = 'finance_banking.wsgi.application'
 
-# Database
+# Database (Updated)
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'metal_mint',
-        'USER': 'metal_mint_user',
+        'NAME': 'finance_db',           # Updated database name
+        'USER': 'finance_user',         # Updated user name
         'PASSWORD': 'wCh29&HE&T83',
         'HOST': 'db',
         'PORT': '5432',
     }
 }
+
+# Debug print to verify config
+print("DATABASES Config:", DATABASES)
 
 # Password validation
 AUTH_PASSWORD_VALIDATORS = [
@@ -207,7 +210,7 @@ STRIPE_SECRET_KEY = 'sk_test_51Lc84CDTMi1SAp13nQ049H6S612ZRMLUe59soxZZleOT4HFTTT
 STRIPE_WEBHOOK_SECRET = 'whsec_B5OEY4D9jz0Em26UPWmmbAl26k8RfA9K'
 
 # Encryption
-FIELD_ENCRYPTION_KEY = 'T86V1XiaQnV_128P62njY_h5pUkN8ayKeJUnIn17xrQ='  # Updated key with padding
+FIELD_ENCRYPTION_KEY = 'T86V1XiaQnV_128P62njY_h5pUkN8ayKeJUnIn17xrQ='
 
 GOLD_API_KEY = 'your_gold_api_key_here'
 
