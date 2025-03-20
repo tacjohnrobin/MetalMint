@@ -11,10 +11,20 @@ ENV PYTHONUNBUFFERED=1 \
     PIP_DISABLE_PIP_VERSION_CHECK=on \
     PIP_DEFAULT_TIMEOUT=100
 
-# Install system dependencies
+# Install system dependencies required for dlib and existing dependencies
 RUN apt-get update && apt-get install -y \
     gcc \
     libpq-dev \
+    build-essential \
+    cmake \
+    libopenblas-dev \
+    liblapack-dev \
+    libx11-dev \
+    libgtk-3-dev \
+    libpng-dev \
+    libjpeg-dev \
+    libatlas-base-dev \
+    gfortran \
     && rm -rf /var/lib/apt/lists/*
 
 # Install Python dependencies
