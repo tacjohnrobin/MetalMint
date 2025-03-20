@@ -14,6 +14,7 @@ from io import BytesIO
 import logging
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+import phonenumbers
 from .managers import UserManager
 
 
@@ -23,6 +24,16 @@ def generate_hex_code(length=6):
     """Generate cryptographically secure hexadecimal string"""
     return secrets.token_hex(length // 2 + 1)[:length].lower()
 
+def validate_phone_number(value):
+    try:
+        # Parse the phone number
+        parsed_number = phonenumbers.parse(value, None)
+        # Check if it's a valid number
+        if not phonenumbers.is_valid_number(parsed_number):
+            raise ValidationError(_("Invalid phone number."))
+    except phonenumbers.NumberParseException:
+        raise ValidationError(_("Invalid phone number format."))
+    
 
 class User(AbstractBaseUser, PermissionsMixin):
     # Authentication & Identification
@@ -54,10 +65,15 @@ class User(AbstractBaseUser, PermissionsMixin):
         _("mobile number"),
         max_length=20,
         unique=True,
-        validators=[RegexValidator(r'^\+?[1-9]\d{7,14}$')],
+        validators=[validate_phone_number],
         blank=True
     )
-    country = CountryField(_("country"), blank=True, null=True)
+    country = CountryField(
+        _("country"),
+        default='US',  
+        blank=False,   
+        null=False   
+    )    
     city = models.CharField(_("city"), max_length=255, blank=True, null=True)
 
     # Wallet Information
@@ -138,6 +154,17 @@ class User(AbstractBaseUser, PermissionsMixin):
         return f"{self.city}, {self.country.name if self.country else 'No Country'}"
 
     def save(self, *args, **kwargs):
+        # Ensure the mobile number is formatted correctly
+        if self.mobile_number:
+            try:
+                parsed_number = phonenumbers.parse(self.mobile_number, None)
+                self.mobile_number = phonenumbers.format_number(parsed_number, phonenumbers.PhoneNumberFormat.E164)
+            except phonenumbers.NumberParseException:
+                raise ValidationError(_("Invalid phone number format."))
+        super().save(*args, **kwargs)
+
+
+    def save(self, *args, **kwargs):
         self.full_clean()
         with transaction.atomic():
             if not self.client_id:
@@ -183,7 +210,7 @@ class User(AbstractBaseUser, PermissionsMixin):
                     email=self.email,
                     phone=self.mobile_number,
                     metadata={
-                        'user_id': str(self.client_id),
+                        'user_id': str(self.pkid),
                         'jurisdiction': self.jurisdiction 
                     }
                 )
@@ -201,7 +228,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     def update_kyc_status(self):
         try:
             kyc = self.kyc_verification
-            if kyc.verified_at and not kyc.rejection_reason:
+            if kyc.is_auto_verified and kyc.verified_at and not kyc.rejection_reason:
                 self.kyc_status = 'VERIFIED'
                 self.document_expiry = kyc.next_review_date or (timezone.now().date() + timedelta(days=365))
             elif kyc.rejection_reason:
@@ -222,6 +249,22 @@ class User(AbstractBaseUser, PermissionsMixin):
             self.document_expiry and 
             self.document_expiry > timezone.now().date()
         )
+
+    # Account Deletion
+    def delete(self, *args, **kwargs):
+        # Delete related objects explicitly if needed
+        if hasattr(self, 'profile'):
+            self.profile.delete()
+        
+        if hasattr(self, 'kyc_verification'):
+            self.kyc_verification.delete()
+
+        if hasattr(self, 'otps'):
+            self.otps.all().delete()
+
+        # Call the superclass delete method
+        super().delete(*args, **kwargs)
+
 
     # Financial Methods & Setup
     def deposit(self, amount, currency='USD', stripe_payment_id=None, status='completed'):
@@ -334,12 +377,11 @@ class User(AbstractBaseUser, PermissionsMixin):
             latest_gold_price = GoldPrice.objects.latest('timestamp').price
         except GoldPrice.DoesNotExist:
             latest_gold_price = 0
-            
-        investments_value = UserInvestment.objects.filter(
-            user=self,
-            is_active=True
-        ).aggregate(total=models.Sum('current_value'))['total'] or 0
         
+        investments = UserInvestment.objects.filter(user=self, is_active=True)
+        investments_value = sum(investment.current_value for investment in investments)
+            
+
         return self.usd_balance + (self.usxw_balance * latest_gold_price) + investments_value
 
     @property
@@ -470,7 +512,6 @@ class UserProfile(models.Model):
             logger.error(f"Avatar processing error for {self.user}: {str(e)}")
 
 class KYCVerification(models.Model):
-    """KYC Verification documentation model"""
     DOCUMENT_TYPES = (
         ('PASSPORT', 'Passport'),
         ('DRIVING_LICENSE', 'Driving License'),
@@ -478,32 +519,15 @@ class KYCVerification(models.Model):
     )
 
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='kyc_verification')
-    document_type = models.CharField(
-        _("Document Type"), 
-        max_length=20, 
-        choices=DOCUMENT_TYPES
-    )
-    document_front = models.FileField(
-        _("Document Front"), 
-        upload_to='kyc/documents/',
-        validators=[FileExtensionValidator(['pdf', 'jpg', 'jpeg', 'png'])]
-    )
-    document_back = models.FileField(
-        _("Document Back"), 
-        upload_to='kyc/documents/',
-        validators=[FileExtensionValidator(['pdf', 'jpg', 'jpeg', 'png'])],
-        blank=True
-    )
-    verified_by = models.ForeignKey(
-        User,
-        null=True,
-        blank=True,
-        on_delete=models.SET_NULL,
-        related_name='verified_kycs'
-    )
-    verified_at = models.DateTimeField(_("Verified At"), null=True, blank=True)
-    rejection_reason = models.TextField(_("Rejection Reason"), blank=True)
-    next_review_date = models.DateField(_("Next Review Date"), null=True, blank=True)
+    document_type = models.CharField(max_length=20, choices=DOCUMENT_TYPES)
+    document_front = models.FileField(upload_to='kyc/documents/', validators=[FileExtensionValidator(['pdf', 'jpg', 'jpeg', 'png'])])
+    document_back = models.FileField(upload_to='kyc/documents/', validators=[FileExtensionValidator(['pdf', 'jpg', 'jpeg', 'png'])], blank=True)
+    selfie = models.FileField(upload_to='kyc/selfies/', validators=[FileExtensionValidator(['jpg', 'jpeg', 'png'])], blank=True, null=True)
+    verified_at = models.DateTimeField(null=True, blank=True)
+    rejection_reason = models.TextField(blank=True)
+    next_review_date = models.DateField(null=True, blank=True)
+    verification_result = models.JSONField(null=True, blank=True)  # Store OCR/validation results
+    is_auto_verified = models.BooleanField(default=False)  # Track automation
 
     class Meta:
         verbose_name = _("KYC Verification")
@@ -517,6 +541,5 @@ class KYCVerification(models.Model):
         return f"{self.user} - {self.get_document_type_display()}"
 
     def clean(self):
-        """Validate document requirements"""
         if self.document_type == 'NATIONAL_ID' and not self.document_back:
             raise ValidationError(_("National ID requires both front and back images"))

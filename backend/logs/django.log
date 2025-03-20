@@ -1009,3 +1009,973 @@ ERROR 2025-03-18 08:01:24,450 basehttp "GET /api/users/me/ HTTP/1.1" 500 63969
 INFO 2025-03-18 08:04:04,896 models Stripe customer cus_RxqpZF86HsiBNQ created for testuser@gmail.com
 INFO 2025-03-18 08:04:09,252 serializers Welcome email sent to testuser@gmail.com
 INFO 2025-03-18 08:04:09,400 basehttp "POST /api/auth/register/ HTTP/1.1" 201 300
+ERROR 2025-03-18 08:09:12,476 log Internal Server Error: /api/users/me/
+Traceback (most recent call last):
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/Users/jakendai/Developer/MetalMint/backend/middleware/security.py", line 34, in __call__
+    if not request.user.is_authenticated:
+AttributeError: 'WSGIRequest' object has no attribute 'user'
+ERROR 2025-03-18 08:09:12,479 basehttp "GET /api/users/me/ HTTP/1.1" 500 63969
+ERROR 2025-03-18 08:12:23,094 log Internal Server Error: /api/user/me/
+Traceback (most recent call last):
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/Users/jakendai/Developer/MetalMint/backend/middleware/security.py", line 34, in __call__
+    if not request.user.is_authenticated:
+AttributeError: 'WSGIRequest' object has no attribute 'user'
+ERROR 2025-03-18 08:12:23,132 basehttp "GET /api/user/me/ HTTP/1.1" 500 63868
+INFO 2025-03-18 08:37:42,124 autoreload /Users/jakendai/Developer/MetalMint/backend/finance_banking/settings.py changed, reloading.
+INFO 2025-03-18 08:40:12,827 autoreload Watching for file changes with StatReloader
+INFO 2025-03-18 08:58:39,824 autoreload /Users/jakendai/Developer/MetalMint/backend/middleware/security.py changed, reloading.
+INFO 2025-03-18 09:05:15,568 autoreload Watching for file changes with StatReloader
+WARNING 2025-03-18 09:06:53,171 log Unauthorized: /api/user/me/
+WARNING 2025-03-18 09:06:53,415 basehttp "GET /api/user/me/ HTTP/1.1" 401 36
+WARNING 2025-03-18 09:46:06,101 log Unauthorized: /api/user/me/
+WARNING 2025-03-18 09:46:06,243 basehttp "GET /api/user/me/ HTTP/1.1" 401 36
+WARNING 2025-03-18 09:46:35,787 log Unauthorized: /api/user/me/
+WARNING 2025-03-18 09:46:36,022 basehttp "GET /api/user/me/ HTTP/1.1" 401 36
+INFO 2025-03-18 09:53:45,933 basehttp "POST /api/auth/login/ HTTP/1.1" 200 523
+WARNING 2025-03-18 09:54:27,360 log Unauthorized: /api/user/me/
+WARNING 2025-03-18 09:54:27,428 basehttp "GET /api/user/me/ HTTP/1.1" 401 36
+INFO 2025-03-18 10:51:32,368 autoreload /Users/jakendai/Developer/MetalMint/backend/authentication/serializers.py changed, reloading.
+INFO 2025-03-18 10:53:32,861 autoreload Watching for file changes with StatReloader
+INFO 2025-03-18 10:53:51,681 autoreload /Users/jakendai/Developer/MetalMint/backend/authentication/serializers.py changed, reloading.
+INFO 2025-03-18 10:54:49,788 autoreload Watching for file changes with StatReloader
+ERROR 2025-03-18 10:58:52,608 views Login failed: name 'user' is not defined
+WARNING 2025-03-18 10:58:52,616 log Unauthorized: /api/auth/login/
+WARNING 2025-03-18 10:58:52,626 basehttp "POST /api/auth/login/ HTTP/1.1" 401 32
+INFO 2025-03-18 11:08:14,526 autoreload /Users/jakendai/Developer/MetalMint/backend/authentication/serializers.py changed, reloading.
+INFO 2025-03-18 11:11:04,722 autoreload Watching for file changes with StatReloader
+INFO 2025-03-18 11:13:54,391 autoreload /Users/jakendai/Developer/MetalMint/backend/authentication/views.py changed, reloading.
+INFO 2025-03-18 11:18:10,286 autoreload Watching for file changes with StatReloader
+INFO 2025-03-18 11:18:39,400 autoreload /Users/jakendai/Developer/MetalMint/backend/authentication/views.py changed, reloading.
+INFO 2025-03-18 11:21:14,639 autoreload Watching for file changes with StatReloader
+INFO 2025-03-18 11:21:55,043 autoreload /Users/jakendai/Developer/MetalMint/backend/authentication/views.py changed, reloading.
+INFO 2025-03-18 11:23:13,113 autoreload Watching for file changes with StatReloader
+INFO 2025-03-18 11:23:21,962 autoreload /Users/jakendai/Developer/MetalMint/backend/authentication/views.py changed, reloading.
+INFO 2025-03-18 11:28:51,867 autoreload Watching for file changes with StatReloader
+ERROR 2025-03-18 11:34:02,507 log Internal Server Error: /api/auth/login/
+Traceback (most recent call last):
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/django/views/decorators/csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "/Users/jakendai/Developer/MetalMint/backend/authentication/views.py", line 51, in post
+    serializer = self.serializer_class(data=request.data)
+  File "/Users/jakendai/Developer/MetalMint/backend/authentication/serializers.py", line 26, in __init__
+    del self.fields['username']  # Remove default username field
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/rest_framework/utils/serializer_helpers.py", line 175, in __delitem__
+    del self.fields[key]
+KeyError: 'username'
+ERROR 2025-03-18 11:34:02,546 basehttp "POST /api/auth/login/ HTTP/1.1" 500 102113
+INFO 2025-03-18 11:36:33,097 autoreload /Users/jakendai/Developer/MetalMint/backend/authentication/serializers.py changed, reloading.
+INFO 2025-03-18 11:40:28,732 autoreload Watching for file changes with StatReloader
+INFO 2025-03-18 11:41:40,526 views Login successful for eyJhbGciOi...
+INFO 2025-03-18 11:41:41,307 basehttp "POST /api/auth/login/ HTTP/1.1" 200 523
+WARNING 2025-03-18 11:44:50,752 log Unauthorized: /api/user/me/
+WARNING 2025-03-18 11:44:50,823 basehttp "GET /api/user/me/ HTTP/1.1" 401 36
+INFO 2025-03-18 11:45:17,901 autoreload /Users/jakendai/Developer/MetalMint/backend/middleware/security.py changed, reloading.
+INFO 2025-03-18 11:47:28,141 autoreload Watching for file changes with StatReloader
+WARNING 2025-03-18 11:57:05,048 log Unauthorized: /api/user/me/
+WARNING 2025-03-18 11:57:05,049 basehttp "GET /api/user/me/ HTTP/1.1" 401 36
+INFO 2025-03-18 11:58:21,830 views Password reset email sent to michaelndai7@gmail.com
+INFO 2025-03-18 11:58:21,905 basehttp "POST /api/auth/password/reset/ HTTP/1.1" 200 38
+WARNING 2025-03-18 11:58:50,614 log Unauthorized: /api/user/me/
+WARNING 2025-03-18 11:58:50,693 basehttp "GET /api/user/me/ HTTP/1.1" 401 36
+INFO 2025-03-18 12:41:26,797 autoreload /Users/jakendai/Developer/MetalMint/backend/finance_banking/settings.py changed, reloading.
+INFO 2025-03-18 12:43:32,890 autoreload Watching for file changes with StatReloader
+WARNING 2025-03-18 12:56:14,494 log Unauthorized: /api/user/me/
+WARNING 2025-03-18 12:56:14,626 basehttp "GET /api/user/me/ HTTP/1.1" 401 36
+INFO 2025-03-18 12:57:02,400 autoreload /Users/jakendai/Developer/MetalMint/backend/finance_banking/settings.py changed, reloading.
+INFO 2025-03-18 12:58:26,228 autoreload Watching for file changes with StatReloader
+WARNING 2025-03-18 12:59:13,530 log Not Found: /api/user/me/
+WARNING 2025-03-18 12:59:13,610 basehttp "GET /api/user/me/ HTTP/1.1" 404 3048
+ERROR 2025-03-18 12:59:55,244 log Internal Server Error: /api/users/me/
+Traceback (most recent call last):
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/django/core/handlers/base.py", line 220, in _get_response
+    response = response.render()
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/django/template/response.py", line 114, in render
+    self.content = self.rendered_content
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/rest_framework/response.py", line 70, in rendered_content
+    ret = renderer.render(self.data, accepted_media_type, context)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/rest_framework/renderers.py", line 99, in render
+    ret = json.dumps(
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/rest_framework/utils/json.py", line 25, in dumps
+    return json.dumps(*args, **kwargs)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/json/__init__.py", line 238, in dumps
+    **kw).encode(obj)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/json/encoder.py", line 199, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/json/encoder.py", line 257, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/rest_framework/utils/encoders.py", line 67, in default
+    return super().default(obj)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/json/encoder.py", line 179, in default
+    raise TypeError(f'Object of type {o.__class__.__name__} '
+TypeError: Object of type Country is not JSON serializable
+ERROR 2025-03-18 12:59:55,266 basehttp "GET /api/users/me/ HTTP/1.1" 500 107947
+INFO 2025-03-18 13:00:26,380 autoreload /Users/jakendai/Developer/MetalMint/backend/finance_banking/settings.py changed, reloading.
+INFO 2025-03-18 13:03:09,555 autoreload Watching for file changes with StatReloader
+INFO 2025-03-18 13:04:13,421 autoreload /Users/jakendai/Developer/MetalMint/backend/finance_banking/settings.py changed, reloading.
+INFO 2025-03-18 13:05:20,261 autoreload Watching for file changes with StatReloader
+WARNING 2025-03-18 13:07:45,513 log Unauthorized: /api/users/me/
+WARNING 2025-03-18 13:07:45,528 basehttp "GET /api/users/me/ HTTP/1.1" 401 36
+INFO 2025-03-18 13:16:15,420 autoreload /Users/jakendai/Developer/MetalMint/backend/authentication/serializers.py changed, reloading.
+INFO 2025-03-18 13:17:10,156 autoreload Watching for file changes with StatReloader
+INFO 2025-03-18 13:26:42,321 autoreload /Users/jakendai/Developer/MetalMint/backend/authentication/serializers.py changed, reloading.
+INFO 2025-03-18 13:28:47,369 autoreload Watching for file changes with StatReloader
+INFO 2025-03-18 13:29:29,726 autoreload /Users/jakendai/Developer/MetalMint/backend/authentication/views.py changed, reloading.
+INFO 2025-03-18 13:30:11,733 autoreload Watching for file changes with StatReloader
+ERROR 2025-03-18 13:30:53,832 views Login failed: name 'authenticate' is not defined
+WARNING 2025-03-18 13:30:53,834 log Unauthorized: /api/auth/login/
+WARNING 2025-03-18 13:30:53,835 basehttp "POST /api/auth/login/ HTTP/1.1" 401 46
+INFO 2025-03-18 13:32:07,665 autoreload /Users/jakendai/Developer/MetalMint/backend/authentication/serializers.py changed, reloading.
+INFO 2025-03-18 13:33:27,001 autoreload Watching for file changes with StatReloader
+INFO 2025-03-18 13:36:08,412 autoreload /Users/jakendai/Developer/MetalMint/backend/authentication/serializers.py changed, reloading.
+INFO 2025-03-18 13:37:23,052 autoreload Watching for file changes with StatReloader
+INFO 2025-03-18 13:40:53,626 models Stripe customer cus_RxwGTiCEM2MNKo created for delonsanders@gmail.com
+ERROR 2025-03-18 13:40:53,628 serializers Error sending welcome email: name 'send_mail' is not defined
+ERROR 2025-03-18 13:40:53,629 serializers Failed to send welcome email to delonsanders@gmail.com
+INFO 2025-03-18 13:40:53,713 basehttp "POST /api/auth/register/ HTTP/1.1" 201 123
+INFO 2025-03-18 13:42:11,012 autoreload /Users/jakendai/Developer/MetalMint/backend/authentication/views.py changed, reloading.
+INFO 2025-03-18 13:42:47,860 autoreload Watching for file changes with StatReloader
+INFO 2025-03-18 13:42:56,705 autoreload /Users/jakendai/Developer/MetalMint/backend/authentication/views.py changed, reloading.
+INFO 2025-03-18 13:43:41,052 autoreload Watching for file changes with StatReloader
+INFO 2025-03-18 13:44:00,377 autoreload /Users/jakendai/Developer/MetalMint/backend/authentication/views.py changed, reloading.
+INFO 2025-03-18 13:44:29,349 autoreload Watching for file changes with StatReloader
+INFO 2025-03-18 13:45:15,153 autoreload /Users/jakendai/Developer/MetalMint/backend/authentication/views.py changed, reloading.
+INFO 2025-03-18 13:46:06,036 autoreload Watching for file changes with StatReloader
+INFO 2025-03-18 13:46:13,264 autoreload /Users/jakendai/Developer/MetalMint/backend/authentication/views.py changed, reloading.
+INFO 2025-03-18 13:46:51,002 autoreload Watching for file changes with StatReloader
+INFO 2025-03-18 13:47:39,524 autoreload /Users/jakendai/Developer/MetalMint/backend/authentication/views.py changed, reloading.
+INFO 2025-03-18 13:48:31,970 autoreload Watching for file changes with StatReloader
+INFO 2025-03-18 14:04:49,677 autoreload /Users/jakendai/Developer/MetalMint/backend/authentication/serializers.py changed, reloading.
+INFO 2025-03-18 14:06:21,313 autoreload Watching for file changes with StatReloader
+INFO 2025-03-18 14:08:08,326 autoreload /Users/jakendai/Developer/MetalMint/backend/authentication/views.py changed, reloading.
+INFO 2025-03-18 14:09:34,995 autoreload Watching for file changes with StatReloader
+INFO 2025-03-18 14:11:02,716 models Stripe customer cus_RxwkiKw04GxABv created for sheaudersanders@gmail.com
+ERROR 2025-03-18 14:11:02,724 serializers Error sending welcome email: name 'send_mail' is not defined
+ERROR 2025-03-18 14:11:02,725 serializers Failed to send welcome email to sheaudersanders@gmail.com
+INFO 2025-03-18 14:11:02,826 basehttp "POST /api/auth/register/ HTTP/1.1" 201 314
+INFO 2025-03-18 14:11:48,697 autoreload /Users/jakendai/Developer/MetalMint/backend/authentication/serializers.py changed, reloading.
+INFO 2025-03-18 14:14:38,056 autoreload Watching for file changes with StatReloader
+INFO 2025-03-18 14:16:23,732 models Stripe customer cus_RxwqUA6j3ymRs7 created for deshaunwatson@gmail.com
+ERROR 2025-03-18 14:16:23,739 serializers Error sending welcome email: name 'send_mail' is not defined
+ERROR 2025-03-18 14:16:23,739 serializers Failed to send welcome email to deshaunwatson@gmail.com
+INFO 2025-03-18 14:16:23,792 basehttp "POST /api/auth/register/ HTTP/1.1" 201 320
+ERROR 2025-03-18 14:16:54,945 views Login failed: name 'authenticate' is not defined
+WARNING 2025-03-18 14:16:54,946 log Unauthorized: /api/auth/login/
+WARNING 2025-03-18 14:16:54,948 basehttp "POST /api/auth/login/ HTTP/1.1" 401 47
+INFO 2025-03-18 14:34:25,618 autoreload /Users/jakendai/Developer/MetalMint/backend/authentication/serializers.py changed, reloading.
+INFO 2025-03-18 14:37:46,602 autoreload Watching for file changes with StatReloader
+INFO 2025-03-18 14:39:29,653 views Login successful for deshaunwatson@gmail.com
+INFO 2025-03-18 14:39:29,658 basehttp "POST /api/auth/login/ HTTP/1.1" 200 693
+INFO 2025-03-18 14:40:42,776 views OTP MM-075002 sent to deshaunwatson@gmail.com for purpose VA
+INFO 2025-03-18 14:40:42,810 basehttp "POST /api/auth/otp/send/ HTTP/1.1" 200 35
+INFO 2025-03-18 14:42:11,888 views Login successful for deshaunwatson@gmail.com
+INFO 2025-03-18 14:42:12,062 basehttp "POST /api/auth/login/ HTTP/1.1" 200 693
+ERROR 2025-03-18 14:42:58,044 log Internal Server Error: /api/auth/logout/
+Traceback (most recent call last):
+  File "/Users/jakendai/Developer/MetalMint/backend/authentication/views.py", line 68, in post
+    logger.info(f"User {request.user.email} logged out successfully")
+AttributeError: 'AnonymousUser' object has no attribute 'email'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/django/views/decorators/csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "/Users/jakendai/Developer/MetalMint/backend/authentication/views.py", line 71, in post
+    logger.error(f"Logout failed for {request.user.email}: {str(e)}")
+AttributeError: 'AnonymousUser' object has no attribute 'email'
+ERROR 2025-03-18 14:42:58,092 basehttp "POST /api/auth/logout/ HTTP/1.1" 500 100846
+INFO 2025-03-18 14:48:22,511 autoreload /Users/jakendai/Developer/MetalMint/backend/authentication/views.py changed, reloading.
+INFO 2025-03-18 14:50:29,779 autoreload Watching for file changes with StatReloader
+ERROR 2025-03-18 14:51:30,204 serializers Token revocation failed: Token is blacklisted
+ERROR 2025-03-18 14:51:30,242 views Logout failed for unknown: 'AnonymousUser' object has no attribute 'email'
+WARNING 2025-03-18 14:51:30,245 log Bad Request: /api/auth/logout/
+WARNING 2025-03-18 14:51:30,249 basehttp "POST /api/auth/logout/ HTTP/1.1" 400 37
+INFO 2025-03-18 14:51:51,898 views Login successful for deshaunwatson@gmail.com
+INFO 2025-03-18 14:51:51,901 basehttp "POST /api/auth/login/ HTTP/1.1" 200 693
+ERROR 2025-03-18 14:52:28,529 views Logout failed for unknown: 'AnonymousUser' object has no attribute 'email'
+WARNING 2025-03-18 14:52:28,531 log Bad Request: /api/auth/logout/
+WARNING 2025-03-18 14:52:28,533 basehttp "POST /api/auth/logout/ HTTP/1.1" 400 37
+INFO 2025-03-18 15:50:40,406 autoreload Watching for file changes with StatReloader
+INFO 2025-03-18 16:12:34,208 autoreload /Users/jakendai/Developer/MetalMint/backend/authentication/serializers.py changed, reloading.
+INFO 2025-03-18 16:16:37,271 autoreload Watching for file changes with StatReloader
+ERROR 2025-03-18 16:30:15,766 views Registration failed: {'email': [ErrorDetail(string='This field is required.', code='required')], 'first_name': [ErrorDetail(string='This field is required.', code='required')], 'last_name': [ErrorDetail(string='This field is required.', code='required')], 'mobile_number': [ErrorDetail(string='This field is required.', code='required')], 'password': [ErrorDetail(string='This field is required.', code='required')]}
+WARNING 2025-03-18 16:30:16,531 log Bad Request: /api/auth/register/
+WARNING 2025-03-18 16:30:16,535 basehttp "POST /api/auth/register/ HTTP/1.1" 400 201
+INFO 2025-03-18 16:34:38,859 models Stripe customer cus_Rxz4xreCeUfFce created for jake@bitke.io
+ERROR 2025-03-18 16:34:38,898 serializers Error sending welcome email: name 'send_mail' is not defined
+ERROR 2025-03-18 16:34:38,899 serializers Failed to send welcome email to jake@bitke.io
+INFO 2025-03-18 16:34:38,943 basehttp "POST /api/auth/register/ HTTP/1.1" 201 304
+INFO 2025-03-18 16:35:51,386 views Login successful for jake@bitke.io
+INFO 2025-03-18 16:35:52,933 basehttp "POST /api/auth/login/ HTTP/1.1" 200 685
+ERROR 2025-03-18 16:37:59,170 views Logout failed for unknown: 'AnonymousUser' object has no attribute 'email'
+Traceback (most recent call last):
+  File "/Users/jakendai/Developer/MetalMint/backend/authentication/views.py", line 73, in post
+    logger.info(f"User {request.user.email} logged out successfully")
+AttributeError: 'AnonymousUser' object has no attribute 'email'
+WARNING 2025-03-18 16:37:59,649 log Bad Request: /api/auth/logout/
+WARNING 2025-03-18 16:37:59,649 basehttp "POST /api/auth/logout/ HTTP/1.1" 400 37
+INFO 2025-03-18 16:43:32,528 autoreload /Users/jakendai/Developer/MetalMint/backend/authentication/serializers.py changed, reloading.
+INFO 2025-03-18 16:45:34,006 autoreload Watching for file changes with StatReloader
+ERROR 2025-03-18 16:46:51,432 serializers Token revocation failed: Token is blacklisted
+WARNING 2025-03-18 16:46:51,512 views Failed to revoke token for jake@bitke.io: Token invalid or already blacklisted
+WARNING 2025-03-18 16:46:51,557 log Bad Request: /api/auth/logout/
+WARNING 2025-03-18 16:46:51,579 basehttp "POST /api/auth/logout/ HTTP/1.1" 400 37
+INFO 2025-03-18 16:55:09,095 autoreload /Users/jakendai/Developer/MetalMint/backend/authentication/views.py changed, reloading.
+INFO 2025-03-18 17:00:11,734 autoreload Watching for file changes with StatReloader
+INFO 2025-03-18 17:03:11,238 autoreload /Users/jakendai/Developer/MetalMint/backend/authentication/views.py changed, reloading.
+INFO 2025-03-18 17:04:17,270 autoreload Watching for file changes with StatReloader
+INFO 2025-03-18 17:06:11,708 views Login successful for jake@bitke.io
+INFO 2025-03-18 17:06:11,910 basehttp "POST /api/auth/login/ HTTP/1.1" 200 652
+ERROR 2025-03-18 17:08:21,590 views Logout failed for unknown: 'AnonymousUser' object has no attribute 'email'
+ERROR 2025-03-18 17:08:21,653 log Internal Server Error: /api/auth/logout/
+ERROR 2025-03-18 17:08:21,660 basehttp "POST /api/auth/logout/ HTTP/1.1" 500 78
+INFO 2025-03-18 17:12:03,068 autoreload /Users/jakendai/Developer/MetalMint/backend/authentication/views.py changed, reloading.
+INFO 2025-03-18 17:15:06,210 autoreload Watching for file changes with StatReloader
+INFO 2025-03-18 17:25:40,848 autoreload /Users/jakendai/Developer/MetalMint/backend/authentication/views.py changed, reloading.
+INFO 2025-03-18 17:27:05,695 autoreload Watching for file changes with StatReloader
+ERROR 2025-03-18 17:29:03,658 log Internal Server Error: /api/auth/logout/
+Traceback (most recent call last):
+  File "/Users/jakendai/Developer/MetalMint/backend/authentication/views.py", line 68, in post
+    token = RefreshToken(refresh_token)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/rest_framework_simplejwt/tokens.py", line 47, in __init__
+    self.verify()
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/rest_framework_simplejwt/tokens.py", line 218, in verify
+    self.check_blacklist()
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/rest_framework_simplejwt/tokens.py", line 230, in check_blacklist
+    raise TokenError(_("Token is blacklisted"))
+rest_framework_simplejwt.exceptions.TokenError: Token is blacklisted
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/django/views/decorators/csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "/Users/jakendai/Developer/MetalMint/backend/authentication/views.py", line 72, in post
+    except TokenError as e:
+NameError: name 'TokenError' is not defined
+ERROR 2025-03-18 17:29:03,681 basehttp "POST /api/auth/logout/ HTTP/1.1" 500 112090
+INFO 2025-03-18 17:32:53,057 autoreload /Users/jakendai/Developer/MetalMint/backend/authentication/views.py changed, reloading.
+INFO 2025-03-18 17:34:55,286 autoreload Watching for file changes with StatReloader
+INFO 2025-03-18 17:36:02,157 autoreload /Users/jakendai/Developer/MetalMint/backend/authentication/views.py changed, reloading.
+INFO 2025-03-18 17:37:37,137 autoreload Watching for file changes with StatReloader
+WARNING 2025-03-18 17:39:14,218 log Bad Request: /api/auth/logout/
+WARNING 2025-03-18 17:39:14,386 basehttp "POST /api/auth/logout/ HTTP/1.1" 400 37
+INFO 2025-03-18 17:39:45,055 views Login successful for jake@bitke.io
+INFO 2025-03-18 17:39:45,059 basehttp "POST /api/auth/login/ HTTP/1.1" 200 652
+INFO 2025-03-18 17:41:27,513 basehttp "POST /api/auth/logout/ HTTP/1.1" 200 37
+INFO 2025-03-18 17:47:31,909 views Login successful for jake@bitke.io
+INFO 2025-03-18 17:47:31,946 basehttp "POST /api/auth/login/ HTTP/1.1" 200 652
+INFO 2025-03-18 17:52:25,143 views OTP MM-203108 sent to jake@bitke.io for purpose VA
+INFO 2025-03-18 17:52:25,385 basehttp "POST /api/auth/otp/send/ HTTP/1.1" 200 35
+ERROR 2025-03-18 17:54:43,815 views OTP verification failed for jake@bitke.io: {'otp_code': [ErrorDetail(string='This field is required.', code='required')], 'purpose': [ErrorDetail(string='This field is required.', code='required')]}
+WARNING 2025-03-18 17:54:44,262 log Bad Request: /api/auth/otp/verify/
+WARNING 2025-03-18 17:54:44,263 basehttp "POST /api/auth/otp/verify/ HTTP/1.1" 400 78
+ERROR 2025-03-18 17:55:15,095 views OTP verification failed for jake@bitke.io: {'otp_code': [ErrorDetail(string='This field is required.', code='required')]}
+WARNING 2025-03-18 17:55:15,596 log Bad Request: /api/auth/otp/verify/
+WARNING 2025-03-18 17:55:15,703 basehttp "POST /api/auth/otp/verify/ HTTP/1.1" 400 40
+INFO 2025-03-18 17:55:28,206 basehttp "POST /api/auth/otp/verify/ HTTP/1.1" 200 72
+INFO 2025-03-18 17:57:44,730 views Password reset email sent to jake@bitke.io
+INFO 2025-03-18 17:57:44,764 basehttp "POST /api/auth/password/reset/ HTTP/1.1" 200 38
+INFO 2025-03-18 17:59:36,981 models Stripe customer cus_Ry0RbtneX4WzUu created for lesama365@gmail.com
+ERROR 2025-03-18 17:59:37,041 serializers Error sending welcome email: name 'send_mail' is not defined
+ERROR 2025-03-18 17:59:37,042 serializers Failed to send welcome email to lesama365@gmail.com
+INFO 2025-03-18 17:59:37,123 basehttp "POST /api/auth/register/ HTTP/1.1" 201 316
+INFO 2025-03-18 18:00:25,982 views Login successful for lesama365@gmail.com
+INFO 2025-03-18 18:00:26,013 basehttp "POST /api/auth/login/ HTTP/1.1" 200 678
+INFO 2025-03-18 18:01:22,264 views OTP MM-054977 sent to lesama365@gmail.com for purpose VA
+INFO 2025-03-18 18:01:22,278 basehttp "POST /api/auth/otp/send/ HTTP/1.1" 200 35
+INFO 2025-03-18 18:02:38,039 basehttp "POST /api/auth/otp/verify/ HTTP/1.1" 200 72
+INFO 2025-03-18 18:03:10,104 views Password reset email sent to lesama365@gmail.com
+INFO 2025-03-18 18:03:10,111 basehttp "POST /api/auth/password/reset/ HTTP/1.1" 200 38
+INFO 2025-03-18 18:04:55,264 views Password reset email sent to lesama365@gmail.com
+INFO 2025-03-18 18:04:55,285 basehttp "POST /api/auth/password/reset/ HTTP/1.1" 200 38
+WARNING 2025-03-18 18:08:56,332 log Bad Request: /api/auth/password/reset/confirm/MTg/cmvgw3-7d246ec47c8300e34bfb135e0d7817f7/
+WARNING 2025-03-18 18:08:56,360 basehttp "POST /api/auth/password/reset/confirm/MTg/cmvgw3-7d246ec47c8300e34bfb135e0d7817f7/ HTTP/1.1" 400 40
+INFO 2025-03-18 18:12:32,451 views Password reset successful for lesama365@gmail.com
+INFO 2025-03-18 18:12:32,489 basehttp "POST /api/auth/password/reset/confirm/MTg/cmvgw3-7d246ec47c8300e34bfb135e0d7817f7/ HTTP/1.1" 200 39
+INFO 2025-03-18 18:14:20,658 views Password changed successfully for lesama365@gmail.com
+INFO 2025-03-18 18:14:20,752 basehttp "POST /api/auth/password/change/ HTTP/1.1" 200 43
+INFO 2025-03-18 18:15:55,107 views Account deleted for lesama365@gmail.com
+INFO 2025-03-18 18:15:55,191 basehttp "DELETE /api/auth/account/delete/ HTTP/1.1" 200 42
+ERROR 2025-03-18 18:16:45,484 log Internal Server Error: /api/auth/register/
+Traceback (most recent call last):
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/django/db/backends/utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+psycopg2.errors.UniqueViolation: duplicate key value violates unique constraint "user_user_email_key"
+DETAIL:  Key (email)=(lesama365@gmail.com) already exists.
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/django/views/decorators/csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "/Users/jakendai/Developer/MetalMint/backend/authentication/views.py", line 34, in post
+    user = serializer.save()
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/rest_framework/serializers.py", line 212, in save
+    self.instance = self.create(validated_data)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/contextlib.py", line 79, in inner
+    return func(*args, **kwds)
+  File "/Users/jakendai/Developer/MetalMint/backend/authentication/serializers.py", line 104, in create
+    user.save()
+  File "/Users/jakendai/Developer/MetalMint/backend/user/models.py", line 147, in save
+    super().save(*args, **kwargs)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/django/contrib/auth/base_user.py", line 76, in save
+    super().save(*args, **kwargs)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/django/db/models/base.py", line 814, in save
+    self.save_base(
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/django/db/models/base.py", line 877, in save_base
+    updated = self._save_table(
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/django/db/models/base.py", line 1020, in _save_table
+    results = self._do_insert(
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/django/db/models/base.py", line 1061, in _do_insert
+    return manager._insert(
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/django/db/models/query.py", line 1805, in _insert
+    return query.get_compiler(using=using).execute_sql(returning_fields)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/django/db/models/sql/compiler.py", line 1822, in execute_sql
+    cursor.execute(sql, params)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/django/db/backends/utils.py", line 102, in execute
+    return super().execute(sql, params)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/django/db/backends/utils.py", line 67, in execute
+    return self._execute_with_wrappers(
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/django/db/backends/utils.py", line 80, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/django/db/backends/utils.py", line 84, in _execute
+    with self.db.wrap_database_errors:
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/django/db/utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/django/db/backends/utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+django.db.utils.IntegrityError: duplicate key value violates unique constraint "user_user_email_key"
+DETAIL:  Key (email)=(lesama365@gmail.com) already exists.
+
+ERROR 2025-03-18 18:16:47,591 basehttp "POST /api/auth/register/ HTTP/1.1" 500 208696
+INFO 2025-03-18 18:31:03,859 autoreload /Users/jakendai/Developer/MetalMint/backend/user/models.py changed, reloading.
+INFO 2025-03-18 18:32:13,263 autoreload Watching for file changes with StatReloader
+INFO 2025-03-18 18:34:16,501 autoreload /Users/jakendai/Developer/MetalMint/backend/user/models.py changed, reloading.
+INFO 2025-03-18 18:35:33,325 autoreload Watching for file changes with StatReloader
+INFO 2025-03-18 18:38:16,783 autoreload /Users/jakendai/Developer/MetalMint/backend/user/models.py changed, reloading.
+INFO 2025-03-18 18:39:43,524 autoreload Watching for file changes with StatReloader
+INFO 2025-03-18 18:50:36,009 autoreload /Users/jakendai/Developer/MetalMint/backend/user/models.py changed, reloading.
+INFO 2025-03-18 18:53:11,252 autoreload Watching for file changes with StatReloader
+INFO 2025-03-18 19:13:50,285 autoreload Watching for file changes with StatReloader
+INFO 2025-03-18 19:15:27,181 autoreload /Users/jakendai/Developer/MetalMint/backend/user/models.py changed, reloading.
+INFO 2025-03-18 19:17:12,430 autoreload Watching for file changes with StatReloader
+ERROR 2025-03-18 19:20:24,935 log Internal Server Error: /api/auth/register/
+Traceback (most recent call last):
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/django/db/backends/utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+psycopg2.errors.UniqueViolation: duplicate key value violates unique constraint "user_user_email_key"
+DETAIL:  Key (email)=(lesama365@gmail.com) already exists.
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/django/views/decorators/csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "/Users/jakendai/Developer/MetalMint/backend/authentication/views.py", line 34, in post
+    user = serializer.save()
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/rest_framework/serializers.py", line 212, in save
+    self.instance = self.create(validated_data)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/contextlib.py", line 79, in inner
+    return func(*args, **kwds)
+  File "/Users/jakendai/Developer/MetalMint/backend/authentication/serializers.py", line 104, in create
+    user.save()
+  File "/Users/jakendai/Developer/MetalMint/backend/user/models.py", line 147, in save
+    super().save(*args, **kwargs)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/django/contrib/auth/base_user.py", line 76, in save
+    super().save(*args, **kwargs)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/django/db/models/base.py", line 814, in save
+    self.save_base(
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/django/db/models/base.py", line 877, in save_base
+    updated = self._save_table(
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/django/db/models/base.py", line 1020, in _save_table
+    results = self._do_insert(
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/django/db/models/base.py", line 1061, in _do_insert
+    return manager._insert(
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/django/db/models/manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/django/db/models/query.py", line 1805, in _insert
+    return query.get_compiler(using=using).execute_sql(returning_fields)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/django/db/models/sql/compiler.py", line 1822, in execute_sql
+    cursor.execute(sql, params)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/django/db/backends/utils.py", line 102, in execute
+    return super().execute(sql, params)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/django/db/backends/utils.py", line 67, in execute
+    return self._execute_with_wrappers(
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/django/db/backends/utils.py", line 80, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/django/db/backends/utils.py", line 84, in _execute
+    with self.db.wrap_database_errors:
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/django/db/utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/django/db/backends/utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+django.db.utils.IntegrityError: duplicate key value violates unique constraint "user_user_email_key"
+DETAIL:  Key (email)=(lesama365@gmail.com) already exists.
+
+ERROR 2025-03-18 19:20:25,556 basehttp "POST /api/auth/register/ HTTP/1.1" 500 208696
+INFO 2025-03-18 19:22:29,525 models Stripe customer cus_Ry1mX2Bce5xfTa created for lesama36@gmail.com
+ERROR 2025-03-18 19:22:29,733 serializers Error sending welcome email: name 'send_mail' is not defined
+ERROR 2025-03-18 19:22:29,733 serializers Failed to send welcome email to lesama36@gmail.com
+INFO 2025-03-18 19:22:29,751 basehttp "POST /api/auth/register/ HTTP/1.1" 201 313
+INFO 2025-03-18 19:23:36,596 views Login successful for lesama36@gmail.com
+INFO 2025-03-18 19:23:36,862 basehttp "POST /api/auth/login/ HTTP/1.1" 200 675
+INFO 2025-03-18 19:26:56,529 views OTP MM-605058 sent to lesama36@gmail.com for purpose VA
+INFO 2025-03-18 19:26:56,588 basehttp "POST /api/auth/otp/send/ HTTP/1.1" 200 35
+INFO 2025-03-18 19:27:49,661 basehttp "POST /api/auth/otp/verify/ HTTP/1.1" 200 72
+ERROR 2025-03-18 19:28:23,270 views Account deletion failed for lesama36@gmail.com: User has no kyc_verification.
+ERROR 2025-03-18 19:28:23,274 log Internal Server Error: /api/auth/account/delete/
+ERROR 2025-03-18 19:28:23,289 basehttp "DELETE /api/auth/account/delete/ HTTP/1.1" 500 37
+INFO 2025-03-18 19:31:18,562 autoreload /Users/jakendai/Developer/MetalMint/backend/user/models.py changed, reloading.
+INFO 2025-03-18 19:33:04,126 autoreload Watching for file changes with StatReloader
+INFO 2025-03-18 19:35:55,138 autoreload /Users/jakendai/Developer/MetalMint/backend/user/models.py changed, reloading.
+INFO 2025-03-18 19:38:29,893 autoreload Watching for file changes with StatReloader
+INFO 2025-03-18 19:47:50,510 views Account and all related data deleted for lesama36@gmail.com
+INFO 2025-03-18 19:47:50,540 basehttp "DELETE /api/auth/account/delete/ HTTP/1.1" 200 63
+INFO 2025-03-18 19:48:37,519 models Stripe customer cus_Ry2CBixzMVahtc created for lesama36@gmail.com
+ERROR 2025-03-18 19:48:37,538 serializers Error sending welcome email: name 'send_mail' is not defined
+ERROR 2025-03-18 19:48:37,539 serializers Failed to send welcome email to lesama36@gmail.com
+INFO 2025-03-18 19:48:37,724 basehttp "POST /api/auth/register/ HTTP/1.1" 201 313
+INFO 2025-03-18 19:49:18,687 views Login successful for lesama36@gmail.com
+INFO 2025-03-18 19:49:18,767 basehttp "POST /api/auth/login/ HTTP/1.1" 200 675
+INFO 2025-03-18 19:52:59,997 basehttp "POST /api/auth/logout/ HTTP/1.1" 200 37
+INFO 2025-03-18 19:54:34,498 views Login successful for lesama36@gmail.com
+INFO 2025-03-18 19:54:34,645 basehttp "POST /api/auth/login/ HTTP/1.1" 200 675
+INFO 2025-03-18 19:55:17,802 views OTP MM-136960 sent to lesama36@gmail.com for purpose VA
+INFO 2025-03-18 19:55:17,871 basehttp "POST /api/auth/otp/send/ HTTP/1.1" 200 35
+INFO 2025-03-18 19:56:16,395 basehttp "POST /api/auth/otp/verify/ HTTP/1.1" 200 72
+WARNING 2025-03-18 19:59:06,835 log Unauthorized: /api/users/me/
+WARNING 2025-03-18 19:59:06,923 basehttp "GET /api/users/me/ HTTP/1.1" 401 36
+INFO 2025-03-18 20:19:15,864 autoreload /Users/jakendai/Developer/MetalMint/backend/finance_banking/settings.py changed, reloading.
+INFO 2025-03-18 20:20:36,757 autoreload Watching for file changes with StatReloader
+INFO 2025-03-18 20:21:39,453 autoreload /Users/jakendai/Developer/MetalMint/backend/middleware/security.py changed, reloading.
+INFO 2025-03-18 20:22:58,101 autoreload Watching for file changes with StatReloader
+WARNING 2025-03-18 20:25:37,746 log Unauthorized: /api/users/me/
+WARNING 2025-03-18 20:25:37,839 basehttp "GET /api/users/me/ HTTP/1.1" 401 36
+INFO 2025-03-18 20:27:55,415 autoreload /Users/jakendai/Developer/MetalMint/backend/middleware/security.py changed, reloading.
+INFO 2025-03-18 20:30:37,834 autoreload Watching for file changes with StatReloader
+INFO 2025-03-18 20:39:50,582 autoreload /Users/jakendai/Developer/MetalMint/backend/middleware/security.py changed, reloading.
+INFO 2025-03-18 20:41:57,373 autoreload Watching for file changes with StatReloader
+WARNING 2025-03-18 20:54:01,185 log Unauthorized: /api/users/me/
+WARNING 2025-03-18 20:54:01,221 basehttp "GET /api/users/me/ HTTP/1.1" 401 36
+INFO 2025-03-18 20:54:25,434 autoreload /Users/jakendai/Developer/MetalMint/backend/user/views.py changed, reloading.
+INFO 2025-03-18 20:57:16,309 autoreload Watching for file changes with StatReloader
+WARNING 2025-03-18 21:57:35,531 log Unauthorized: /api/users/me/
+WARNING 2025-03-18 21:57:35,604 basehttp "GET /api/users/me/ HTTP/1.1" 401 36
+INFO 2025-03-18 22:22:04,749 autoreload /Users/jakendai/Developer/MetalMint/backend/user/views.py changed, reloading.
+INFO 2025-03-18 22:23:56,371 autoreload Watching for file changes with StatReloader
+INFO 2025-03-18 22:27:34,201 autoreload /Users/jakendai/Developer/MetalMint/backend/middleware/security.py changed, reloading.
+INFO 2025-03-18 22:28:45,341 autoreload Watching for file changes with StatReloader
+INFO 2025-03-18 22:29:28,465 autoreload /Users/jakendai/Developer/MetalMint/backend/middleware/security.py changed, reloading.
+INFO 2025-03-18 22:30:40,587 autoreload Watching for file changes with StatReloader
+INFO 2025-03-18 22:32:24,793 autoreload /Users/jakendai/Developer/MetalMint/backend/middleware/security.py changed, reloading.
+INFO 2025-03-18 22:33:16,173 autoreload Watching for file changes with StatReloader
+INFO 2025-03-18 22:39:49,876 autoreload /Users/jakendai/Developer/MetalMint/backend/middleware/security.py changed, reloading.
+INFO 2025-03-18 22:40:27,583 autoreload Watching for file changes with StatReloader
+ERROR 2025-03-18 22:42:14,019 log Internal Server Error: /api/users/me/
+Traceback (most recent call last):
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/django/core/handlers/base.py", line 220, in _get_response
+    response = response.render()
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/django/template/response.py", line 114, in render
+    self.content = self.rendered_content
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/rest_framework/response.py", line 70, in rendered_content
+    ret = renderer.render(self.data, accepted_media_type, context)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/rest_framework/renderers.py", line 99, in render
+    ret = json.dumps(
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/rest_framework/utils/json.py", line 25, in dumps
+    return json.dumps(*args, **kwargs)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/json/__init__.py", line 238, in dumps
+    **kw).encode(obj)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/json/encoder.py", line 199, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/json/encoder.py", line 257, in iterencode
+    return _iterencode(o, 0)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/rest_framework/utils/encoders.py", line 67, in default
+    return super().default(obj)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/json/encoder.py", line 179, in default
+    raise TypeError(f'Object of type {o.__class__.__name__} '
+TypeError: Object of type Country is not JSON serializable
+ERROR 2025-03-18 22:42:14,420 basehttp "GET /api/users/me/ HTTP/1.1" 500 107386
+INFO 2025-03-18 22:49:27,830 autoreload /Users/jakendai/Developer/MetalMint/backend/user/serializers.py changed, reloading.
+INFO 2025-03-18 22:50:58,731 autoreload Watching for file changes with StatReloader
+INFO 2025-03-18 22:51:56,278 basehttp "GET /api/users/me/ HTTP/1.1" 200 548
+INFO 2025-03-18 22:56:27,146 views User lesama36@gmail.com updated their details
+INFO 2025-03-18 22:56:27,180 basehttp "PATCH /api/users/me/ HTTP/1.1" 200 557
+INFO 2025-03-18 22:57:05,072 views User lesama36@gmail.com updated their details
+INFO 2025-03-18 22:57:05,122 basehttp "PATCH /api/users/me/ HTTP/1.1" 200 552
+INFO 2025-03-18 22:57:41,829 views User lesama36@gmail.com updated their details
+INFO 2025-03-18 22:57:41,892 basehttp "PATCH /api/users/me/ HTTP/1.1" 200 552
+INFO 2025-03-18 23:03:58,969 autoreload /Users/jakendai/Developer/MetalMint/backend/user/serializers.py changed, reloading.
+INFO 2025-03-18 23:04:58,667 autoreload Watching for file changes with StatReloader
+INFO 2025-03-18 23:05:47,587 autoreload /Users/jakendai/Developer/MetalMint/backend/user/serializers.py changed, reloading.
+INFO 2025-03-18 23:07:49,510 autoreload Watching for file changes with StatReloader
+INFO 2025-03-18 23:07:59,162 autoreload /Users/jakendai/Developer/MetalMint/backend/user/serializers.py changed, reloading.
+INFO 2025-03-18 23:08:47,599 autoreload Watching for file changes with StatReloader
+INFO 2025-03-18 23:08:52,224 autoreload /Users/jakendai/Developer/MetalMint/backend/user/serializers.py changed, reloading.
+INFO 2025-03-18 23:09:28,598 autoreload Watching for file changes with StatReloader
+INFO 2025-03-18 23:09:53,565 autoreload /Users/jakendai/Developer/MetalMint/backend/user/serializers.py changed, reloading.
+INFO 2025-03-18 23:10:49,172 autoreload Watching for file changes with StatReloader
+INFO 2025-03-18 23:11:04,025 autoreload /Users/jakendai/Developer/MetalMint/backend/user/serializers.py changed, reloading.
+INFO 2025-03-18 23:16:07,074 autoreload Watching for file changes with StatReloader
+INFO 2025-03-18 23:16:48,529 autoreload /Users/jakendai/Developer/MetalMint/backend/user/serializers.py changed, reloading.
+INFO 2025-03-18 23:18:36,321 autoreload Watching for file changes with StatReloader
+INFO 2025-03-18 23:18:57,307 autoreload /Users/jakendai/Developer/MetalMint/backend/user/serializers.py changed, reloading.
+INFO 2025-03-18 23:20:05,961 autoreload Watching for file changes with StatReloader
+INFO 2025-03-18 23:27:14,940 autoreload /Users/jakendai/Developer/MetalMint/backend/user/serializers.py changed, reloading.
+INFO 2025-03-18 23:29:19,421 autoreload Watching for file changes with StatReloader
+INFO 2025-03-18 23:34:06,750 autoreload /Users/jakendai/Developer/MetalMint/backend/user/serializers.py changed, reloading.
+INFO 2025-03-18 23:37:19,205 autoreload Watching for file changes with StatReloader
+INFO 2025-03-18 23:38:10,288 autoreload /Users/jakendai/Developer/MetalMint/backend/user/urls.py changed, reloading.
+INFO 2025-03-18 23:39:37,335 autoreload Watching for file changes with StatReloader
+WARNING 2025-03-18 23:40:57,610 log Unauthorized: /api/users/countries/
+WARNING 2025-03-18 23:40:57,611 basehttp "GET /api/users/countries/ HTTP/1.1" 401 36
+INFO 2025-03-18 23:41:15,869 basehttp "GET /api/users/countries/ HTTP/1.1" 200 8548
+INFO 2025-03-18 23:42:58,463 views User lesama36@gmail.com updated their details
+INFO 2025-03-18 23:42:58,598 basehttp "PATCH /api/users/me/ HTTP/1.1" 200 552
+INFO 2025-03-18 23:43:42,486 views User lesama36@gmail.com updated their details
+INFO 2025-03-18 23:43:42,527 basehttp "PATCH /api/users/me/ HTTP/1.1" 200 552
+INFO 2025-03-18 23:46:20,528 autoreload /Users/jakendai/Developer/MetalMint/backend/user/serializers.py changed, reloading.
+INFO 2025-03-18 23:49:02,127 autoreload Watching for file changes with StatReloader
+INFO 2025-03-18 23:50:43,201 autoreload /Users/jakendai/Developer/MetalMint/backend/user/models.py changed, reloading.
+INFO 2025-03-19 07:36:20,998 autoreload Watching for file changes with StatReloader
+INFO 2025-03-19 07:36:47,004 autoreload /Users/jakendai/Developer/MetalMint/backend/user/models.py changed, reloading.
+INFO 2025-03-19 07:54:13,603 autoreload Watching for file changes with StatReloader
+INFO 2025-03-19 08:05:00,223 views User lesama36@gmail.com updated their details
+INFO 2025-03-19 08:05:00,353 basehttp "PATCH /api/users/me/ HTTP/1.1" 200 595
+INFO 2025-03-19 08:12:38,768 views User lesama36@gmail.com updated their details
+INFO 2025-03-19 08:12:38,966 basehttp "PATCH /api/users/me/ HTTP/1.1" 200 594
+INFO 2025-03-19 08:59:56,318 autoreload /Users/jakendai/Developer/MetalMint/backend/user/serializers.py changed, reloading.
+INFO 2025-03-19 09:16:49,595 autoreload Watching for file changes with StatReloader
+INFO 2025-03-19 09:22:03,520 views User lesama36@gmail.com updated their details: {'email': 'lesama36@gmail.com', 'username': 'lesama36_e27ef9', 'client_id': 'MM-0018-e27ef9', 'first_name': 'cooper', 'last_name': 'flash', 'mobile_number': '+254704764925', 'verification_status': 'verified', 'kyc_status': 'UNVERIFIED', 'document_expiry': None, 'country_display': {'code': 'AE', 'name': 'United Arab Emirates'}, 'city': 'Dubai', 'usd_balance': '0.00', 'usxw_balance': '0.00', 'stripe_customer_id': 'cus_Ry2CBixzMVahtc', 'stripe_account_id': '', 'total_invested': '0.00', 'jurisdiction': 'US', 'risk_level': 'MED', 'created_at': '2025-03-18T19:48:34.793263Z', 'last_activity': '2025-03-19T09:22:03.182144Z', 'is_active': True}
+INFO 2025-03-19 09:22:03,822 basehttp "PATCH /api/users/me/ HTTP/1.1" 200 598
+INFO 2025-03-19 09:23:10,099 basehttp "GET /api/users/countries/ HTTP/1.1" 200 8548
+INFO 2025-03-19 09:24:13,544 autoreload /Users/jakendai/Developer/MetalMint/backend/user/models.py changed, reloading.
+INFO 2025-03-19 09:27:21,215 autoreload Watching for file changes with StatReloader
+INFO 2025-03-19 09:34:31,235 autoreload /Users/jakendai/Developer/MetalMint/backend/user/models.py changed, reloading.
+INFO 2025-03-19 09:35:53,999 autoreload Watching for file changes with StatReloader
+INFO 2025-03-19 09:38:11,593 autoreload /Users/jakendai/Developer/MetalMint/backend/user/models.py changed, reloading.
+INFO 2025-03-19 09:40:06,164 autoreload Watching for file changes with StatReloader
+INFO 2025-03-19 09:40:37,025 autoreload /Users/jakendai/Developer/MetalMint/backend/user/models.py changed, reloading.
+INFO 2025-03-19 09:43:55,271 autoreload Watching for file changes with StatReloader
+INFO 2025-03-19 09:45:06,697 autoreload /Users/jakendai/Developer/MetalMint/backend/user/models.py changed, reloading.
+INFO 2025-03-19 09:47:29,429 autoreload Watching for file changes with StatReloader
+INFO 2025-03-19 09:48:00,751 autoreload /Users/jakendai/Developer/MetalMint/backend/user/models.py changed, reloading.
+INFO 2025-03-19 09:49:27,821 autoreload Watching for file changes with StatReloader
+INFO 2025-03-19 09:52:01,604 autoreload /Users/jakendai/Developer/MetalMint/backend/user/models.py changed, reloading.
+INFO 2025-03-19 09:58:11,399 autoreload Watching for file changes with StatReloader
+ERROR 2025-03-19 10:07:50,842 log Internal Server Error: /api/auth/register/
+Traceback (most recent call last):
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/django/views/decorators/csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "/Users/jakendai/Developer/MetalMint/backend/authentication/views.py", line 34, in post
+    user = serializer.save()
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/rest_framework/serializers.py", line 212, in save
+    self.instance = self.create(validated_data)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/contextlib.py", line 79, in inner
+    return func(*args, **kwds)
+  File "/Users/jakendai/Developer/MetalMint/backend/authentication/serializers.py", line 104, in create
+    user.save()
+  File "/Users/jakendai/Developer/MetalMint/backend/user/models.py", line 168, in save
+    self.full_clean()
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/django/db/models/base.py", line 1502, in full_clean
+    raise ValidationError(errors)
+django.core.exceptions.ValidationError: {'mobile_number': ['Invalid phone number.']}
+ERROR 2025-03-19 10:08:09,655 basehttp "POST /api/auth/register/ HTTP/1.1" 500 118883
+ERROR 2025-03-19 10:09:37,237 log Internal Server Error: /api/auth/register/
+Traceback (most recent call last):
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/django/views/decorators/csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "/Users/jakendai/Developer/MetalMint/backend/authentication/views.py", line 34, in post
+    user = serializer.save()
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/rest_framework/serializers.py", line 212, in save
+    self.instance = self.create(validated_data)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/contextlib.py", line 79, in inner
+    return func(*args, **kwds)
+  File "/Users/jakendai/Developer/MetalMint/backend/authentication/serializers.py", line 104, in create
+    user.save()
+  File "/Users/jakendai/Developer/MetalMint/backend/user/models.py", line 168, in save
+    self.full_clean()
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/django/db/models/base.py", line 1502, in full_clean
+    raise ValidationError(errors)
+django.core.exceptions.ValidationError: {'mobile_number': ['Invalid phone number format.'], '__all__': ['Mobile number must include country code']}
+ERROR 2025-03-19 10:10:14,096 basehttp "POST /api/auth/register/ HTTP/1.1" 500 119457
+INFO 2025-03-19 10:18:28,388 models Stripe customer cus_RyGEV9WFCkj7Iq created for lesama3@gmail.com
+ERROR 2025-03-19 10:18:28,450 serializers Error sending welcome email: name 'send_mail' is not defined
+ERROR 2025-03-19 10:18:28,450 serializers Failed to send welcome email to lesama3@gmail.com
+INFO 2025-03-19 10:18:28,630 basehttp "POST /api/auth/register/ HTTP/1.1" 201 310
+INFO 2025-03-19 10:20:36,918 models Stripe customer cus_RyGGzQOwe012jo created for barron@gmail.com
+ERROR 2025-03-19 10:20:37,086 serializers Error sending welcome email: name 'send_mail' is not defined
+ERROR 2025-03-19 10:20:37,094 serializers Failed to send welcome email to barron@gmail.com
+INFO 2025-03-19 10:20:37,137 basehttp "POST /api/auth/register/ HTTP/1.1" 201 309
+INFO 2025-03-19 10:31:33,566 autoreload /Users/jakendai/Developer/MetalMint/backend/authentication/serializers.py changed, reloading.
+INFO 2025-03-19 10:33:20,291 autoreload Watching for file changes with StatReloader
+INFO 2025-03-19 10:35:35,487 models Stripe customer cus_RyGVVlPX9gPCvJ created for tesla@gmail.com
+INFO 2025-03-19 10:35:42,791 basehttp "POST /api/auth/register/ HTTP/1.1" 201 306
+INFO 2025-03-19 11:16:45,748 basehttp "GET /api/users/me/profile/ HTTP/1.1" 200 24
+ERROR 2025-03-19 11:58:28,835 views Profile update failed for lesama36@gmail.com: {'avatar': [ErrorDetail(string='The submitted data was not a file. Check the encoding type on the form.', code='invalid')]}
+WARNING 2025-03-19 11:58:28,862 log Bad Request: /api/users/me/profile/
+WARNING 2025-03-19 11:58:28,866 basehttp "PUT /api/users/me/profile/ HTTP/1.1" 400 86
+INFO 2025-03-19 11:58:54,077 views Profile updated for lesama36@gmail.com
+INFO 2025-03-19 11:58:54,124 basehttp "PUT /api/users/me/profile/ HTTP/1.1" 200 38
+INFO 2025-03-19 11:59:48,307 basehttp "GET /api/users/me/profile/ HTTP/1.1" 200 38
+WARNING 2025-03-19 12:01:48,551 log Not Found: /api/users/me/kyc/
+WARNING 2025-03-19 12:01:48,604 basehttp "GET /api/users/me/kyc/ HTTP/1.1" 404 43
+WARNING 2025-03-19 12:07:21,022 log Forbidden: /api/users/admin/kyc/
+WARNING 2025-03-19 12:07:21,091 basehttp "GET /api/users/admin/kyc/ HTTP/1.1" 403 63
+WARNING 2025-03-19 12:09:13,077 log Not Found: /api/users/welcome/
+WARNING 2025-03-19 12:09:13,142 basehttp "GET /api/users/welcome/ HTTP/1.1" 404 4886
+ERROR 2025-03-19 12:09:41,196 log Internal Server Error: /api/users/me/dashboard/
+Traceback (most recent call last):
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/django/views/decorators/csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "/Users/jakendai/Developer/MetalMint/backend/user/views.py", line 148, in get
+    "total_portfolio_value": user.get_total_portfolio_value()
+  File "/Users/jakendai/Developer/MetalMint/backend/user/models.py", line 381, in get_total_portfolio_value
+    investments_value = UserInvestment.objects.filter(
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/django/db/models/query.py", line 592, in aggregate
+    return self.query.chain().get_aggregation(self.db, kwargs)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/django/db/models/sql/query.py", line 398, in get_aggregation
+    aggregate = aggregate_expr.resolve_expression(
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/django/db/models/aggregates.py", line 64, in resolve_expression
+    c = super().resolve_expression(query, allow_joins, reuse, summarize)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/django/db/models/expressions.py", line 950, in resolve_expression
+    c.source_expressions[pos] = arg.resolve_expression(
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/django/db/models/expressions.py", line 829, in resolve_expression
+    return query.resolve_ref(self.name, allow_joins, reuse, summarize)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/django/db/models/sql/query.py", line 1976, in resolve_ref
+    join_info = self.setup_joins(
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/django/db/models/sql/query.py", line 1823, in setup_joins
+    path, final_field, targets, rest = self.names_to_path(
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/django/db/models/sql/query.py", line 1724, in names_to_path
+    raise FieldError(
+django.core.exceptions.FieldError: Cannot resolve keyword 'current_value' into field. Choices are: end_date, id, initial_gold_price, is_active, package, package_id, start_date, total_earned, user, user_id
+ERROR 2025-03-19 12:09:57,456 basehttp "GET /api/users/me/dashboard/ HTTP/1.1" 500 138973
+INFO 2025-03-19 16:26:24,999 autoreload Watching for file changes with StatReloader
+INFO 2025-03-19 18:13:07,956 autoreload Watching for file changes with StatReloader
+WARNING 2025-03-19 20:12:45,841 log Unauthorized: /api/users/me/dashboard/
+WARNING 2025-03-19 20:12:45,896 basehttp "GET /api/users/me/dashboard/ HTTP/1.1" 401 36
+ERROR 2025-03-19 20:13:59,616 log Internal Server Error: /api/users/me/dashboard/
+Traceback (most recent call last):
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/django/views/decorators/csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "/Users/jakendai/Developer/MetalMint/backend/user/views.py", line 148, in get
+    "total_portfolio_value": user.get_total_portfolio_value()
+  File "/Users/jakendai/Developer/MetalMint/backend/user/models.py", line 381, in get_total_portfolio_value
+    investments_value = UserInvestment.objects.filter(
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/django/db/models/query.py", line 592, in aggregate
+    return self.query.chain().get_aggregation(self.db, kwargs)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/django/db/models/sql/query.py", line 398, in get_aggregation
+    aggregate = aggregate_expr.resolve_expression(
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/django/db/models/aggregates.py", line 64, in resolve_expression
+    c = super().resolve_expression(query, allow_joins, reuse, summarize)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/django/db/models/expressions.py", line 950, in resolve_expression
+    c.source_expressions[pos] = arg.resolve_expression(
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/django/db/models/expressions.py", line 829, in resolve_expression
+    return query.resolve_ref(self.name, allow_joins, reuse, summarize)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/django/db/models/sql/query.py", line 1976, in resolve_ref
+    join_info = self.setup_joins(
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/django/db/models/sql/query.py", line 1823, in setup_joins
+    path, final_field, targets, rest = self.names_to_path(
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/django/db/models/sql/query.py", line 1724, in names_to_path
+    raise FieldError(
+django.core.exceptions.FieldError: Cannot resolve keyword 'current_value' into field. Choices are: end_date, id, initial_gold_price, is_active, package, package_id, start_date, total_earned, user, user_id
+ERROR 2025-03-19 20:13:59,766 basehttp "GET /api/users/me/dashboard/ HTTP/1.1" 500 140042
+INFO 2025-03-19 21:48:52,487 autoreload /Users/jakendai/Developer/MetalMint/backend/user/models.py changed, reloading.
+INFO 2025-03-19 21:51:08,934 autoreload Watching for file changes with StatReloader
+INFO 2025-03-19 21:56:50,936 basehttp "GET /api/users/me/dashboard/ HTTP/1.1" 200 1437
+INFO 2025-03-19 22:00:50,218 basehttp "GET /api/users/me/wallet/ HTTP/1.1" 200 152
+WARNING 2025-03-19 22:13:23,161 log Method Not Allowed: /api/users/me/wallet/convert/
+WARNING 2025-03-19 22:13:23,205 basehttp "GET /api/users/me/wallet/convert/ HTTP/1.1" 405 40
+ERROR 2025-03-19 22:13:50,647 views Wallet conversion failed for lesama36@gmail.com: ['Insufficient USD balance']
+WARNING 2025-03-19 22:13:50,772 log Bad Request: /api/users/me/wallet/convert/
+WARNING 2025-03-19 22:13:50,774 basehttp "POST /api/users/me/wallet/convert/ HTTP/1.1" 400 41
+ERROR 2025-03-19 22:15:04,013 log Internal Server Error: /api/users/me/wallet/stripe-account/
+Traceback (most recent call last):
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/django/views/decorators/csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "/Users/jakendai/Developer/MetalMint/backend/user/views.py", line 227, in post
+    stripe_account_id = serializer.validated_data["stripe_account_id"]
+KeyError: 'stripe_account_id'
+ERROR 2025-03-19 22:15:04,276 basehttp "POST /api/users/me/wallet/stripe-account/ HTTP/1.1" 500 95982
+ERROR 2025-03-19 22:21:25,134 views KYC submission failed for lesama36@gmail.com: {'document_front': [ErrorDetail(string='The submitted data was not a file. Check the encoding type on the form.', code='invalid')], 'document_back': [ErrorDetail(string='The submitted data was not a file. Check the encoding type on the form.', code='invalid')]}
+WARNING 2025-03-19 22:21:25,224 log Bad Request: /api/users/me/kyc/
+WARNING 2025-03-19 22:21:25,228 basehttp "POST /api/users/me/kyc/ HTTP/1.1" 400 186
+ERROR 2025-03-19 22:22:19,535 views Invalid Stripe account ID for lesama36@gmail.com: The provided key 'sk_test_***********************************************************************************************7Xnj' does not have access to account 'acct_123456789' (or that account does not exist). Application access may have been revoked.
+WARNING 2025-03-19 22:22:19,559 log Bad Request: /api/users/me/wallet/stripe-account/
+WARNING 2025-03-19 22:22:19,560 basehttp "POST /api/users/me/wallet/stripe-account/ HTTP/1.1" 400 291
+INFO 2025-03-19 22:23:49,723 autoreload /Users/jakendai/Developer/MetalMint/backend/user/models.py changed, reloading.
+INFO 2025-03-19 22:25:25,491 autoreload Watching for file changes with StatReloader
+INFO 2025-03-19 22:30:48,211 autoreload /Users/jakendai/Developer/MetalMint/backend/user/models.py changed, reloading.
+INFO 2025-03-19 22:32:20,366 autoreload Watching for file changes with StatReloader
+INFO 2025-03-19 23:07:22,189 autoreload /Users/jakendai/Developer/MetalMint/backend/user/models.py changed, reloading.
+INFO 2025-03-19 23:07:59,012 autoreload Watching for file changes with StatReloader
+INFO 2025-03-19 23:08:35,294 autoreload /Users/jakendai/Developer/MetalMint/backend/user/models.py changed, reloading.
+INFO 2025-03-19 23:08:46,749 autoreload Watching for file changes with StatReloader
+INFO 2025-03-19 23:09:55,993 autoreload /Users/jakendai/Developer/MetalMint/backend/user/serializers.py changed, reloading.
+INFO 2025-03-19 23:10:46,747 autoreload Watching for file changes with StatReloader
+INFO 2025-03-19 23:11:48,230 autoreload /Users/jakendai/Developer/MetalMint/backend/user/views.py changed, reloading.
+INFO 2025-03-19 23:12:04,166 autoreload Watching for file changes with StatReloader
+INFO 2025-03-20 06:52:21,420 autoreload /Users/jakendai/Developer/MetalMint/backend/user/kyc_utils.py changed, reloading.
+INFO 2025-03-20 06:52:36,690 autoreload Watching for file changes with StatReloader
+INFO 2025-03-20 06:54:35,884 autoreload /Users/jakendai/Developer/MetalMint/backend/user/urls.py changed, reloading.
+INFO 2025-03-20 06:54:37,684 autoreload Watching for file changes with StatReloader
+INFO 2025-03-20 06:55:36,299 autoreload /Users/jakendai/Developer/MetalMint/backend/user/urls.py changed, reloading.
+INFO 2025-03-20 06:55:38,365 autoreload Watching for file changes with StatReloader
+ERROR 2025-03-20 07:00:34,367 log Internal Server Error: /api/users/me/kyc/
+Traceback (most recent call last):
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/django/db/models/fields/related_descriptors.py", line 473, in __get__
+    rel_obj = self.related.get_cached_value(instance)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/django/db/models/fields/mixins.py", line 15, in get_cached_value
+    return instance._state.fields_cache[cache_name]
+KeyError: 'kyc_verification'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/django/db/backends/utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+psycopg2.errors.UndefinedColumn: column user_kycverification.selfie does not exist
+LINE 1: ...t_front", "user_kycverification"."document_back", "user_kycv...
+                                                             ^
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/django/views/decorators/csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "/Users/jakendai/Developer/MetalMint/backend/user/views.py", line 70, in get
+    kyc = request.user.kyc_verification
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/django/db/models/fields/related_descriptors.py", line 481, in __get__
+    rel_obj = self.get_queryset(instance=instance).get(**filter_args)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/django/db/models/query.py", line 633, in get
+    num = len(clone)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/django/db/models/query.py", line 380, in __len__
+    self._fetch_all()
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/django/db/models/query.py", line 1881, in _fetch_all
+    self._result_cache = list(self._iterable_class(self))
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/django/db/models/query.py", line 91, in __iter__
+    results = compiler.execute_sql(
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/django/db/models/sql/compiler.py", line 1562, in execute_sql
+    cursor.execute(sql, params)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/django/db/backends/utils.py", line 102, in execute
+    return super().execute(sql, params)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/django/db/backends/utils.py", line 67, in execute
+    return self._execute_with_wrappers(
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/django/db/backends/utils.py", line 80, in _execute_with_wrappers
+    return executor(sql, params, many, context)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/django/db/backends/utils.py", line 84, in _execute
+    with self.db.wrap_database_errors:
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/django/db/utils.py", line 91, in __exit__
+    raise dj_exc_value.with_traceback(traceback) from exc_value
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/django/db/backends/utils.py", line 89, in _execute
+    return self.cursor.execute(sql, params)
+django.db.utils.ProgrammingError: column user_kycverification.selfie does not exist
+LINE 1: ...t_front", "user_kycverification"."document_back", "user_kycv...
+                                                             ^
+
+ERROR 2025-03-20 07:00:34,403 basehttp "GET /api/users/me/kyc/ HTTP/1.1" 500 168790
+INFO 2025-03-20 07:15:03,442 autoreload /Users/jakendai/Developer/MetalMint/backend/user/models.py changed, reloading.
+INFO 2025-03-20 07:15:18,054 autoreload Watching for file changes with StatReloader
+ERROR 2025-03-20 07:16:20,207 log Internal Server Error: /api/users/me/kyc/
+Traceback (most recent call last):
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/django/views/decorators/csrf.py", line 56, in wrapper_view
+    return view_func(*args, **kwargs)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/rest_framework/views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/rest_framework/views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/rest_framework/views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "/Users/jakendai/.pyenv/versions/3.10.15/lib/python3.10/site-packages/rest_framework/views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+  File "/Users/jakendai/Developer/MetalMint/backend/user/views.py", line 112, in post
+    logger.error(f"KYC submission failed for {request.user.email}: {str(e)}")
+UnboundLocalError: local variable 'e' referenced before assignment
+ERROR 2025-03-20 07:16:20,218 basehttp "POST /api/users/me/kyc/ HTTP/1.1" 500 96414
+INFO 2025-03-20 07:18:59,634 autoreload /Users/jakendai/Developer/MetalMint/backend/user/views.py changed, reloading.
+INFO 2025-03-20 07:19:15,722 autoreload Watching for file changes with StatReloader
+ERROR 2025-03-20 07:19:30,454 views KYC submission failed for lesama36@gmail.com: {'document_type': [ErrorDetail(string='This field is required.', code='required')], 'document_front': [ErrorDetail(string='No file was submitted.', code='required')]}
+WARNING 2025-03-20 07:19:30,455 log Bad Request: /api/users/me/kyc/
+WARNING 2025-03-20 07:19:30,485 basehttp "POST /api/users/me/kyc/ HTTP/1.1" 400 89
+ERROR 2025-03-20 07:29:12,691 views KYC submission failed for lesama36@gmail.com: {'document_type': [ErrorDetail(string='This field is required.', code='required')], 'document_front': [ErrorDetail(string='No file was submitted.', code='required')]}
+WARNING 2025-03-20 07:29:12,708 log Bad Request: /api/users/me/kyc/
+WARNING 2025-03-20 07:29:12,710 basehttp "POST /api/users/me/kyc/?document_type=PASSPORT&document_front=passport_front.jpg&selfie=selfie.jpg HTTP/1.1" 400 89
+ERROR 2025-03-20 07:29:29,293 views KYC submission failed for lesama36@gmail.com: {'document_type': [ErrorDetail(string='This field is required.', code='required')], 'document_front': [ErrorDetail(string='No file was submitted.', code='required')]}
+WARNING 2025-03-20 07:29:29,294 log Bad Request: /api/users/me/kyc/
+WARNING 2025-03-20 07:29:29,301 basehttp "POST /api/users/me/kyc/ HTTP/1.1" 400 89
+ERROR 2025-03-20 07:32:55,706 views KYC submission failed for lesama36@gmail.com: {'document_type': [ErrorDetail(string='This field is required.', code='required')], 'document_front': [ErrorDetail(string='No file was submitted.', code='required')]}
+WARNING 2025-03-20 07:32:55,727 log Bad Request: /api/users/me/kyc/
+WARNING 2025-03-20 07:32:55,728 basehttp "POST /api/users/me/kyc/?document_type=PASSPORT&document_front=passport_front.jpg&selfie=selfie.jpg HTTP/1.1" 400 89

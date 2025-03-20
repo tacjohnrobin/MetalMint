@@ -1,30 +1,42 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
-from rest_framework.permissions import IsAuthenticated, IsAdminUser
+from rest_framework.permissions import IsAuthenticated, IsAdminUser, AllowAny
 from rest_framework_simplejwt.authentication import JWTAuthentication
 from django.core.exceptions import ValidationError
 import logging
 from decimal import Decimal
-
+from django_countries import countries
 from .models import User, UserProfile, KYCVerification
 from .serializers import UserSerializer, UserProfileSerializer, KYCVerificationSerializer, StripeAccountSerializer
+from .kyc_utils import KYCVerifier
 
 logger = logging.getLogger(__name__)
 
+
+class CountryListView(APIView):
+    permission_classes = [AllowAny]
+
+    def get(self, *args, **kwargs):
+        country_list = [
+            {"code": code, "name": name} for code, name in countries
+        ]
+        return Response(country_list, status=status.HTTP_200_OK)
+
 class UserDetailView(APIView):
-    authentication_classes = [JWTAuthentication]
     permission_classes = [IsAuthenticated]
 
     def get(self, request, *args, **kwargs):
+        logger.debug(f"UserDetailView accessed by {request.user.email}")
         serializer = UserSerializer(request.user)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
     def patch(self, request, *args, **kwargs):
+        logger.debug(f"UserDetailView PATCH accessed by {request.user.email} with data: {request.data}")
         serializer = UserSerializer(request.user, data=request.data, partial=True)
         if serializer.is_valid():
             serializer.save()
-            logger.info(f"User {request.user.email} updated their details")
+            logger.info(f"User {request.user.email} updated their details: {serializer.data}")
             return Response(serializer.data, status=status.HTTP_200_OK)
         logger.error(f"User update failed for {request.user.email}: {serializer.errors}")
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
@@ -48,6 +60,7 @@ class UserProfileView(APIView):
         logger.error(f"Profile update failed for {request.user.email}: {serializer.errors}")
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+
 class KYCVerificationView(APIView):
     authentication_classes = [JWTAuthentication]
     permission_classes = [IsAuthenticated]
@@ -66,8 +79,34 @@ class KYCVerificationView(APIView):
         
         serializer = KYCVerificationSerializer(data=request.data)
         if serializer.is_valid():
-            serializer.save(user=request.user)
-            logger.info(f"KYC verification submitted for {request.user.email}")
+            kyc = serializer.save(user=request.user)
+            
+            # Automate KYC verification
+            try:
+                verifier = KYCVerifier()
+                doc_path = kyc.document_front.path
+                selfie_path = kyc.selfie.path
+                
+                # Validate document
+                result = verifier.validate_document(doc_path, kyc.document_type)
+                kyc.verification_result = result
+                
+                # Verify face match
+                verifier.verify_face(doc_path, selfie_path)
+                
+                # If all pass, mark as verified
+                kyc.verified_at = timezone.now()
+                kyc.is_auto_verified = True
+                kyc.next_review_date = timezone.now().date() + timedelta(days=365)
+                kyc.save()
+                request.user.update_kyc_status()
+                logger.info(f"KYC auto-verified for {request.user.email}")
+            except ValidationError as e:
+                kyc.rejection_reason = str(e)
+                kyc.save()
+                request.user.update_kyc_status()
+                logger.error(f"KYC failed for {request.user.email}: {str(e)}")
+            
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         logger.error(f"KYC submission failed for {request.user.email}: {serializer.errors}")
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
@@ -82,28 +121,6 @@ class KYCVerificationView(APIView):
                 serializer.save()
                 logger.info(f"KYC updated for {request.user.email}")
                 return Response(serializer.data, status=status.HTTP_200_OK)
-            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-        except KYCVerification.DoesNotExist:
-            return Response({"detail": "KYC verification not found"}, status=status.HTTP_404_NOT_FOUND)
-
-class AdminKYCVerificationView(APIView):
-    authentication_classes = [JWTAuthentication]
-    permission_classes = [IsAuthenticated, IsAdminUser]
-
-    def get(self, request, *args, **kwargs):
-        kycs = KYCVerification.objects.filter(verified_at__isnull=True, rejection_reason='')
-        serializer = KYCVerificationSerializer(kycs, many=True)
-        return Response(serializer.data, status=status.HTTP_200_OK)
-
-    def patch(self, request, *args, **kwargs):
-        try:
-            kyc = KYCVerification.objects.get(user__email=request.data.get("email"))
-            serializer = KYCVerificationSerializer(kyc, data=request.data, partial=True)
-            if serializer.is_valid():
-                serializer.save(verified_by=request.user)
-                logger.info(f"KYC status updated for {kyc.user.email} by {request.user.email}")
-                return Response(serializer.data, status=status.HTTP_200_OK)
-            logger.error(f"KYC update failed: {serializer.errors}")
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
         except KYCVerification.DoesNotExist:
             return Response({"detail": "KYC verification not found"}, status=status.HTTP_404_NOT_FOUND)

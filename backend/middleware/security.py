@@ -1,46 +1,63 @@
 import logging
 from django.http import JsonResponse
-from django.urls import resolve
-from rest_framework import status
 from django.core.exceptions import PermissionDenied
+from rest_framework import status
+from rest_framework_simplejwt.authentication import JWTAuthentication
+from django.utils.deprecation import MiddlewareMixin
 
 logger = logging.getLogger(__name__)
 
-class FinancialSecurityMiddleware:
-    def __init__(self, get_response):
+class FinancialSecurityMiddleware(MiddlewareMixin):
+    def __init__(self, get_response=None):
         self.get_response = get_response
-        # Protected URL prefixes (not namespaces, since banking uses 'transactions' namespace)
         self.protected_paths = [
             '/api/investments/',
             '/api/transactions/',
             '/api/analytics/',
         ]
-        # Public paths that don’t require authentication or KYC
+        self.user_paths = [
+            '/api/users/',
+        ]
         self.public_paths = [
             '/api/auth/',
             '/dj-admin/',
             '/api-auth/',
         ]
+        self.jwt_authenticator = JWTAuthentication()
 
     def __call__(self, request):
         path = request.path_info
+        logger.debug(f"Request path: {path}")
 
         # Check if the path is public
-        is_public = any(path.startswith(pub_path) for pub_path in self.public_paths)
-        if is_public:
+        if any(path.startswith(pub_path) for pub_path in self.public_paths):
+            logger.debug(f"Public path accessed: {path}")
             return self.get_response(request)
 
-        # Check authentication for all non-public paths
-        if not request.user.is_authenticated:
-            logger.warning(f"Unauthorized access attempt to {path} by IP {request.META.get('REMOTE_ADDR')}")
+        # Authenticate the user using JWT
+        try:
+            user, token = self.jwt_authenticator.authenticate(request)
+            request.user = user
+            logger.debug(f"Authenticated user: {user.email}")
+        except Exception as e:
+            logger.warning(f"Authentication failed: {str(e)}")
             return JsonResponse({"error": "Authentication required"}, status=status.HTTP_401_UNAUTHORIZED)
 
-        # Check KYC for protected paths
-        is_protected = any(path.startswith(prot_path) for prot_path in self.protected_paths)
-        if is_protected and not request.user.is_kyc_valid():
-            logger.warning(f"KYC not verified for user {request.user.email} attempting to access {path}")
-            raise PermissionDenied("KYC verification required")
+        # Check authentication for user paths
+        if any(path.startswith(user_path) for user_path in self.user_paths):
+            if not request.user.is_authenticated:
+                logger.warning(f"Unauthorized access attempt to {path} by IP {request.META.get('REMOTE_ADDR')}")
+                return JsonResponse({"error": "Authentication required"}, status=status.HTTP_401_UNAUTHORIZED)
+            logger.debug(f"Authenticated access to user path {path} by {request.user.email}")
+            return self.get_response(request)
 
+        # Check KYC for protected paths
+        if any(path.startswith(prot_path) for prot_path in self.protected_paths):
+            if not request.user.is_kyc_valid():
+                logger.warning(f"KYC not verified for user {request.user.email} attempting to access {path}")
+                raise PermissionDenied("KYC verification required")
+
+        logger.debug(f"Authorized access to {path} by user {request.user.email}")
         return self.get_response(request)
 
     def process_exception(self, request, exception):
