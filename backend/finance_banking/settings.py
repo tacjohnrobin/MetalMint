@@ -92,13 +92,14 @@ WSGI_APPLICATION = 'finance_banking.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'finance_db',           # Updated database name
-        'USER': 'finance_user',         # Updated user name
+        'NAME': 'finance_db',
+        'USER': 'finance_user',  # Matches the role created in init-db.sh
         'PASSWORD': 'wCh29&HE&T83',
         'HOST': 'db',
         'PORT': '5432',
     }
 }
+print("DATABASES Config:", DATABASES)
 
 # Debug print to verify config
 print("DATABASES Config:", DATABASES)

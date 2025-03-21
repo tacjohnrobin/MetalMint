@@ -34,8 +34,10 @@ RUN pip install -r requirements.txt
 # Copy project files
 COPY . .
 
-# Create non-root user for Celery
-RUN useradd -m -r celeryuser && chown celeryuser:celeryuser /app
+# Create logs directory and set permissions
+RUN mkdir -p /app/logs && \
+    useradd -m -r celeryuser && \
+    chown -R celeryuser:celeryuser /app
 
 # Expose port
 EXPOSE 8000
