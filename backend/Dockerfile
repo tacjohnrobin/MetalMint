@@ -11,7 +11,7 @@ ENV PYTHONUNBUFFERED=1 \
     PIP_DISABLE_PIP_VERSION_CHECK=on \
     PIP_DEFAULT_TIMEOUT=100
 
-# Install system dependencies required for dlib and existing dependencies
+# Install system dependencies
 RUN apt-get update && apt-get install -y \
     gcc \
     libpq-dev \
@@ -34,10 +34,8 @@ RUN pip install -r requirements.txt
 # Copy project files
 COPY . .
 
-# Create logs directory and set permissions
-RUN mkdir -p /app/logs && \
-    useradd -m -r celeryuser && \
-    chown -R celeryuser:celeryuser /app
+# Create non-root user for Celery
+RUN useradd -m -r -u 1000 celeryuser && chown celeryuser:celeryuser /app
 
 # Expose port
 EXPOSE 8000

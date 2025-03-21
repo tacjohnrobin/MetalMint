@@ -88,20 +88,17 @@ SECURE_CROSS_ORIGIN_OPENER_POLICY = None
 
 WSGI_APPLICATION = 'finance_banking.wsgi.application'
 
-# Database (Updated)
+# Database
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'finance_db',
-        'USER': 'finance_user',  # Matches the role created in init-db.sh
+        'USER': 'finance_user',
         'PASSWORD': 'wCh29&HE&T83',
         'HOST': 'db',
         'PORT': '5432',
     }
 }
-print("DATABASES Config:", DATABASES)
-
-# Debug print to verify config
 print("DATABASES Config:", DATABASES)
 
 # Password validation
@@ -215,7 +212,7 @@ FIELD_ENCRYPTION_KEY = 'T86V1XiaQnV_128P62njY_h5pUkN8ayKeJUnIn17xrQ='
 
 GOLD_API_KEY = 'your_gold_api_key_here'
 
-# Logging
+# Logging (Updated for Console-Only)
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
@@ -226,12 +223,6 @@ LOGGING = {
         },
     },
     'handlers': {
-        'file': {
-            'level': 'INFO',
-            'class': 'logging.FileHandler',
-            'filename': BASE_DIR / 'logs' / 'django.log',
-            'formatter': 'verbose',
-        },
         'console': {
             'level': 'DEBUG',
             'class': 'logging.StreamHandler',
@@ -240,17 +231,17 @@ LOGGING = {
     },
     'loggers': {
         'django': {
-            'handlers': ['file', 'console'],
+            'handlers': ['console'],
             'level': 'INFO',
             'propagate': True,
         },
         'user': {
-            'handlers': ['file', 'console'],
+            'handlers': ['console'],
             'level': 'INFO',
             'propagate': True,
         },
         'authentication': {
-            'handlers': ['file', 'console'],
+            'handlers': ['console'],
             'level': 'INFO',
             'propagate': True,
         },
