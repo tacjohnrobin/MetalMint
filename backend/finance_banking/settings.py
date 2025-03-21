@@ -170,6 +170,7 @@ CELERY_ACCEPT_CONTENT = ['json']
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
 CELERY_TIMEZONE = 'UTC'
+CELERY_BEAT_SCHEDULER = 'django_celery_beat.schedulers:DatabaseScheduler'  # Use database scheduler
 
 CELERY_BEAT_SCHEDULE = {
     'process_daily_payouts': {
@@ -212,7 +213,7 @@ FIELD_ENCRYPTION_KEY = 'T86V1XiaQnV_128P62njY_h5pUkN8ayKeJUnIn17xrQ='
 
 GOLD_API_KEY = 'your_gold_api_key_here'
 
-# Logging (Updated for Console-Only)
+# Logging (Console-Only)
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,

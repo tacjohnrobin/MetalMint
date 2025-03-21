@@ -5,7 +5,6 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    command: gunicorn --bind 0.0.0.0:8000 --workers 3 finance_banking.wsgi:application
     volumes:
       - .:/app
       - static_volume:/app/static
@@ -53,7 +52,7 @@ services:
     image: postgres:13
     environment:
       - POSTGRES_DB=finance_db
-      - POSTGRES_USER=finance_user  # Use finance_user directly
+      - POSTGRES_USER=finance_user
       - POSTGRES_PASSWORD=wCh29&HE&T83
     volumes:
       - postgres_data:/var/lib/postgresql/data

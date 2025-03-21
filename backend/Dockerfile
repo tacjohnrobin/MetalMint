@@ -25,13 +25,14 @@ RUN apt-get update && apt-get install -y \
     libjpeg-dev \
     libatlas-base-dev \
     gfortran \
+    postgresql-client \
     && rm -rf /var/lib/apt/lists/*
 
 # Install Python dependencies
 COPY requirements.txt .
 RUN pip install -r requirements.txt
 
-# Copy project files
+# Copy project files (including entrypoint.sh)
 COPY . .
 
 # Create non-root user for Celery
@@ -40,5 +41,5 @@ RUN useradd -m -r -u 1000 celeryuser && chown celeryuser:celeryuser /app
 # Expose port
 EXPOSE 8000
 
-# Default command (overridden in docker-compose)
-CMD ["gunicorn", "--bind", "0.0.0.0:8000", "finance_banking.wsgi:application"]
+# Use the entrypoint script
+ENTRYPOINT ["./entrypoint.sh"]
