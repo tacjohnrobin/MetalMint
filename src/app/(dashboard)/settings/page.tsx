@@ -2,6 +2,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ArrowLeft, AlertCircle, Pencil } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
+import BankAccountsPage from "@/components/dashboard/accountConnect";
 
 export default function AccountPage() {
 	return (
@@ -30,13 +31,6 @@ export default function AccountPage() {
 							</div>
 						</div>
 					</div>
-					<Link
-						href="/accounts"
-						className="flex items-center gap-1 text-sm font-medium text-blue-600 hover:text-blue-800"
-					>
-						<ArrowLeft className="h-4 w-4" />
-						Return to Accounts
-					</Link>
 				</div>
 			</div>
 
@@ -176,65 +170,7 @@ export default function AccountPage() {
 
 				<TabsContent value="bank-details" className="mt-0">
 					<div className="space-y-6">
-						<div>
-							<h2 className="mb-6 text-xl font-bold text-gray-900">
-								Bank Account Details
-							</h2>
-							<div className="grid gap-6 sm:grid-cols-2">
-								<div>
-									<label
-										htmlFor="account-name"
-										className="mb-1 block text-sm font-normal text-gray-500"
-									>
-										Account Holder Name
-									</label>
-									<input
-										id="account-name"
-										defaultValue="Qubo Creatives Ltd"
-										className="w-full rounded-md border border-gray-200 bg-gray-50 px-3 py-2 text-gray-900 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
-									/>
-								</div>
-								<div>
-									<label
-										htmlFor="account-number"
-										className="mb-1 block text-sm font-normal text-gray-500"
-									>
-										Account Number
-									</label>
-									<input
-										id="account-number"
-										defaultValue="1234567890"
-										className="w-full rounded-md border border-gray-200 bg-gray-50 px-3 py-2 text-gray-900 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
-									/>
-								</div>
-								<div>
-									<label
-										htmlFor="bank-name"
-										className="mb-1 block text-sm font-normal text-gray-500"
-									>
-										Bank Name
-									</label>
-									<input
-										id="bank-name"
-										defaultValue="Standard Chartered"
-										className="w-full rounded-md border border-gray-200 bg-gray-50 px-3 py-2 text-gray-900 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
-									/>
-								</div>
-								<div>
-									<label
-										htmlFor="branch-code"
-										className="mb-1 block text-sm font-normal text-gray-500"
-									>
-										Branch Code
-									</label>
-									<input
-										id="branch-code"
-										defaultValue="SCB-001"
-										className="w-full rounded-md border border-gray-200 bg-gray-50 px-3 py-2 text-gray-900 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
-									/>
-								</div>
-							</div>
-						</div>
+						<BankAccountsPage />
 					</div>
 				</TabsContent>
 

@@ -19,10 +19,7 @@ export function VerificationAlert() {
 							Account verification required
 						</h3>
 						<div className="mt-1 text-sm text-amber-700">
-							<p>
-								Please complete the verification process to unlock all features
-								and ensure the security of your account.
-							</p>
+							<p>Please verification ccount to unlock all features.</p>
 						</div>
 						<div className="mt-3">
 							<a href="#">

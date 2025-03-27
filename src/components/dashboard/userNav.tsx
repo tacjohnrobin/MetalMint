@@ -1,7 +1,7 @@
 "use client";
 
-import { LogOut, Settings, Shield, User, HelpCircle, Eye } from "lucide-react";
-
+import { useEffect, useState } from "react";
+import { LogOut, Settings, HelpCircle, User } from "lucide-react";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import {
@@ -12,16 +12,30 @@ import {
 	DropdownMenuSeparator,
 	DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Switch } from "@/components/ui/switch";
+import { getUserProfile } from "@/lib/authApi";
 
 export function UserNav() {
+	const [initials, setInitials] = useState<string>("");
+
+	useEffect(() => {
+		async function fetchUser() {
+			const user = await getUserProfile();
+			if (user) {
+				const firstInitial = user.firstName?.charAt(0) || "";
+				const lastInitial = user.lastName?.charAt(0) || "";
+				setInitials(`${firstInitial}${lastInitial}`.toUpperCase());
+			}
+		}
+		fetchUser();
+	}, []);
+
 	return (
 		<DropdownMenu>
 			<DropdownMenuTrigger asChild>
 				<Button variant="ghost" className="relative h-9 w-9 rounded-full">
 					<Avatar className="h-9 w-9">
 						<AvatarFallback className="bg-green-300 text-sm text-gray-800">
-							QC
+							{initials}
 						</AvatarFallback>
 					</Avatar>
 				</Button>
@@ -29,7 +43,9 @@ export function UserNav() {
 			<DropdownMenuContent className="w-64 p-0 mt-3" align="end" forceMount>
 				<div className="flex flex-col items-center gap-2 p-4">
 					<Avatar className="h-16 w-16">
-						<AvatarFallback className="bg-green-300 text-xl">QC</AvatarFallback>
+						<AvatarFallback className="bg-green-300 text-xl">
+							{initials}
+						</AvatarFallback>
 					</Avatar>
 					<div className="flex flex-col items-center space-y-2">
 						<p className="text-sm font-medium">Qubo Creatives</p>
@@ -59,19 +75,6 @@ export function UserNav() {
 					</DropdownMenuItem>
 				</DropdownMenuGroup>
 				<DropdownMenuSeparator className="my-2" />
-				<DropdownMenuGroup className="p-1">
-					{/*<DropdownMenuItem className="flex items-center justify-between px-3 py-2.5">
-						<div className="flex items-center gap-3">
-							<Eye className="h-4.5 w-4.5" />
-							<span>Privacy mode</span>
-						</div>
-						<Switch />
-					</DropdownMenuItem>
-					<DropdownMenuItem className="flex items-center gap-3 px-3 py-2.5 text-red-600 focus:text-red-600">
-						<LogOut className="h-4.5 w-4.5" />
-						<span>Log out</span>
-					</DropdownMenuItem> */}
-				</DropdownMenuGroup>
 			</DropdownMenuContent>
 		</DropdownMenu>
 	);

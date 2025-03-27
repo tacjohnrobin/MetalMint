@@ -47,8 +47,8 @@ export function TradingVolume() {
 	}, []);
 
 	return (
-		<div className="bg-white rounded-lg border border-gray-200 p-4">
-			<div className="flex justify-between items-center mb-4">
+		<div className="bg-white rounded-lg  p-4 mb-4 shadow-lg">
+			<div className="flex justify-between items-center mb-6">
 				<h3 className="text-lg font-semibold">Trading Volume</h3>
 				<div className="text-sm font-medium">
 					24h:{" "}

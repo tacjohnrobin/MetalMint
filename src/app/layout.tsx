@@ -49,7 +49,7 @@ export default function RootLayout({
 		<html lang="en">
 			<body
 				suppressHydrationWarning
-				className={`${geologica.variable} ${geistSans.variable} antialiased bg-white text-[#d4af37]`}
+				className={`${geologica.variable} ${geistSans.variable} antialiased bg-white `}
 			>
 				{children}
 			</body>

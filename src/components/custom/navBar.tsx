@@ -17,7 +17,7 @@ export default function Navbar() {
 						width={28}
 						height={28}
 					/>
-					<span className="text-xl font-semibold">MetalMint</span>
+					<span className="text-xl font-semibold text-gold">MetalMint</span>
 				</Link>
 
 				{/* Desktop Navigation */}
@@ -38,7 +38,7 @@ export default function Navbar() {
 						<a href="/login">
 							<Button
 								variant="outline"
-								className="h-12 border-white/20 bg-white/10"
+								className="h-12 border-white/20 bg-white/10 rounded-lg"
 							>
 								Login
 							</Button>
@@ -87,12 +87,12 @@ export default function Navbar() {
 							</Link>
 							<div className="flex flex-col gap-3 mt-4">
 								<a href="/register">
-									<Button className="w-full bg-emerald-600 hover:bg-emerald-700">
+									<Button className="w-full bg-emerald-600 hover:bg-emerald-700 h-12">
 										Get Started
 									</Button>
 								</a>
 								<a href="/login">
-									<Button variant="outline" className="w-full border-gray-300">
+									<Button variant="outline" className="w-full rounded-sm ">
 										Login
 									</Button>
 								</a>

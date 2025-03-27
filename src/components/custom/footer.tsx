@@ -209,7 +209,7 @@ export default function Footer() {
 									height={38}
 									className="ml-1"
 								/>
-								<span className="text-3xl font-bold ">MetalMint</span>
+								<span className="text-3xl font-bold text-gold">MetalMint</span>
 							</div>
 						</Link>
 					</div>

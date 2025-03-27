@@ -6,7 +6,7 @@ export default function Features() {
 	return (
 		<main className="min-h-screen w-full max-w-7xl mx-auto  py-8 md:py-12 lg:py-16">
 			{/* Row 1: Invest in fractions */}
-			<section className="grid  md:grid-cols-2 items-center bg-[#e18a07]">
+			<section className="grid  md:grid-cols-2 items-center bg-gold">
 				<div className="p-4 py-8 md:p-12 lg:p-16">
 					<h1 className="text-3xl md:text-4xl font-bold text-white mb-4">
 						Grow Your Wealth with Confidence
@@ -59,7 +59,7 @@ export default function Features() {
 			</section>
 
 			{/* Row 3: Advanced Trading */}
-			<section className="grid md:grid-cols-2 items-center bg-[#e18a07]">
+			<section className="grid md:grid-cols-2 items-center bg-gold">
 				<div className="p-4 py-8 px- md:p-12 lg:p-16">
 					<h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
 						Investment Plans for Everyone

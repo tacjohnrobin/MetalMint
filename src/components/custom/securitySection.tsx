@@ -40,13 +40,13 @@ export default function SecuritySection() {
 						</Button>
 					</div>
 
-					<div className="hidden md:flex relative lg:ml-auto">
+					<div className="hidden md:flex relative lg:ml-auto items-center justify-center pt-36">
 						<Image
-							src=""
+							src="/image/shield.svg"
 							alt="Security illustration"
-							width={500}
-							height={500}
-							className="w-full max-w-md mx-auto"
+							width={700}
+							height={700}
+							className="w-full max-w-xl mx-auto"
 							priority
 						/>
 					</div>
