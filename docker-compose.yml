@@ -1,12 +1,24 @@
 version: '3.8'
 
 services:
-  web:
+  frontend:
     build:
       context: .
       dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      - NEXT_PUBLIC_API_URL=http://web:8000  # Frontend calls backend internally
+    depends_on:
+      - web
+    restart: unless-stopped
+
+  web:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
     volumes:
-      - .:/app
+      - ./backend:/app
       - static_volume:/app/static
       - media_volume:/app/media
     ports:
@@ -20,12 +32,12 @@ services:
 
   celery:
     build:
-      context: .
+      context: ./backend
       dockerfile: Dockerfile
     command: celery -A finance_banking worker -l info
     user: celeryuser
     volumes:
-      - .:/app
+      - ./backend:/app
     depends_on:
       db:
         condition: service_healthy
@@ -35,12 +47,12 @@ services:
 
   celery-beat:
     build:
-      context: .
+      context: ./backend
       dockerfile: Dockerfile
     command: celery -A finance_banking beat -l info
     user: celeryuser
     volumes:
-      - .:/app
+      - ./backend:/app
     depends_on:
       db:
         condition: service_healthy
