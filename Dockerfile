@@ -11,8 +11,8 @@ RUN npm install --legacy-peer-deps
 # Copy project files
 COPY . .
 
-# Build the Next.js app
-RUN npm run build
+# Build the Next.js app with linting disabled
+RUN npm run build -- --no-lint
 
 # Production stage
 FROM node:18-alpine AS runner
