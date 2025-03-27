@@ -43,7 +43,7 @@ services:
         condition: service_healthy
       redis:
         condition: service_started
-    entrypoint: ""  # Override the web-specific entrypoint
+    entrypoint: /app/celery-entrypoint.sh
     restart: unless-stopped
 
   celery-beat:
@@ -59,7 +59,7 @@ services:
         condition: service_healthy
       redis:
         condition: service_started
-    entrypoint: ""  # Override the web-specific entrypoint
+    entrypoint: /app/celery-entrypoint.sh
     restart: unless-stopped
 
   db:
