@@ -32,7 +32,7 @@ RUN apt-get update && apt-get install -y \
 COPY requirements.txt .
 RUN pip install -r requirements.txt
 
-# Copy project files (including entrypoint.sh)
+# Copy project files
 COPY . .
 
 # Create non-root user for Celery
@@ -41,5 +41,5 @@ RUN useradd -m -r -u 1000 celeryuser && chown celeryuser:celeryuser /app
 # Expose port
 EXPOSE 8000
 
-# Use the entrypoint script
-ENTRYPOINT ["./entrypoint.sh"]
+# Use the web-specific entrypoint
+ENTRYPOINT ["./web-entrypoint.sh"]
