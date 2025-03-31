@@ -7,19 +7,20 @@ class InvestmentPackageSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = InvestmentPackage
-        fields = ['id', 'tier', 'tier_display', 'daily_return', 'total_return']
+        fields = ['id', 'tier', 'tier_display', 'daily_roi', 'total_return']
 
-    def get_total_return(self, obj):
-        return obj.tier * 3  # Fixed 300% return in USD
+    def to_representation(self, instance):
+        data = super().to_representation(instance)
+        data['total_return'] = instance.tier * 3 
+        return data
 
 class UserInvestmentSerializer(serializers.ModelSerializer):
     package = InvestmentPackageSerializer(read_only=True)
-    current_value = serializers.DecimalField(max_digits=15, decimal_places=2, read_only=True)
     days_remaining = serializers.IntegerField(read_only=True)
 
     class Meta:
         model = UserInvestment
-        fields = ['id', 'package', 'start_date', 'end_date', 'total_earned', 'current_value', 'days_remaining', 'is_active']
+        fields = ['id', 'package', 'start_date', 'end_date', 'initial_investment', 'current_value', 'total_earned', 'days_remaining', 'is_active']
 
 class InvestmentCreateSerializer(serializers.Serializer):
     package_id = serializers.IntegerField()

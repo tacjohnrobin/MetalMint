@@ -7,20 +7,21 @@ from django.core.exceptions import ValidationError
 import logging
 from decimal import Decimal
 from django_countries import countries
+from django.conf import settings
+import stripe
 from .models import User, UserProfile, KYCVerification
 from .serializers import UserSerializer, UserProfileSerializer, KYCVerificationSerializer, StripeAccountSerializer
 from .kyc_utils import KYCVerifier
 
 logger = logging.getLogger(__name__)
 
+stripe.api_key = settings.STRIPE_SECRET_KEY
 
 class CountryListView(APIView):
     permission_classes = [AllowAny]
 
     def get(self, *args, **kwargs):
-        country_list = [
-            {"code": code, "name": name} for code, name in countries
-        ]
+        country_list = [{"code": code, "name": name} for code, name in countries]
         return Response(country_list, status=status.HTTP_200_OK)
 
 class UserDetailView(APIView):
@@ -60,7 +61,6 @@ class UserProfileView(APIView):
         logger.error(f"Profile update failed for {request.user.email}: {serializer.errors}")
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-
 class KYCVerificationView(APIView):
     authentication_classes = [JWTAuthentication]
     permission_classes = [IsAuthenticated]
@@ -80,8 +80,6 @@ class KYCVerificationView(APIView):
         serializer = KYCVerificationSerializer(data=request.data)
         if serializer.is_valid():
             kyc = serializer.save(user=request.user)
-            
-            # Automate KYC verification
             try:
                 verifier = KYCVerifier()
                 doc_path = kyc.document_front.path
@@ -150,7 +148,6 @@ class WelcomeDashboardView(APIView):
             "wallet": {
                 "usd_balance": user.usd_balance,
                 "usxw_balance": user.usxw_balance,
-                "total_invested": user.total_invested,
                 "total_portfolio_value": user.get_total_portfolio_value()
             },
             "send_verification_otp": {
@@ -174,9 +171,8 @@ class WelcomeDashboardView(APIView):
             },
             "add_stripe_account": {
                 "message": "Link your Stripe account for payouts.",
-                "endpoint": "/user/me/wallet/stripe-account/",
+                "endpoint": "/user/me/stripe/connect/",
                 "method": "POST",
-                "payload": {"stripe_account_id": "<your_stripe_account_id>"},
                 "required": not user.stripe_account_id
             }
         }
@@ -195,32 +191,11 @@ class WalletDetailView(APIView):
         wallet_data = {
             "usd_balance": user.usd_balance,
             "usxw_balance": user.usxw_balance,
-            "total_invested": user.total_invested,
             "total_portfolio_value": user.get_total_portfolio_value(),
             "stripe_customer_id": user.stripe_customer_id,
             "stripe_account_id": user.stripe_account_id,
         }
         return Response(wallet_data, status=status.HTTP_200_OK)
-
-class WalletConversionView(APIView):
-    authentication_classes = [JWTAuthentication]
-    permission_classes = [IsAuthenticated]
-
-    def post(self, request, *args, **kwargs):
-        user = request.user
-        try:
-            amount = Decimal(request.data.get("amount", 0))
-            tx = user.convert_usd_to_usxw(amount)
-            logger.info(f"Converted {amount} USD to USXW for {user.email}")
-            return Response({
-                "message": f"Successfully converted {amount} USD to USXW",
-                "transaction_id": tx.id,
-                "new_usd_balance": user.usd_balance,
-                "new_usxw_balance": user.usxw_balance
-            }, status=status.HTTP_200_OK)
-        except ValidationError as e:
-            logger.error(f"Wallet conversion failed for {user.email}: {str(e)}")
-            return Response({"detail": str(e)}, status=status.HTTP_400_BAD_REQUEST)
 
 class WalletStripeAccountView(APIView):
     authentication_classes = [JWTAuthentication]
@@ -232,7 +207,6 @@ class WalletStripeAccountView(APIView):
         if serializer.is_valid():
             stripe_account_id = serializer.validated_data["stripe_account_id"]
             try:
-                import stripe
                 stripe.Account.retrieve(stripe_account_id)
             except stripe.error.StripeError as e:
                 logger.error(f"Invalid Stripe account ID for {user.email}: {str(e)}")
@@ -245,3 +219,25 @@ class WalletStripeAccountView(APIView):
             }, status=status.HTTP_200_OK)
         logger.error(f"Stripe account update failed for {user.email}: {serializer.errors}")
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+class StripeExpressConnectAPI(APIView):
+    authentication_classes = [JWTAuthentication]
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request, *args, **kwargs):
+        try:
+            account_id = request.user.create_stripe_express_account()
+            account_link = stripe.AccountLink.create(
+                account=account_id,
+                refresh_url=f"{settings.FRONTEND_URL}/stripe/refresh",
+                return_url=f"{settings.FRONTEND_URL}/stripe/return",
+                type='account_onboarding'
+            )
+            return Response({
+                "message": "Stripe Express account created",
+                "account_id": account_id,
+                "onboarding_url": account_link.url
+            }, status=status.HTTP_201_CREATED)
+        except ValidationError as e:
+            logger.error(f"Stripe Express connect failed for {request.user.email}: {str(e)}")
+            return Response({"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)

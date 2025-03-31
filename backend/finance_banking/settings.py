@@ -92,10 +92,10 @@ WSGI_APPLICATION = 'finance_banking.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'finance_db',
-        'USER': 'finance_user',
+        'NAME': 'metal_mint',
+        'USER': 'metal_mint_user',
         'PASSWORD': 'wCh29&HE&T83',
-        'HOST': 'db',
+        'HOST': 'localhost',
         'PORT': '5432',
     }
 }

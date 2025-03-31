@@ -6,7 +6,7 @@ from .services import PortfolioAnalyzer
 from banking.models import Transaction
 from user.models import User
 from .models import PortfolioSnapshot
-from django.db.models import Sum, Max, Count, Avg, Q
+from django.db.models import Sum, Max, Count, Avg
 from django.utils import timezone
 from datetime import timedelta
 import logging
@@ -17,10 +17,14 @@ class PortfolioAPI(APIView):
     permission_classes = [IsAuthenticated]
 
     def get(self, request):
-        analyzer = PortfolioAnalyzer(request.user)
-        report = analyzer.generate_report()
-        analyzer.generate_snapshot()  # Save snapshot for historical tracking
-        return Response(report, status=status.HTTP_200_OK)
+        try:
+            analyzer = PortfolioAnalyzer(request.user)
+            report = analyzer.generate_report()
+            analyzer.generate_snapshot()
+            return Response(report, status=status.HTTP_200_OK)
+        except Exception as e:
+            logger.error(f"Portfolio report failed for {request.user.email}: {str(e)}")
+            return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 class EarningsReportAPI(APIView):
     permission_classes = [IsAuthenticated]
@@ -46,77 +50,96 @@ class TransactionTrendsAPI(APIView):
     permission_classes = [IsAuthenticated]
 
     def get(self, request):
-        days = int(request.query_params.get('days', 30))  # Default to 30 days
-        start_date = timezone.now() - timedelta(days=days)
-        
-        transactions = Transaction.objects.filter(
-            user=request.user,
-            created_at__gte=start_date
-        ).values('transaction_type').annotate(
-            total_amount=Sum('amount'),
-            count=Count('id'),
-            avg_amount=Avg('amount')
-        )
-        
-        return Response({
-            "trends": {
-                tx['transaction_type']: {
-                    "total_amount": tx['total_amount'],
-                    "count": tx['count'],
-                    "avg_amount": tx['avg_amount']
-                } for tx in transactions
-            },
-            "period_days": days
-        }, status=status.HTTP_200_OK)
+        try:
+            days = int(request.query_params.get('days', 30))
+            if days <= 0:
+                return Response({"error": "Days must be positive"}, status=status.HTTP_400_BAD_REQUEST)
+            start_date = timezone.now() - timedelta(days=days)
+
+            transactions = Transaction.objects.filter(
+                user=request.user,
+                created_at__gte=start_date
+            ).values('transaction_type').annotate(
+                total_amount=Sum('amount'),
+                count=Count('id'),
+                avg_amount=Avg('amount')
+            )
+
+            return Response({
+                "trends": {
+                    tx['transaction_type']: {
+                        "total_amount": tx['total_amount'] or 0,
+                        "count": tx['count'],
+                        "avg_amount": tx['avg_amount'] or 0
+                    } for tx in transactions
+                },
+                "period_days": days
+            }, status=status.HTTP_200_OK)
+        except ValueError:
+            return Response({"error": "Invalid days parameter"}, status=status.HTTP_400_BAD_REQUEST)
+        except Exception as e:
+            logger.error(f"Transaction trends failed for {request.user.email}: {str(e)}")
+            return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 class PortfolioHistoryAPI(APIView):
     permission_classes = [IsAuthenticated]
 
     def get(self, request):
-        days = int(request.query_params.get('days', 30))  # Default to 30 days
-        start_date = timezone.now() - timedelta(days=days)
-        
-        snapshots = PortfolioSnapshot.objects.filter(
-            user=request.user,
-            timestamp__gte=start_date
-        ).order_by('timestamp')
-        
-        return Response({
-            "history": [
-                {
-                    "timestamp": snap.timestamp,
-                    "total_value": snap.total_value,
-                    "gold_price": snap.gold_price,
-                    "usd_balance": snap.usd_balance,
-                    "usxw_balance": snap.usxw_balance,
-                    "total_invested": snap.total_invested,
-                    "daily_change": snap.daily_change
-                } for snap in snapshots
-            ],
-            "period_days": days
-        }, status=status.HTTP_200_OK)
+        try:
+            days = int(request.query_params.get('days', 30))
+            if days <= 0:
+                return Response({"error": "Days must be positive"}, status=status.HTTP_400_BAD_REQUEST)
+            start_date = timezone.now() - timedelta(days=days)
 
-# Admin Views
+            snapshots = PortfolioSnapshot.objects.filter(
+                user=request.user,
+                timestamp__gte=start_date
+            ).order_by('timestamp')
+
+            return Response({
+                "history": [
+                    {
+                        "timestamp": snap.timestamp,
+                        "total_value": snap.total_value,
+                        "gold_price": snap.gold_price,
+                        "usd_balance": snap.usd_balance,
+                        "usxw_balance": snap.usxw_balance,
+                        "total_invested": snap.total_invested,
+                        "daily_change": snap.daily_change
+                    } for snap in snapshots
+                ],
+                "period_days": days
+            }, status=status.HTTP_200_OK)
+        except ValueError:
+            return Response({"error": "Invalid days parameter"}, status=status.HTTP_400_BAD_REQUEST)
+        except Exception as e:
+            logger.error(f"Portfolio history failed for {request.user.email}: {str(e)}")
+            return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
 class SystemOverviewAPI(APIView):
     permission_classes = [IsAuthenticated, IsAdminUser]
 
     def get(self, request):
-        users = User.objects.all()
-        transactions = Transaction.objects.all()
-        snapshots = PortfolioSnapshot.objects.all()
-        
-        overview = {
-            "total_users": users.count(),
-            "kyc_status": {
-                status: users.filter(kyc_status=status).count()
-                for status in ['UNVERIFIED', 'PENDING', 'VERIFIED', 'REJECTED']
-            },
-            "total_transactions": transactions.count(),
-            "transaction_volume": transactions.aggregate(total=Sum('amount'))['total'] or 0,
-            "average_portfolio_value": snapshots.aggregate(avg=Avg('total_value'))['avg'] or 0,
-            "total_invested_system": snapshots.aggregate(total=Sum('total_invested'))['total'] or 0,
-        }
-        return Response(overview, status=status.HTTP_200_OK)
+        try:
+            users = User.objects.all()
+            transactions = Transaction.objects.all()
+            snapshots = PortfolioSnapshot.objects.all()
+
+            overview = {
+                "total_users": users.count(),
+                "kyc_status": {
+                    status: users.filter(kyc_status=status).count()
+                    for status in ['UNVERIFIED', 'PENDING', 'VERIFIED', 'REJECTED']
+                },
+                "total_transactions": transactions.count(),
+                "transaction_volume": transactions.aggregate(total=Sum('amount'))['total'] or 0,
+                "average_portfolio_value": snapshots.aggregate(avg=Avg('total_value'))['avg'] or 0,
+                "total_invested_system": snapshots.aggregate(total=Sum('total_invested'))['total'] or 0,
+            }
+            return Response(overview, status=status.HTTP_200_OK)
+        except Exception as e:
+            logger.error(f"System overview failed: {str(e)}")
+            return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 class UserActivityAPI(APIView):
     permission_classes = [IsAuthenticated, IsAdminUser]
@@ -125,12 +148,12 @@ class UserActivityAPI(APIView):
         email = request.query_params.get('email')
         if not email:
             return Response({"error": "Email parameter required"}, status=status.HTTP_400_BAD_REQUEST)
-        
+
         try:
             user = User.objects.get(email=email)
             analyzer = PortfolioAnalyzer(user)
             transactions = Transaction.objects.filter(user=user)
-            
+
             return Response({
                 "user": {
                     "email": user.email,
@@ -142,11 +165,14 @@ class UserActivityAPI(APIView):
                 "transactions": {
                     "total_count": transactions.count(),
                     "total_amount": transactions.aggregate(total=Sum('amount'))['total'] or 0,
-                    "by_type": transactions.values('transaction_type').annotate(
+                    "by_type": list(transactions.values('transaction_type').annotate(
                         count=Count('id'),
                         total=Sum('amount')
-                    )
+                    ))
                 }
             }, status=status.HTTP_200_OK)
         except User.DoesNotExist:
             return Response({"error": "User not found"}, status=status.HTTP_404_NOT_FOUND)
+        except Exception as e:
+            logger.error(f"User activity report failed for {email}: {str(e)}")
+            return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)

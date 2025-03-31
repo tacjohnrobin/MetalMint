@@ -2,8 +2,9 @@ import stripe
 from django.conf import settings
 from django.db import transaction
 from .models import Transaction
-from django.utils import timezone
 import logging
+from decimal import Decimal
+
 
 logger = logging.getLogger(__name__)
 
@@ -44,12 +45,7 @@ class PaymentService:
             event = stripe.Webhook.construct_event(
                 payload, sig_header, settings.STRIPE_WEBHOOK_SECRET
             )
-            if event.type == 'payment_intent.succeeded':
-                PaymentService._handle_payment_success(event.data.object)
-            elif event.type == 'payout.paid':
-                PaymentService._handle_payout_success(event.data.object)
-            elif event.type == 'payout.failed':
-                PaymentService._handle_payout_failure(event.data.object)
+            return event
         except ValueError as e:
             logger.error(f"Invalid webhook signature: {str(e)}")
             raise
@@ -57,47 +53,67 @@ class PaymentService:
             logger.error(f"Webhook error: {str(e)}")
             raise
     
+class ConversionService:
     @staticmethod
-    def _handle_payment_success(intent):
-        try:
-            tx = Transaction.objects.get(
-                stripe_payment_id=intent.id,
-                status='pending'
+    def convert_usd_to_usxw(user, amount):
+        from .models import Transaction
+        from investments.models import GoldPrice
+
+        user._ensure_gbm_price()
+        with transaction.atomic():
+            amount = Decimal(str(amount))
+            if amount <= 0:
+                raise ValidationError(_("Conversion amount must be positive"))
+            if user.usd_balance < amount:
+                raise ValidationError(_("Insufficient USD balance"))
+            
+            gold_price = GoldPrice.objects.latest('timestamp').price
+            usxw_amount = (amount / gold_price).quantize(Decimal('0.01'))
+
+            user.usd_balance -= amount
+            user.usxw_balance += usxw_amount
+            user.save(update_fields=['usd_balance', 'usxw_balance'])
+
+            tx = Transaction.objects.create(
+                user=user,
+                amount=amount,
+                currency='USD',
+                transaction_type='conversion',
+                status='completed',
+                gold_price_at_time=gold_price,
+                metadata={'converted_to': f"{usxw_amount} USXW"}
             )
-            tx.process_deposit(stripe_payment_id=intent.id)
-        except Transaction.DoesNotExist:
-            Transaction.log_failure(
-                tx.user if 'tx' in locals() else None,
-                'deposit',
-                f"Transaction not found for payment intent {intent.id}"
-            )
-            raise ValueError(f"Transaction not found for payment intent {intent.id}")
+            logger.info(f"Converted {amount} USD to {usxw_amount} USXW for {user.email}")
+            return tx
 
     @staticmethod
-    def _handle_payout_success(payout):
-        try:
-            tx = Transaction.objects.get(
-                stripe_payment_id=payout.id,
-                status='pending'
-            )
-            tx.status = 'completed'
-            tx.completed_at = timezone.now()
-            tx.save(update_fields=['status', 'completed_at'])
-            logger.info(f"Payout {payout.id} completed for {tx.user.email}")
-        except Transaction.DoesNotExist:
-            logger.error(f"Payout {payout.id} not found in transactions")
+    def convert_usxw_to_usd(user, amount):
+        from .models import Transaction
+        from investments.models import GoldPrice
 
-    @staticmethod
-    def _handle_payout_failure(payout):
-        try:
-            tx = Transaction.objects.get(
-                stripe_payment_id=payout.id,
-                status='pending'
+        user._ensure_gbm_price()
+        with transaction.atomic():
+            amount = Decimal(str(amount))
+            if amount <= 0:
+                raise ValidationError(_("Conversion amount must be positive"))
+            if user.usxw_balance < amount:
+                raise ValidationError(_("Insufficient USXW balance"))
+            
+            gold_price = GoldPrice.objects.latest('timestamp').price
+            usd_amount = (amount * gold_price).quantize(Decimal('0.01'))
+
+            user.usxw_balance -= amount
+            user.usd_balance += usd_amount
+            user.save(update_fields=['usd_balance', 'usxw_balance'])
+
+            tx = Transaction.objects.create(
+                user=user,
+                amount=amount,
+                currency='USXW',
+                transaction_type='conversion',
+                status='completed',
+                gold_price_at_time=gold_price,
+                metadata={'converted_to': f"{usd_amount} USD"}
             )
-            tx.status = 'failed'
-            tx.metadata['error'] = payout.failure_message or 'Unknown failure'
-            tx.save(update_fields=['status', 'metadata'])
-            logger.error(f"Payout {payout.id} failed for {tx.user.email}: {payout.failure_message}")
-            # Note: Wallet was already deducted; manual refund may be needed
-        except Transaction.DoesNotExist:
-            logger.error(f"Failed payout {payout.id} not found in transactions")
+            logger.info(f"Converted {amount} USXW to {usd_amount} USD for {user.email}")
+            return tx

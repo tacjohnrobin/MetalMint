@@ -8,8 +8,10 @@ urlpatterns = [
     # API Endpoints
     path('deposit/', views.DepositAPI.as_view(), name='deposit'),
     path('withdrawal/', views.WithdrawalAPI.as_view(), name='withdrawal'),
-    path('history/', views.TransactionHistoryAPI.as_view(), name='transaction_history'),
-    
+    path('transactions/', views.TransactionListView.as_view(), name='transaction_list'),
+    path('convert/', views.ConversionAPI.as_view(), name='convert_currency'),
+    path('transactions/detail/', views.TransactionDetailView.as_view(), name='transaction_detail'),
+
     # Webhook Endpoint
     path('webhook/stripe/', views.stripe_webhook, name='stripe_webhook'),
 ]

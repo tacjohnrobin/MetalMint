@@ -16,8 +16,7 @@ class UserSerializer(serializers.ModelSerializer):
             "email", "username", "client_id", "first_name", "last_name", "mobile_number",
             "verification_status", "kyc_status", "document_expiry", "country", "country_display", "city",
             "usd_balance", "usxw_balance", "stripe_customer_id", "stripe_account_id",
-            "total_invested", "jurisdiction", "risk_level", "created_at", "last_activity",
-            "is_active"
+            "jurisdiction", "risk_level", "created_at", "last_activity", "is_active"
         ]
         read_only_fields = [
             "username", "client_id", "verification_status", "kyc_status", "document_expiry",

@@ -27,7 +27,7 @@ class Transaction(models.Model):
     transaction_type = models.CharField(max_length=20, choices=TRANSACTION_TYPES)
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='pending')
     stripe_payment_id = EncryptedCharField(max_length=100, blank=True)
-    gold_price_at_time = models.DecimalField(max_digits=10, decimal_places=2, default=0)
+    gold_price_at_time = models.DecimalField(max_digits=10, decimal_places=2)
     created_at = models.DateTimeField(auto_now_add=True)
     completed_at = models.DateTimeField(null=True, blank=True)
     metadata = models.JSONField(default=dict, blank=True)
@@ -42,7 +42,7 @@ class Transaction(models.Model):
         return f"{self.user.email} - {self.transaction_type} - {self.amount} {self.currency} ({self.status})"
 
     def save(self, *args, **kwargs):
-        if self.pk and self.status == 'completed' and not self.completed_at:
+        if self.status == 'completed' and not self.completed_at:
             self.completed_at = timezone.now()
         super().save(*args, **kwargs)
 

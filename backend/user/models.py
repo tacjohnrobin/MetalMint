@@ -17,6 +17,7 @@ from django.dispatch import receiver
 import phonenumbers
 from .managers import UserManager
 
+from decimal import Decimal
 
 logger = logging.getLogger(__name__)
 
@@ -81,7 +82,6 @@ class User(AbstractBaseUser, PermissionsMixin):
     usxw_balance = models.DecimalField(max_digits=15, decimal_places=2, default=0)
     stripe_customer_id = EncryptedCharField(max_length=255, blank=True, unique=True)
     stripe_account_id = EncryptedCharField(max_length=255, blank=True, unique=True)
-    total_invested = models.DecimalField(max_digits=15, decimal_places=2, default=0)
     
     # Compliance & KYC
     KYC_STATUS = (
@@ -154,19 +154,14 @@ class User(AbstractBaseUser, PermissionsMixin):
         return f"{self.city}, {self.country.name if self.country else 'No Country'}"
 
     def save(self, *args, **kwargs):
-        # Ensure the mobile number is formatted correctly
-        if self.mobile_number:
-            try:
-                parsed_number = phonenumbers.parse(self.mobile_number, None)
-                self.mobile_number = phonenumbers.format_number(parsed_number, phonenumbers.PhoneNumberFormat.E164)
-            except phonenumbers.NumberParseException:
-                raise ValidationError(_("Invalid phone number format."))
-        super().save(*args, **kwargs)
-
-
-    def save(self, *args, **kwargs):
         self.full_clean()
         with transaction.atomic():
+            if self.mobile_number and not self.pk:
+                try:
+                    parsed_number = phonenumbers.parse(self.mobile_number, None)
+                    self.mobile_number = phonenumbers.format_number(parsed_number, phonenumbers.PhoneNumberFormat.E164)
+                except phonenumbers.NumberParseException:
+                    raise ValidationError(_("Invalid phone number format."))
             if not self.client_id:
                 self.generate_client_id()
             if not self.username:
@@ -174,6 +169,9 @@ class User(AbstractBaseUser, PermissionsMixin):
             super().save(*args, **kwargs)
             if not self.stripe_customer_id and self.pk:
                 self.create_stripe_customer()
+
+    def __str__(self):
+        return f"{self.email} ({self.client_id})"
 
     # Authentication Tracking
 
@@ -264,13 +262,25 @@ class User(AbstractBaseUser, PermissionsMixin):
 
         # Call the superclass delete method
         super().delete(*args, **kwargs)
-
-
-    # Financial Methods & Setup
+    
+    # Gold Price Initialisation
+    def _ensure_gbm_price(self):
+        """
+        Helper method to check if GBM-simulated GoldPrice exists
+        """
+        from investments.models import GoldPrice
+        if not GoldPrice.objects.filter(source='GBM_Simulation').exists():
+            logger.warning(f"Operation blocked for {self.email}: Gold price simulation not initialized")
+            raise ValidationError(
+                _("Gold price simulation not yet initialized. Please try again later."),
+                code='service_unavailable'
+            )
+    
     def deposit(self, amount, currency='USD', stripe_payment_id=None, status='completed'):
         from banking.models import Transaction
         from investments.models import GoldPrice
-        
+
+        self._ensure_gbm_price()
         with transaction.atomic():
             if amount <= 0:
                 raise ValidationError(_("Deposit amount must be positive"))
@@ -282,11 +292,7 @@ class User(AbstractBaseUser, PermissionsMixin):
                 raise ValidationError(_("Unsupported currency"))
             
             self.save(update_fields=['usd_balance', 'usxw_balance'])
-
-            try:
-                gold_price = GoldPrice.objects.latest('timestamp').price
-            except GoldPrice.DoesNotExist:
-                gold_price = 0
+            gold_price = GoldPrice.objects.latest('timestamp').price  # GBM ensured
 
             tx = Transaction.objects.create(
                 user=self,
@@ -307,10 +313,10 @@ class User(AbstractBaseUser, PermissionsMixin):
         from banking.models import Transaction
         from investments.models import GoldPrice
 
+        self._ensure_gbm_price()
         with transaction.atomic():
             if amount <= 0:
                 raise ValidationError(_("Withdrawal amount must be positive"))
-            
             if currency == 'USD' and self.usd_balance >= amount:
                 self.usd_balance -= amount
             elif currency == 'USXW' and self.usxw_balance >= amount:
@@ -319,11 +325,7 @@ class User(AbstractBaseUser, PermissionsMixin):
                 raise ValidationError(_("Insufficient balance or unsupported currency"))
             
             self.save(update_fields=['usd_balance', 'usxw_balance'])
-
-            try:
-                gold_price = GoldPrice.objects.latest('timestamp').price
-            except GoldPrice.DoesNotExist:
-                gold_price = 0
+            gold_price = GoldPrice.objects.latest('timestamp').price  # GBM ensured
 
             tx = Transaction.objects.create(
                 user=self,
@@ -339,50 +341,48 @@ class User(AbstractBaseUser, PermissionsMixin):
             logger.info(f"Withdrawal of {amount} {currency} ({status}) for {self.email}")
             return tx
 
-    def convert_usd_to_usxw(self, amount):
-        from banking.models import Transaction
-        from investments.models import GoldPrice
-
-        with transaction.atomic():
-            if amount <= 0:
-                raise ValidationError(_("Conversion amount must be positive"))
-            if self.usd_balance < amount:
-                raise ValidationError(_("Insufficient USD balance"))
-
-            self.usd_balance -= amount
-            self.usxw_balance += amount
-            self.save(update_fields=['usd_balance', 'usxw_balance'])
-
-            try:
-                gold_price = GoldPrice.objects.latest('timestamp').price
-            except GoldPrice.DoesNotExist:
-                gold_price = 0
-
-            tx = Transaction.objects.create(
-                user=self,
-                amount=amount,
-                currency='USD',
-                transaction_type='conversion',
-                status='completed',
-                gold_price_at_time=gold_price
-            )
-            logger.info(f"Converted {amount} USD to USXW for {self.email}")
-            return tx
-
     def get_total_portfolio_value(self):
-        from banking.models import Transaction
         from investments.models import GoldPrice, UserInvestment
-        
-        try:
-            latest_gold_price = GoldPrice.objects.latest('timestamp').price
-        except GoldPrice.DoesNotExist:
-            latest_gold_price = 0
-        
-        investments = UserInvestment.objects.filter(user=self, is_active=True)
-        investments_value = sum(investment.current_value for investment in investments)
-            
 
-        return self.usd_balance + (self.usxw_balance * latest_gold_price) + investments_value
+        self._ensure_gbm_price()
+        latest_gold_price = GoldPrice.objects.latest('timestamp').price
+        investments = UserInvestment.objects.filter(user=self, is_active=True)
+        investments_value = sum(investment.current_value for investment in investments) or Decimal('0.00')
+        return (self.usd_balance + (self.usxw_balance * latest_gold_price) + investments_value).quantize(Decimal('0.01'))
+    
+
+    def create_stripe_express_account(self):
+        import stripe
+        from stripe.error import StripeError
+
+        if self.stripe_account_id:
+            logger.info(f"Stripe Express account already exists for {self.email}")
+            return self.stripe_account_id
+
+        try:
+            with transaction.atomic():
+                account = stripe.Account.create(
+                    type='express',
+                    email=self.email,
+                    country=self.country.code,
+                    capabilities={'card_payments': {'requested': True}, 'transfers': {'requested': True}},
+                    metadata={'user_id': str(self.pkid)}
+                )
+                self.stripe_account_id = account.id
+                self.save(update_fields=['stripe_account_id'])
+                logger.info(f"Stripe Express account {account.id} created for {self.email}")
+                return account.id
+        except StripeError as e:
+            logger.error(f"Failed to create Stripe Express account for {self.email}: {str(e)}")
+            raise ValidationError(f"Stripe account creation failed: {str(e)}")
+
+    def convert_usd_to_usxw(self, amount):
+        from banking.services import ConversionService
+        return ConversionService.convert_usd_to_usxw(self, amount)
+
+    def convert_usxw_to_usd(self, amount):
+        from banking.services import ConversionService
+        return ConversionService.convert_usxw_to_usd(self, amount)
 
     @property
     def is_verified(self):
