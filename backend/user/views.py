@@ -12,6 +12,7 @@ import stripe
 from .models import User, UserProfile, KYCVerification
 from .serializers import UserSerializer, UserProfileSerializer, KYCVerificationSerializer, StripeAccountSerializer
 from .kyc_utils import KYCVerifier
+from django.core.exceptions import ValidationError
 
 logger = logging.getLogger(__name__)
 

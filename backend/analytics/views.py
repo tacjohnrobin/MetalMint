@@ -43,7 +43,7 @@ class EarningsReportAPI(APIView):
             "total_earnings": earnings['total_earned'] or 0,
             "last_payout": earnings['last_payout'],
             "payout_count": earnings['payout_count'] or 0,
-            "currency": "USXW"
+            "currency": "USXW"  # All payouts are in USXW per investments module
         }, status=status.HTTP_200_OK)
 
 class TransactionTrendsAPI(APIView):
@@ -59,20 +59,24 @@ class TransactionTrendsAPI(APIView):
             transactions = Transaction.objects.filter(
                 user=request.user,
                 created_at__gte=start_date
-            ).values('transaction_type').annotate(
+            ).values('transaction_type', 'currency').annotate(
                 total_amount=Sum('amount'),
                 count=Count('id'),
                 avg_amount=Avg('amount')
             )
 
+            # Structure response to reflect currency separation
+            trends = {}
+            for tx in transactions:
+                key = f"{tx['transaction_type']}_{tx['currency'].lower()}"
+                trends[key] = {
+                    "total_amount": tx['total_amount'] or 0,
+                    "count": tx['count'],
+                    "avg_amount": tx['avg_amount'] or 0
+                }
+
             return Response({
-                "trends": {
-                    tx['transaction_type']: {
-                        "total_amount": tx['total_amount'] or 0,
-                        "count": tx['count'],
-                        "avg_amount": tx['avg_amount'] or 0
-                    } for tx in transactions
-                },
+                "trends": trends,
                 "period_days": days
             }, status=status.HTTP_200_OK)
         except ValueError:
@@ -125,6 +129,10 @@ class SystemOverviewAPI(APIView):
             transactions = Transaction.objects.all()
             snapshots = PortfolioSnapshot.objects.all()
 
+            # Split transaction volume by currency
+            transaction_volume_usd = transactions.filter(currency='USD').aggregate(total=Sum('amount'))['total'] or 0
+            transaction_volume_usxw = transactions.filter(currency='USXW').aggregate(total=Sum('amount'))['total'] or 0
+
             overview = {
                 "total_users": users.count(),
                 "kyc_status": {
@@ -132,7 +140,10 @@ class SystemOverviewAPI(APIView):
                     for status in ['UNVERIFIED', 'PENDING', 'VERIFIED', 'REJECTED']
                 },
                 "total_transactions": transactions.count(),
-                "transaction_volume": transactions.aggregate(total=Sum('amount'))['total'] or 0,
+                "transaction_volume": {
+                    "usd": transaction_volume_usd,
+                    "usxw": transaction_volume_usxw
+                },
                 "average_portfolio_value": snapshots.aggregate(avg=Avg('total_value'))['avg'] or 0,
                 "total_invested_system": snapshots.aggregate(total=Sum('total_invested'))['total'] or 0,
             }
@@ -154,6 +165,10 @@ class UserActivityAPI(APIView):
             analyzer = PortfolioAnalyzer(user)
             transactions = Transaction.objects.filter(user=user)
 
+            # Split total amount by currency
+            total_usd = transactions.filter(currency='USD').aggregate(total=Sum('amount'))['total'] or 0
+            total_usxw = transactions.filter(currency='USXW').aggregate(total=Sum('amount'))['total'] or 0
+
             return Response({
                 "user": {
                     "email": user.email,
@@ -164,11 +179,16 @@ class UserActivityAPI(APIView):
                 "portfolio": analyzer.generate_report(),
                 "transactions": {
                     "total_count": transactions.count(),
-                    "total_amount": transactions.aggregate(total=Sum('amount'))['total'] or 0,
-                    "by_type": list(transactions.values('transaction_type').annotate(
-                        count=Count('id'),
-                        total=Sum('amount')
-                    ))
+                    "total_amount": {
+                        "usd": total_usd,
+                        "usxw": total_usxw
+                    },
+                    "by_type": list(
+                        transactions.values('transaction_type', 'currency').annotate(
+                            count=Count('id'),
+                            total=Sum('amount')
+                        ).order_by('transaction_type', 'currency')
+                    )
                 }
             }, status=status.HTTP_200_OK)
         except User.DoesNotExist:

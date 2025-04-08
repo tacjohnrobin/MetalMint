@@ -46,14 +46,15 @@ class InvestmentPackage(models.Model):
     def __str__(self):
         return f"{self.get_tier_display()} (${self.tier}) - {self.daily_roi*100}%/day"
 
+
 class UserInvestment(models.Model):
     user = models.ForeignKey('user.User', on_delete=models.CASCADE, related_name='investments')
-    package = models.ForeignKey(InvestmentPackage, on_delete=models.PROTECT)
+    package = models.ForeignKey('InvestmentPackage', on_delete=models.PROTECT)
     start_date = models.DateTimeField(auto_now_add=True)
     end_date = models.DateTimeField()
     initial_investment = models.DecimalField(max_digits=15, decimal_places=2)
     current_value = models.DecimalField(max_digits=15, decimal_places=2)
-    total_earned = models.DecimalField(max_digits=15, decimal_places=2, default=0)
+    total_earned_usxw = models.DecimalField(max_digits=15, decimal_places=2, default=0)
     is_active = models.BooleanField(default=True)
 
     class Meta:

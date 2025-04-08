@@ -13,13 +13,17 @@ class FinancialSecurityMiddleware(MiddlewareMixin):
         self.user_paths = [
             '/api/users/',
             '/api/investments/',
-            '/api/transactions/',
+            '/api/banking/',  # Keep this to protect most banking endpoints
             '/api/analytics/',
         ]
         self.public_paths = [
             '/api/auth/',
-            '/dj-admin/',  # Note: Consider removing if admin should require auth
+            '/dj-admin/',  # Consider securing in production
             '/api-auth/',
+            '/api/banking/webhook/deposit/',  # Whitelist Stripe webhook
+            '/api/banking/webhook/withdrawal/',  # Whitelist Stripe webhook
+
+
         ]
         self.jwt_authenticator = JWTAuthentication()
 
@@ -47,17 +51,13 @@ class FinancialSecurityMiddleware(MiddlewareMixin):
                 logger.warning(f"Unauthorized access attempt to {path} by IP {request.META.get('REMOTE_ADDR')}")
                 return JsonResponse({"error": "Authentication required"}, status=status.HTTP_401_UNAUTHORIZED)
             
-            # Log access to user paths for auditing
             logger.debug(f"Authenticated access to {path} by {request.user.email}")
-            
-            # Optional: Add a header to indicate user context for downstream validation
             request.META['X-Authenticated-User'] = str(user.pkid)
             
-            # Proceed to views, which will enforce user-specific data access
             response = self.get_response(request)
             return response
 
-        # Allow non-user paths to proceed (if any exist outside public/user paths)
+        # Allow non-user paths to proceed
         return self.get_response(request)
 
     def process_exception(self, request, exception):

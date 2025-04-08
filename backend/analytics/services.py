@@ -1,3 +1,4 @@
+# analytics/services.py
 from investments.models import GoldPrice
 from .models import PortfolioSnapshot
 from decimal import Decimal
@@ -8,7 +9,6 @@ class PortfolioAnalyzer:
         self.current_price = GoldPrice.objects.latest('timestamp').price
 
     def calculate_total_value(self):
-        """Calculate total portfolio value: USD + USXW (in USD) + active investments"""
         investment_value = sum(
             inv.current_value for inv in self.user.investments.filter(is_active=True)
         ) or Decimal('0.00')
@@ -19,7 +19,6 @@ class PortfolioAnalyzer:
         ).quantize(Decimal('0.01'))
 
     def generate_snapshot(self):
-        """Generate and save a portfolio snapshot"""
         active_investments = self.user.investments.filter(is_active=True)
         total_invested = sum(inv.package.tier for inv in active_investments) or Decimal('0.00')
         total_value = self.calculate_total_value()
@@ -37,7 +36,6 @@ class PortfolioAnalyzer:
         return snapshot
 
     def generate_report(self):
-        """Generate a detailed portfolio report"""
         active_investments = self.user.investments.filter(is_active=True)
         total_invested = sum(inv.package.tier for inv in active_investments) or Decimal('0.00')
 
@@ -53,13 +51,12 @@ class PortfolioAnalyzer:
                     "id": inv.id,
                     "package": inv.package.get_tier_display(),
                     "current_value": inv.current_value,
-                    "daily_return": inv.package.daily_return,
+                    "daily_return": inv.package.daily_roi,  
                     "days_remaining": inv.days_remaining
                 } for inv in active_investments
             ]
         }
 
     def get_daily_change(self):
-        """Get the most recent daily change percentage"""
         latest_snapshot = PortfolioSnapshot.objects.filter(user=self.user).order_by('-timestamp').first()
         return latest_snapshot.daily_change if latest_snapshot and latest_snapshot.daily_change is not None else Decimal('0.00')

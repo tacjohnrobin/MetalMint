@@ -6,7 +6,7 @@ from decimal import Decimal
 class TransactionSerializer(ModelSerializer):
     class Meta:
         model = Transaction
-        fields = ['id', 'amount', 'currency', 'transaction_type', 'status', 'gold_price_at_time', 'created_at', 'completed_at', 'metadata']
+        fields = ['id', 'amount', 'currency', 'transaction_type', 'status', 'gold_price_at_time', 'created_at', 'completed_at', 'metadata', 'stripe_payment_id']
 
 class ConversionSerializer(serializers.Serializer):
     DIRECTION_CHOICES = (

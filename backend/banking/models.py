@@ -26,7 +26,7 @@ class Transaction(models.Model):
     currency = models.CharField(max_length=4)
     transaction_type = models.CharField(max_length=20, choices=TRANSACTION_TYPES)
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='pending')
-    stripe_payment_id = EncryptedCharField(max_length=100, blank=True)
+    stripe_payment_id = models.CharField(max_length=100, blank=True)
     gold_price_at_time = models.DecimalField(max_digits=10, decimal_places=2)
     created_at = models.DateTimeField(auto_now_add=True)
     completed_at = models.DateTimeField(null=True, blank=True)
@@ -61,33 +61,32 @@ class Transaction(models.Model):
             logger.error(f"Transaction {tx_type} failed for {user.email}: {error}")
             return tx
     
+
     def process_deposit(self, stripe_payment_id=None):
         if self.transaction_type != 'deposit' or self.status != 'pending':
             raise ValidationError(_("Only pending deposits can be processed"))
-        
         with transaction.atomic():
-            self.user.deposit(self.amount, self.currency, stripe_payment_id, status='completed')
+            if self.currency == 'USD':
+                self.user.usd_balance += self.amount
+            elif self.currency == 'USXW':
+                self.user.usxw_balance += self.amount
+            else:
+                raise ValidationError(_("Unsupported currency"))
+            self.user.save(update_fields=['usd_balance', 'usxw_balance'])
             self.status = 'completed'
             self.stripe_payment_id = stripe_payment_id or self.stripe_payment_id
             self.completed_at = timezone.now()
             self.save(update_fields=['status', 'stripe_payment_id', 'completed_at'])
+            logger.info(f"Deposit processed for {self.user.email}: id={self.id}, amount={self.amount} {self.currency}, stripe_payment_id={self.stripe_payment_id}")
+    
 
-    def process_withdrawal(self):
+    def process_withdrawal(self, stripe_payment_id=None):
         if self.transaction_type != 'withdrawal' or self.status != 'pending':
             raise ValidationError(_("Only pending withdrawals can be processed"))
         
         with transaction.atomic():
-            self.user.withdraw(self.amount, self.currency, status='completed')
             self.status = 'completed'
+            self.stripe_payment_id = stripe_payment_id or self.stripe_payment_id
             self.completed_at = timezone.now()
-            self.save(update_fields=['status', 'completed_at'])
-    
-    def process_conversion(self):
-        if self.transaction_type != 'conversion' or self.status != 'pending':
-            raise ValidationError(_("Only pending conversions can be processed"))
-        
-        with transaction.atomic():
-            self.user.convert_usd_to_usxw(self.amount)
-            self.status = 'completed'
-            self.completed_at = timezone.now()
-            self.save(update_fields=['status', 'completed_at'])
+            self.save(update_fields=['status', 'stripe_payment_id', 'completed_at'])
+            logger.info(f"Withdrawal processed for {self.user.email}: id={self.id}, amount={self.amount} {self.currency}, stripe_payment_id={self.stripe_payment_id}")

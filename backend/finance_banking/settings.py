@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'banking',
     'investments',
     'analytics',
+    'channels',
 ]
 
 MIDDLEWARE = [
@@ -74,12 +75,17 @@ CSRF_TRUSTED_ORIGINS = [
     "http://127.0.0.1:8000",
     "http://localhost:3000",
     "http://127.0.0.1:3000",
+    "http://165.22.41.223:3000"
+    "http://165.22.41.223:8000"
+
 ]
 
 CORS_ALLOWED_ORIGINS = [
     "http://127.0.0.1:8000",
     "http://localhost:3000",
     "http://127.0.0.1:3000",
+    "http://165.22.41.223:3000",
+    "http://165.22.41.223:8000"
 ]
 CORS_ALLOW_CREDENTIALS = True
 CORS_ALLOW_ALL_HEADERS = True
@@ -87,6 +93,7 @@ CORS_ALLOW_ALL_METHODS = True
 SECURE_CROSS_ORIGIN_OPENER_POLICY = None
 
 WSGI_APPLICATION = 'finance_banking.wsgi.application'
+ASGI_APPLICATION = 'finance_banking.asgi.application'
 
 # Database
 DATABASES = {
@@ -122,7 +129,10 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.ManifestStaticFilesStorage'
 STATIC_ROOT = BASE_DIR / 'static'
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [BASE_DIR / 'frontend' / 'build' / 'static']
+STATICFILES_DIR = [
+    BASE_DIR / 'frontend' / 'build' / 'static'
+]
+
 MEDIA_ROOT = BASE_DIR / 'media'
 MEDIA_URL = '/media/'
 
@@ -151,6 +161,7 @@ SIMPLE_JWT = {
     'UPDATE_LAST_LOGIN': True,
     'ALGORITHM': 'HS256',
     'AUTH_HEADER_TYPES': ('Bearer',),
+    'AUTH_HEADER_NAME': 'HTTP_AUTHORIZATION',
     'USER_ID_FIELD': 'pkid',
     'USER_ID_CLAIM': 'user_id',
     'USER_AUTHENTICATION_RULE': 'rest_framework_simplejwt.authentication.default_user_authentication_rule',
@@ -164,8 +175,8 @@ SIMPLE_JWT = {
 }
 
 # Celery
-CELERY_BROKER_URL = 'redis://redis:6379/0'
-CELERY_RESULT_BACKEND = 'redis://redis:6379/0'
+CELERY_BROKER_URL = 'redis://localhost:6380/0'
+CELERY_RESULT_BACKEND = 'redis://localhost:6380/0'
 CELERY_ACCEPT_CONTENT = ['json']
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
@@ -198,20 +209,22 @@ CHANNEL_LAYERS = {
     'default': {
         'BACKEND': 'channels_redis.core.RedisChannelLayer',
         'CONFIG': {
-            'hosts': [('127.0.0.1', 6379)],
+            'hosts': [('localhost', 6380)],
         },
     },
 }
 
 # Stripe
-STRIPE_PUBLISHABLE_KEY = 'pk_test_51Lc84CDTMi1SAp13sTQneXvANuJIBXWOnOBylf40E6Divd7OAjYN8uPVf3z1aL5c2637Qb5liWacPUfKLFBLC6Qq00nGGHipZG'
-STRIPE_SECRET_KEY = 'sk_test_51Lc84CDTMi1SAp13nQ049H6S612ZRMLUe59soxZZleOT4HFTTT9kKpqni8XCrgbu7DdQdd0BTl1BCgmUerENnhr900Wbni7Xnj'
-STRIPE_WEBHOOK_SECRET = 'whsec_B5OEY4D9jz0Em26UPWmmbAl26k8RfA9K'
+STRIPE_PUBLISHABLE_KEY='pk_test_51Lc84CDTMi1SAp13sTQneXvANuJIBXWOnOBylf40E6Divd7OAjYN8uPVf3z1aL5c2637Qb5liWacPUfKLFBLC6Qq00nGGHipZG'
+STRIPE_SECRET_KEY ='sk_test_51Lc84CDTMi1SAp13nQ049H6S612ZRMLUe59soxZZleOT4HFTTT9kKpqni8XCrgbu7DdQdd0BTl1BCgmUerENnhr900Wbni7Xnj'
+STRIPE_WEBHOOK_SECRET='whsec_e6fb9e740bfa6b76a29b7b890e11854593efa6b447c8b582cecd5081035ea1da'
+STRIPE_TEST_MODE = True  # Set to False in production settings
 
 # Encryption
 FIELD_ENCRYPTION_KEY = 'T86V1XiaQnV_128P62njY_h5pUkN8ayKeJUnIn17xrQ='
 
-GOLD_API_KEY = 'your_gold_api_key_here'
+FRONTEND_URL = "http://165.22.41.223:3000"
+CORS_ALLOWED_ORIGINS = ["http://165.22.41.223:3000"]  # If using CORS
 
 # Logging (Console-Only)
 LOGGING = {
@@ -224,27 +237,43 @@ LOGGING = {
         },
     },
     'handlers': {
+        'file': {
+            'level': 'INFO',  # Capture INFO and above
+            'class': 'logging.FileHandler',
+            'filename': 'logs/django.log',
+            'formatter': 'verbose',
+        },
         'console': {
-            'level': 'DEBUG',
+            'level': 'INFO',  # Match file level
             'class': 'logging.StreamHandler',
             'formatter': 'verbose',
         },
     },
     'loggers': {
-        'django': {
-            'handlers': ['console'],
+        '': {  # Root logger catches all modules
+            'handlers': ['file', 'console'],
             'level': 'INFO',
-            'propagate': True,
+            'propagate': False,
+        },
+        'django': {
+            'handlers': ['file', 'console'],
+            'level': 'INFO',
+            'propagate': False,
         },
         'user': {
-            'handlers': ['console'],
+            'handlers': ['file', 'console'],
             'level': 'INFO',
-            'propagate': True,
+            'propagate': False,
         },
         'authentication': {
-            'handlers': ['console'],
+            'handlers': ['file', 'console'],
             'level': 'INFO',
-            'propagate': True,
+            'propagate': False,
+        },
+        'banking': {
+            'handlers': ['file', 'console'],
+            'level': 'INFO',
+            'propagate': False,
         },
     },
 }
