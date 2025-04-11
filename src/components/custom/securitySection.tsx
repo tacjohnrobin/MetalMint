@@ -9,8 +9,8 @@ export default function SecuritySection() {
 				<div className="grid lg:grid-cols-2 gap-12 items-start">
 					<div className="space-y-12">
 						<div className="space-y-4">
-							<h1 className="text-6xl font-bold tracking-tight text-slate-900">
-								Your money is safe with us
+							<h1 className="text-2xl lg:text-4xl font-bold tracking-tight text-slate-900">
+								Comprehensive Security Measures
 							</h1>
 							<p className="text-slate-600 max-w-xl">
 								You trust us with your investments and we take that very
@@ -44,8 +44,8 @@ export default function SecuritySection() {
 						<Image
 							src="/image/shield.svg"
 							alt="Security illustration"
-							width={700}
-							height={700}
+							width={1000}
+							height={1000}
 							className="w-full max-w-xl mx-auto"
 							priority
 						/>

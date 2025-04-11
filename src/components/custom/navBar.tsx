@@ -5,10 +5,41 @@ import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { useEffect, useState } from "react";
 
 export default function Navbar() {
+	const [isVisible, setIsVisible] = useState(false);
+	const [prevScrollPos, setPrevScrollPos] = useState(0);
+
+	useEffect(() => {
+		// Initial check
+		if (window.scrollY > 0) {
+			setIsVisible(true);
+		}
+
+		const handleScroll = () => {
+			const currentScrollPos = window.scrollY;
+
+			// Show navbar when scrolling down and hide when at the top
+			if (currentScrollPos > 0) {
+				setIsVisible(true);
+			} else {
+				setIsVisible(false);
+			}
+
+			setPrevScrollPos(currentScrollPos);
+		};
+
+		window.addEventListener("scroll", handleScroll);
+		return () => window.removeEventListener("scroll", handleScroll);
+	}, [prevScrollPos]);
+
 	return (
-		<header className="fixed top-0 left-0 right-0 z-50 bg-white/30 backdrop-blur-lg">
+		<header
+			className={`fixed top-0 left-0 right-0 z-50 bg-white/30 backdrop-blur-lg transition-transform duration-300 ${
+				isVisible ? "transform-none" : "md:-translate-y-full"
+			}`}
+		>
 			<nav className="container mx-auto flex items-center justify-between px-4 py-4">
 				<Link href="/" className="flex items-center space-x-2">
 					<Image
@@ -22,12 +53,10 @@ export default function Navbar() {
 
 				{/* Desktop Navigation */}
 				<div className="hidden md:flex items-center space-x-8">
-					<Link href="#" className="text-gray-600 hover:text-gray-900">
-						Products
+					<Link href="/gold" className="text-gray-600 hover:text-gray-900">
+						MetalMint gold
 					</Link>
-					<Link href="#" className="text-gray-600 hover:text-gray-900">
-						Learn
-					</Link>
+
 					<Link href="#" className="text-gray-600 hover:text-gray-900">
 						Community
 					</Link>
@@ -62,17 +91,17 @@ export default function Navbar() {
 					<SheetContent side="right" className="w-[300px] sm:w-[350px]">
 						<div className="flex flex-col gap-6 mt-8">
 							<Link
-								href="#"
+								href="/gold"
 								className="text-lg font-medium text-gray-600 hover:text-gray-900 py-2 border-b border-gray-100"
 							>
-								Products
+								MetalMint gold
 							</Link>
-							<Link
+							{/*<Link
 								href="#"
 								className="text-lg font-medium text-gray-600 hover:text-gray-900 py-2 border-b border-gray-100"
 							>
 								Learn
-							</Link>
+							</Link>*/}
 							<Link
 								href="#"
 								className="text-lg font-medium text-gray-600 hover:text-gray-900 py-2 border-b border-gray-100"

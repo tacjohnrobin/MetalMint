@@ -32,7 +32,7 @@ export default function CryptoCarousel() {
 			>
 				<CarouselContent className="-ml-4">
 					{/* Each item will take up different widths based on screen size */}
-					<CarouselItem className="pl-4 sm:basis-1/2 md:basis-1/3 lg:basis-1/5">
+					<CarouselItem className="pl-4 sm:basis-1/2 md:basis-1/3 lg:basis-1/5 shadow-lg rounded-lg ">
 						<Gold />
 					</CarouselItem>
 					<CarouselItem className="pl-4 sm:basis-1/2 md:basis-1/3 lg:basis-1/5">
