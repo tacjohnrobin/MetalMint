@@ -32,6 +32,10 @@ yarn-error.log*
 # env files (can opt-in for committing if needed)
 .env*
 env
+<<<<<<< HEAD
+=======
+venv
+>>>>>>> be651508890eeb580925c3aa080a24cc3d3648e4
 
 # vercel
 .vercel
@@ -39,3 +43,7 @@ env
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+<<<<<<< HEAD
+=======
+ 
+>>>>>>> be651508890eeb580925c3aa080a24cc3d3648e4
