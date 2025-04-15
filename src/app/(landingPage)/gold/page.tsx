@@ -1,15 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import {
-	ArrowRight,
-	CheckCircle,
-	Shield,
-	Coins,
-	BarChart3,
-	DollarSign,
-	Lock,
-	AlertTriangle,
-} from "lucide-react";
+import { ArrowRight, CheckCircle, Coins, BarChart3 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -25,23 +16,63 @@ import Navbar from "@/components/custom/navBar";
 
 export default function page() {
 	return (
-		<div className="  items-center ">
-			<header>
-				<Navbar />
+		<div className=" mx-auto min-h-screen bg-background">
+			<Navbar />
+
+			<header className="top-0 left-0 right-0 bg-white/30 backdrop-blur-lg transition-transform duration-300">
+				<nav className="container mx-auto flex items-center justify-between px-4 py-4">
+					<Link href="/" className="flex items-center space-x-2">
+						<Image
+							src="/icons/favi.svg"
+							alt="MetalMint Logo"
+							width={28}
+							height={28}
+						/>
+						<span className="text-xl font-semibold text-gold">MetalMint</span>
+					</Link>
+
+					{/* Desktop Navigation */}
+					<div className="hidden md:flex items-center space-x-8">
+						<Link href="/gold" className="text-gray-600 hover:text-gray-900">
+							MetalMint gold
+						</Link>
+
+						<Link href="#" className="text-gray-600 hover:text-gray-900">
+							Community
+						</Link>
+						<Link href="#" className="text-gray-600 hover:text-gray-900">
+							FAQ
+						</Link>
+						<div className="flex items-center space-x-4">
+							<a href="/login">
+								<Button
+									variant="outline"
+									className="h-12 border-white/20 bg-white/10 rounded-lg"
+								>
+									Login
+								</Button>
+							</a>
+							<a href="/register">
+								<Button className="bg-emerald-700 hover:bg-emerald-800 h-12">
+									Get Started
+								</Button>
+							</a>
+						</div>
+					</div>
+				</nav>
 			</header>
-			<main className="grid  ">
-				<section className="w-full py-12 md:py-24 lg:py-32 bg-gradient-to-b from-amber-50 to-white">
+			<main className="grid place-items-center">
+				<section className="w-full py-12  bg-gradient-to-b from-amber-50 to-white">
 					<div className="container px-4 md:px-6 mt-12 md:mt-0">
-						<div className="px-4 md:px-8 lg:px-12 grid gap-6 lg:grid-cols-2 items-center">
-							<div className="space-y-4">
-								<h1 className="text-4xl font-bold tracking-tighter md:text-5xl max-w-[500px] ">
-									The Digital Currency Backed by{" "}
-									<span className="text-gold">Real Gold</span>
+						<div className="px-4 md:px-8 lg:px-12 grid gap-6 lg:grid-cols-2 items-center justify-center text-center lg:text-left">
+							<div className="space-y-4 lg:pl-24">
+								<h1 className="text-4xl font-bold tracking-tighter md:text-5xl lg:text-6xlxl max-w-[500px] ">
+									MetalMint <span className="text-gold">GOLD</span>
+									<br></br>
+									<span className="text-4xl font-medium">(USXW)</span>
 								</h1>
 								<p className="max-w-[500px] text-gray-500 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed ">
-									MetalMint combines the stability of physical gold with the
-									convenience of digital currency. Each token is 100% backed by
-									physical gold, stored in secure vaults and regularly audited.
+									The digital currency backed by physical gold.
 								</p>
 								<div className="flex flex-col gap-2 min-[400px]:flex-row">
 									<Button
@@ -65,8 +96,13 @@ export default function page() {
 						</div>
 					</div>
 				</section>
-				<section className=" bg-gold">
-					<div className="mx-auto px-6 py-12">
+				<section className="">
+					<p className="max-w-2xl text-gray-500 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed text-center my-12 mx-auto">
+						MetalMint combines the stability of physical gold with the
+						convenience of digital currency. Each token is 100% backed by
+						physical gold, stored in secure vaults and regularly audited.
+					</p>
+					<div className="mx-auto px-6 py-12  bg-gold rounded-lg ">
 						<GoldDashboard />
 					</div>
 				</section>
@@ -153,7 +189,7 @@ export default function page() {
 								</p>
 							</div>
 						</div>
-						<div className="mx-auto grid max-w-5xl grid-cols-1 gap-8 md:grid-cols-2 mt-12 items-center">
+						<div className="mx-auto grid max-w-5xl grid-cols-1 gap-8 md:grid-cols-2 mt-12 items-center justify-center text-center md:text-left">
 							<div className="space-y-4">
 								<div className="flex items-center space-x-4">
 									<div className="flex h-10 w-10 items-center justify-center rounded-full bg-amber-100">
@@ -497,7 +533,7 @@ export default function page() {
 			</main>
 			<footer className="w-full border-t bg-background py-6 md:py-12">
 				<div className="container px-4 md:px-6">
-					<div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
+					<div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4 text-center md:text-left">
 						<div className="space-y-4">
 							<div className="flex items-center space-x-2">
 								<div className="h-6 w-6 bg-amber-500 rounded-full"></div>

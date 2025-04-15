@@ -19,7 +19,7 @@ import SliderTabs from "@/components/custom/slider-tabs";
 import DigitalCurrenciesSection from "@/components/custom/currency-section";
 import HeroSection from "@/components/custom/hero-section";
 
-export default function Home() {
+export default function page() {
 	return (
 		<div className="min-h-screen">
 			<header>
