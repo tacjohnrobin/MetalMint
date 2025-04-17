@@ -21,20 +21,15 @@ export default function DigitalCurrenciesSection() {
 							<p className="text-center mb-6 text-sm">
 								1 MetalMint Gold (USXW) = 1 gram of physical gold bullion.
 							</p>
-							<div className="flex justify-center mb-6">
-								<button className="flex items-center gap-2 px-4 py-2 rounded-full border border-white/50 text-sm hover:bg-white/10 transition-colors">
-									Learn more <ArrowRight size={16} />
-								</button>
-							</div>
 						</div>
-						<div className="relative h-64 lg:h-[350px] overflow-hidden">
-							<div className="absolute bottom-[-40%] left-1/2 transform -translate-x-1/2 w-[90%]">
+						<div className="relative h-64 lg:h-[350px] max-w-lg flex items-center justify-center pl-6">
+							<div className="absolute bottom-[-30%] left-1/2 transform -translate-x-1/2 w-[80%]">
 								<Image
 									src="/image/coins (1).png"
 									width={400}
 									height={400}
 									alt="Gold bullion bars"
-									className="w-full md:h-auto h-[350px] "
+									className=" md:h-auto h-[350px] "
 									priority
 								/>
 							</div>
@@ -53,6 +48,11 @@ export default function DigitalCurrenciesSection() {
 							flexibility of blockchain, enabling secure, transparent, and
 							fractional ownership of real-world gold assets.
 						</p>
+						<div className="mt-6">
+							<button className="flex items-center gap-2 px-4 py-2 rounded-full border border-emerald-700 text-gray-700 text-sm hover:bg-white/10 transition-colors">
+								Learn more <ArrowRight size={16} />
+							</button>
+						</div>
 					</div>
 				</div>
 			</div>

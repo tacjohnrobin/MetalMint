@@ -70,7 +70,7 @@ const SliderTabs = () => {
 	const [activeTab, setActiveTab] = useState("investment");
 
 	return (
-		<section className="w-full py-12 ">
+		<section className=" py-12 mx-auto ">
 			<div className="container px-4 md:px-6">
 				<h2 className="text-3xl font-bold tracking-tighter text-center md:text-4xl">
 					Explore Our Financial Tools
@@ -78,18 +78,18 @@ const SliderTabs = () => {
 				<p className="mx-auto max-w-[700px] text-muted-foreground text-center mt-4">
 					Unlock your financial potential with our innovative tools.
 				</p>
-				<div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-10">
+				<div className="grid grid-cols-1 md:grid-cols-2 gap-20 mt-10 lg:ml-16">
 					<div className="flex flex-col">
-						<div className="space-x-2 flex overflow-x-auto pb-4">
+						<div className=" space-x-2 flex overflow-x-auto pb-4">
 							{tabContent.map((tab) => (
 								<Button
 									key={tab.id}
 									variant={activeTab === tab.id ? "default" : "secondary"}
 									onClick={() => setActiveTab(tab.id)}
 									className={cn(
-										"w-fit shrink-0",
+										"w-fit shrink-0 ",
 										activeTab === tab.id
-											? "bg-emerald-700 text-primary-foreground"
+											? "bg-emerald-700 text-primary-foreground rounded-full"
 											: "",
 									)}
 								>
@@ -98,7 +98,7 @@ const SliderTabs = () => {
 							))}
 						</div>
 
-						<Card className="border-none shadow-none mt-4 ">
+						<Card className="mx-auto border-none shadow-none mt-4 ">
 							<CardHeader>
 								<CardTitle className="text-2xl md:text-3xl lg:text-4xl">
 									{
@@ -137,7 +137,7 @@ const SliderTabs = () => {
 						</Card>
 					</div>
 
-					<div className="bg-muted rounded-lg h-[400px]  md:h-auto overflow-hidden">
+					<div className="bg-white/0 rounded-lg h-[400px]  md:h-auto overflow-hidden">
 						<motion.div
 							initial={{ opacity: 0, scale: 0.95 }}
 							animate={{ opacity: 1, scale: 1 }}
@@ -153,7 +153,7 @@ const SliderTabs = () => {
 									tabContent.find((tab) => tab.id === activeTab)?.content.image
 										?.alt || "Financial dashboard"
 								}
-								className="w-full h-auto object-cover rounded-xl shadow-md md:max-h-[500px]"
+								className="max-w-3xl h-auto object-cover rounded-xl shadow-md md:max-h-[450px]"
 								width={500}
 								height={500}
 							/>

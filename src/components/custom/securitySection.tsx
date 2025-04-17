@@ -22,8 +22,14 @@ export default function SecuritySection() {
 						<div className="grid sm:grid-cols-2 gap-8">
 							{securityFeatures.map((feature, index) => (
 								<div key={index} className="space-y-3">
-									<div className="h-10 w-10 flex items-center justify-center rounded-full bg-emerald-100">
-										<Building2 className="h-5 w-5 text-emerald-700" />
+									<div className="w-12 h-12 bg-emerald-100 rounded-full flex items-center justify-center mb-4">
+										<Image
+											src="/icons/bank.svg"
+											alt="bank"
+											width={20}
+											height={20}
+											className="w-6 h-6 text-blue-500"
+										/>
 									</div>
 									<h3 className="font-semibold text-slate-900">
 										{feature.title}
@@ -40,7 +46,7 @@ export default function SecuritySection() {
 						</Button>
 					</div>
 
-					<div className="hidden md:flex relative lg:ml-auto items-center justify-center pt-36">
+					<div className="hidden lg:flex relative lg:ml-auto items-center justify-center pt-36">
 						<Image
 							src="/image/shield.svg"
 							alt="Security illustration"

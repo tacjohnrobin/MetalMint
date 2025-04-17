@@ -22,12 +22,137 @@ import HeroSection from "@/components/custom/hero-section";
 export default function page() {
 	return (
 		<div className="min-h-screen">
-			<header>
-				<Navbar />
-			</header>
+			<Navbar />
 
+			<header className="top-0 left-0 right-0 bg-white/30 backdrop-blur-lg transition-transform duration-300">
+				<nav className="container mx-auto flex items-center justify-between px-4 py-4">
+					<Link href="/" className="flex items-center space-x-2">
+						<Image
+							src="/icons/favi.svg"
+							alt="MetalMint Logo"
+							width={28}
+							height={28}
+						/>
+						<span className="text-xl font-semibold text-gold">MetalMint</span>
+					</Link>
+
+					{/* Desktop Navigation */}
+					<div className="hidden md:flex items-center space-x-8">
+						<Link href="/gold" className="text-gray-600 hover:text-gray-900">
+							MetalMint gold
+						</Link>
+
+						<Link href="#" className="text-gray-600 hover:text-gray-900">
+							Community
+						</Link>
+						<Link href="#" className="text-gray-600 hover:text-gray-900">
+							FAQ
+						</Link>
+						<div className="flex items-center space-x-4">
+							<a href="/login">
+								<Button
+									variant="outline"
+									className="h-12 border-white/20 bg-white/10 rounded-lg"
+								>
+									Login
+								</Button>
+							</a>
+							<a href="/register">
+								<Button className="bg-emerald-700 hover:bg-emerald-800 h-12">
+									Get Started
+								</Button>
+							</a>
+						</div>
+					</div>
+				</nav>
+			</header>
 			<main>
-				{/* 	<section className="relative min-h-screen flex items-center">
+				<section>
+					<HeroSection />
+				</section>
+				<section className="">
+					<div className="max-w-6xl mx-auto px-4 py-12 md:py-16 lg:py-20">
+						<h1 className="text-center text-3xl md:text-4xl font-bold text-[#0A1F44] mb-12 md:mb-16 max-w-3xl mx-auto">
+							Protect your spending & savings with precious metals
+						</h1>
+						<div className="grid md:grid-cols-3 gap-6 lg:gap-8">
+							<div className="w-full bg-white rounded-lg p-6 shadow-sm grid items-center justify-center">
+								<div className="w-16 h-16 bg-emerald-100 rounded-full mx-auto flex items-center justify-center mb-4">
+									<Image
+										src="/icons/gold.svg"
+										alt="gold"
+										width={20}
+										height={20}
+										className="w-10 h-10 text-blue-500"
+									/>
+								</div>
+								<h2 className="text-xl text-center font-semibold text-[#0A1F44] mb-3">
+									Spend with gold
+								</h2>
+								<p className="text-gray-600 mb-4 text-center">
+									Use gold as money, anywhere MasterCard is accepted.
+								</p>
+							</div>
+
+							<div className="bg-white rounded-lg p-6 shadow-sm">
+								<div className="w-16 h-16 bg-emerald-100 rounded-full mx-auto flex items-center justify-center mb-4">
+									<Image
+										src="/icons/graph.svg"
+										alt="graph"
+										width={20}
+										height={20}
+										className="w-10 h-10 text-blue-500"
+									/>
+								</div>
+								<h2 className="text-xl font-semibold text-[#0A1F44] mb-3 text-center">
+									Manage your wealth
+								</h2>
+								<p className="text-gray-600 mb-4 text-center">
+									Keep your hard-earned savings safe with physical precious
+									metals.
+								</p>
+							</div>
+
+							<div className="bg-white rounded-lg p-6 shadow-sm">
+								<div className="w-16 h-16 bg-emerald-100 rounded-full mx-auto flex items-center justify-center mb-4">
+									<Image
+										src="/icons/safe.svg"
+										alt="safe"
+										width={20}
+										height={20}
+										className="w-10 h-10 text-blue-500"
+									/>
+								</div>
+								<h2 className="text-xl font-semibold text-[#0A1F44] mb-3 text-center">
+									Secure storage
+								</h2>
+								<p className="text-gray-600 mb-4 text-center">
+									Your gold and silver are safely stored in our world-class
+									vaults.
+								</p>
+							</div>
+						</div>
+					</div>
+				</section>
+				<section className="mx-auto max-w-8xl px-4 sm:px-6 lg:px-8 py-6 bg-[#FFFCF6] ">
+					<SliderTabs />
+				</section>
+				<section className="mx-auto max-w-8xl px-4 sm:px-6 lg:px-8 ">
+					<DigitalCurrenciesSection />
+				</section>
+				<section className="mx-auto max-w-8xl px-4 sm:px-6 lg:px-8 bg-emerald-700 ">
+					<Features />
+				</section>
+				<SecuritySection />
+				<CTASection />
+			</main>
+			<Footer />
+		</div>
+	);
+}
+
+{
+	/* 	<section className="relative min-h-screen flex items-center">
 					<div
 						className="absolute inset-0 z-0"
 						style={{
@@ -69,8 +194,10 @@ export default function page() {
 							</div>
 						</div>
 					</div>
-				</section> */}
-				{/*<section className="relative relative min-h-screen flex items-center bg-[#f5f6f1ff] mt-12">
+				</section> */
+}
+{
+	/*<section className="relative relative min-h-screen flex items-center bg-[#f5f6f1ff] mt-12">
 					<div className="absolute inset-0 bg-gradient-to-b from-background via-background/90 to-background">
 						<div className="absolute inset-0 bg-[linear-gradient(to_right,#4f4f4f2e_1px,transparent_1px),linear-gradient(to_bottom,#4f4f4f2e_1px,transparent_1px)] bg-[size:14px_24px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)]" />
 					</div>
@@ -153,27 +280,11 @@ export default function page() {
 							</div>
 						</div>
 					</div>
-				</section>*/}
-				<section>
-					<HeroSection />
-				</section>
-				<section className="">
-					<div className="max-w-6xl mx-auto px-4 py-12 md:py-16 lg:py-20">
-						<h1 className="text-center text-3xl md:text-4xl font-bold text-[#0A1F44] mb-12 md:mb-16 max-w-3xl mx-auto">
-							Protect your spending & savings with precious metals
-						</h1>
-						<div className="grid md:grid-cols-3 gap-6 lg:gap-8">
-							<div className="w-full bg-white rounded-lg p-6 shadow-sm grid items-center justify-center">
-								<div className="w-12 h-12 bg-blue-100 rounded-full mx-auto flex items-center justify-center mb-4">
-									<CreditCard className="w-6 h-6 text-blue-500" />
-								</div>
-								<h2 className="text-xl text-center font-semibold text-[#0A1F44] mb-3">
-									Spend gold & silver
-								</h2>
-								<p className="text-gray-600 mb-4 text-center">
-									Use gold and silver as money, anywhere MasterCard is accepted.
-								</p>
-								{/*<Link
+				</section>*/
+}
+
+{
+	/*<Link
 									href="#"
 									className="text-blue-500 hover:text-blue-600 font-medium inline-flex items-center"
 								>
@@ -191,50 +302,5 @@ export default function page() {
 											d="M9 5l7 7-7 7"
 										/>
 									</svg>
-								</Link>*/}
-							</div>
-
-							<div className="bg-white rounded-lg p-6 shadow-sm">
-								<div className="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
-									<Menu className="w-6 h-6 text-gray-500" />
-								</div>
-								<h2 className="text-xl font-semibold text-[#0A1F44] mb-3 text-center">
-									Manage your wealth
-								</h2>
-								<p className="text-gray-600 mb-4 text-center">
-									Keep your hard-earned savings safe with physical precious
-									metals.
-								</p>
-							</div>
-
-							<div className="bg-white rounded-lg p-6 shadow-sm">
-								<div className="w-12 h-12 bg-blue-100 mx-auto rounded-full flex items-center justify-center mb-4">
-									<Shield className="w-6 h-6 text-blue-500" />
-								</div>
-								<h2 className="text-xl font-semibold text-[#0A1F44] mb-3 text-center">
-									Secure storage
-								</h2>
-								<p className="text-gray-600 mb-4 text-center">
-									Your gold and silver are safely stored in our world-class
-									vaults.
-								</p>
-							</div>
-						</div>
-					</div>
-				</section>
-				<section className="mx-auto max-w-8xl px-4 sm:px-6 lg:px-8 py-6 bg-[#FFFCF6] ">
-					<SliderTabs />
-				</section>
-				<section className="mx-auto max-w-8xl px-4 sm:px-6 lg:px-8 ">
-					<DigitalCurrenciesSection />
-				</section>
-				<section className="mx-auto max-w-8xl px-4 sm:px-6 lg:px-8 bg-emerald-700 ">
-					<Features />
-				</section>
-				<SecuritySection />
-				<CTASection />
-			</main>
-			<Footer />
-		</div>
-	);
+								</Link>*/
 }
