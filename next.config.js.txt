@@ -1,0 +1,9 @@
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  // Enable the `src/` directory support
+  experimental: {
+    appDir: true,
+  },
+}
+
+module.exports = nextConfig
