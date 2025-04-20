@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 interface TradingViewWidgetProps {
 	symbol: string;
@@ -8,36 +8,56 @@ interface TradingViewWidgetProps {
 
 const TradingViewWidget: React.FC<TradingViewWidgetProps> = ({ symbol }) => {
 	const containerRef = useRef<HTMLDivElement>(null);
+	const [isClient, setIsClient] = useState(false);
+
+	// Mark client-side only
+	useEffect(() => {
+		setIsClient(true);
+	}, []);
 
 	useEffect(() => {
-		const script = document.createElement("script");
-		script.src =
-			"https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js";
-		script.type = "text/javascript";
-		script.async = true;
-		script.innerHTML = JSON.stringify({
-			symbol: symbol,
-			width: "100%",
-			height: "100%",
-			locale: "en",
-			dateRange: "12M",
-			colorTheme: "light",
-			isTransparent: false,
-			autosize: true,
-			largeChartUrl: "",
-		});
+		if (!isClient || !containerRef.current) return;
 
-		if (containerRef.current) {
+		try {
+			// Clear previous script/widget nodes
+			while (containerRef.current.firstChild) {
+				containerRef.current.removeChild(containerRef.current.firstChild);
+			}
+
+			const script = document.createElement("script");
+			script.src =
+				"https://s3.tradingview.com/external-embedding/embed-widget-mini-symbol-overview.js";
+			script.type = "text/javascript";
+			script.async = true;
+			script.innerHTML = JSON.stringify({
+				symbol: symbol,
+				width: "100%",
+				height: "100%",
+				locale: "en",
+				dateRange: "12M",
+				colorTheme: "light",
+				isTransparent: false,
+				autosize: true,
+				largeChartUrl: "",
+			});
+
 			containerRef.current.appendChild(script);
+		} catch (error) {
+			console.error("TradingView widget load error:", error);
 		}
 
+		// Cleanup
 		return () => {
-			// Cleanup to prevent duplicate widgets
 			if (containerRef.current) {
-				containerRef.current.innerHTML = "";
+				while (containerRef.current.firstChild) {
+					containerRef.current.removeChild(containerRef.current.firstChild);
+				}
 			}
 		};
-	}, [symbol]);
+	}, [symbol, isClient]);
+
+	// Render nothing until client is confirmed
+	if (!isClient) return null;
 
 	return (
 		<div className="tradingview-widget-container font-geologica">
@@ -49,7 +69,7 @@ const TradingViewWidget: React.FC<TradingViewWidgetProps> = ({ symbol }) => {
 	);
 };
 
-// **Now use the same component for different trading pairs**
+// ✅ Use per-symbol widgets
 export const TradingViewWidget1 = () => (
 	<TradingViewWidget symbol="KRAKEN:TOKENUSD" />
 );

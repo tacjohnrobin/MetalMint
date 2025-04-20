@@ -18,7 +18,7 @@ export default function HeroSection() {
 	}, []);
 
 	return (
-		<section className="m-4 md:m-12 h-[500px] mt-24 md:mt-0 lg:h-[600px]  bg-gradient-to-r from-emerald-700 via-emerald-600 to-emerald-900 text-white overflow-hidden rounded-3xl md:rounded-[40px]">
+		<section className="m-4 md:m-12 h-[500px] mt-6 md:mt-0 lg:h-[600px]  bg-gradient-to-r from-emerald-700 via-emerald-600 to-emerald-900 text-white overflow-hidden rounded-3xl md:rounded-[40px]">
 			<div className="container mx-auto px-4 py-16 md:py-24  px-24 relative max-w-6xl">
 				{/* Parallax Background Image 1 - Top Right */}
 				<div
@@ -75,16 +75,15 @@ export default function HeroSection() {
 					</div>
 
 					{/* Right Image - Wider and overflowing at bottom */}
-					<div className="relative h-full md:absolute md:right-0 md:bottom-0 md:w-[55%] lg:w-[50%] xl:w-[45%] md:translate-y-[15%] md:translate-x-[5%] z-10">
+					<div className="relative h-full md:absolute md:right-0 md:bottom-0 lg:right-[-5%] lg:bottom-[-15%] md:w-[55%] lg:w-[50%] xl:w-[45%] md:translate-y-[15%] md:translate-x-[5%] z-10">
 						<div className="absolute inset-0 bg-amber-500/40 blur-3xl rounded-full -z-10"></div>
 						<div className="relative w-full h-[300px] md:h-[500px] lg:h-[600px]">
 							<Image
-								src="/image/hero.png"
-								alt="Metal Mint Gold Bar"
-								fill
-								className="object-contain drop-shadow-2xl scale-110"
-								sizes="(max-width: 500px) 100vw, 50vw"
-								priority
+								src="/image/coins (3).png?height=400&width=400"
+								alt="Decorative gold coin"
+								width={400}
+								height={400}
+								className="object-contain rounded-full"
 							/>
 						</div>
 					</div>

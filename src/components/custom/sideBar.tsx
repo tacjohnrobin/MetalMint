@@ -1,12 +1,14 @@
 "use client";
+
 import {
 	Home,
-	BarChart3,
-	ShoppingCart,
-	ArrowLeftRight,
+	LineChart,
+	ArrowRightLeft,
 	Settings,
-	User,
+	UserCircle,
 	LogOut,
+	Wallet,
+	Menu,
 } from "lucide-react";
 
 import {
@@ -18,6 +20,7 @@ import {
 	SidebarMenuButton,
 	SidebarMenuItem,
 	SidebarRail,
+	SidebarTrigger,
 } from "@/components/ui/sidebar";
 import { Separator } from "@/components/ui/separator";
 import Image from "next/image";
@@ -32,127 +35,144 @@ export function MetalmintSidebar() {
 		return pathname === path;
 	};
 
-	// Function to get the appropriate class names based on active state
-	const getMenuItemClasses = (path: string) => {
-		return cn(
-			"text-md transition-colors duration-200",
-			isActive(path)
-				? "text-[#d4af37] font-medium bg-gray-100 rounded-3xl"
-				: "text-gray-700 hover:text-[#d4af37] hover:bg-gray-50",
-		);
-	};
+	// Navigation items
+	const mainNavItems = [
+		{ path: "/home", label: "Dashboard", icon: Home },
+		{ path: "/holdings", label: "Holdings", icon: Wallet },
+		{ path: "/analytics", label: "Analytics", icon: LineChart },
+		{ path: "/transfers", label: "Transfers", icon: ArrowRightLeft },
+	];
+
+	const footerNavItems = [
+		{ path: "/settings", label: "Settings", icon: Settings },
+		{ path: "/profile", label: "Profile", icon: UserCircle },
+	];
 
 	return (
-		<Sidebar collapsible="icon" className="bg-white">
-			<SidebarHeader className="p-3 mb-8">
-				<SidebarMenu>
-					<SidebarMenuItem>
-						<SidebarMenuButton size="lg" asChild>
-							<a href="#" className="flex items-center">
-								<div className="flex aspect-square size-8 items-center justify-center rounded-lg">
-									<Image
-										src="/icons/favi.svg"
-										alt="MetalMint Logo"
-										width={28}
-										height={28}
-									/>
-								</div>
-								<div className="flex flex-col gap-0.5">
-									<span className="text-xl font-semibold text-[#d4af37]">
-										MetalMint
-									</span>
-								</div>
-							</a>
-						</SidebarMenuButton>
-					</SidebarMenuItem>
-				</SidebarMenu>
-			</SidebarHeader>
+		<>
+			{/* Mobile menu trigger - visible only on small screens */}
+			<div className="fixed top-4  md:hidden">
+				<SidebarTrigger className="bg-white shadow-md rounded-full p-2 border ">
+					<Menu className="h-5 w-5 text-[#d4af37]" />
+				</SidebarTrigger>
+			</div>
 
-			<SidebarContent className="p-4">
-				<SidebarMenu className="space-y-3">
-					<SidebarMenuItem>
-						<SidebarMenuButton className={getMenuItemClasses("/home")}>
-							<a href="/home" className="flex items-center gap-2 p-2 w-full">
-								<Home className="size-5" />
-								<span>Home</span>
-							</a>
-						</SidebarMenuButton>
-					</SidebarMenuItem>
+			<Sidebar
+				collapsible="offcanvas"
+				className="bg-white border-r shadow-sm h-full"
+				variant="sidebar"
+				style={{ backgroundColor: "white" }}
+			>
+				<SidebarHeader className="">
+					<SidebarMenu>
+						<SidebarMenuItem>
+							<SidebarMenuButton
+								size="lg"
+								asChild
+								className="hover:bg-transparent bg-white"
+							>
+								<a href="/home" className="w-full flex items-center">
+									<div className="flex aspect-square size-10 items-center justify-center rounded-lg bg-white ">
+										<Image
+											src="/icons/favi.svg"
+											alt="MetalMint Logo"
+											width={32}
+											height={32}
+										/>
+									</div>
+									<div className="flex flex-col">
+										<span className="text-xl font-bold text-[#d4af37]">
+											MetalMint
+										</span>
+									</div>
+								</a>
+							</SidebarMenuButton>
+						</SidebarMenuItem>
+					</SidebarMenu>
+				</SidebarHeader>
 
-					<SidebarMenuItem>
-						<SidebarMenuButton className={getMenuItemClasses("/holdings")}>
-							<a
-								href="/holdings"
-								className="flex items-center gap-2 p-2 w-full"
-							>
-								<BarChart3 className="size-5" />
-								<span>Holdings</span>
-							</a>
-						</SidebarMenuButton>
-					</SidebarMenuItem>
-					<SidebarMenuItem>
-						<SidebarMenuButton className={getMenuItemClasses("/transfers")}>
-							<a
-								href="/analytics"
-								className="flex items-center gap-2 p-2 w-full"
-							>
-								<ArrowLeftRight className="size-5" />
-								<span>analytics</span>
-							</a>
-						</SidebarMenuButton>
-					</SidebarMenuItem>
-					<SidebarMenuItem>
-						<SidebarMenuButton className={getMenuItemClasses("/transfers")}>
-							<a
-								href="/transfers"
-								className="flex items-center gap-2 p-2 w-full"
-							>
-								<ArrowLeftRight className="size-5" />
-								<span>Transfers</span>
-							</a>
-						</SidebarMenuButton>
-					</SidebarMenuItem>
-				</SidebarMenu>
-			</SidebarContent>
+				<SidebarContent className="px-3 py-6 bg-white">
+					<SidebarMenu className="space-y-1.5">
+						{mainNavItems.map((item) => (
+							<SidebarMenuItem key={item.path}>
+								<SidebarMenuButton
+									className={cn(
+										"w-full rounded-none transition-all duration-200 py-2.5 bg-white",
+										isActive(item.path)
+											? "bg-gray-50 text-[#d4af37] font-medium"
+											: "text-gray-600 hover:text-[#d4af37] hover:bg-gray-50",
+									)}
+									tooltip={item.label}
+								>
+									<a
+										href={item.path}
+										className="flex items-center w-full group"
+									>
+										<item.icon
+											className={cn(
+												"size-5 mr-3",
+												isActive(item.path)
+													? "fill-[#d4af37]/10 text-[#d4af37]"
+													: "text-gray-500 group-hover:text-[#d4af37]",
+											)}
+										/>
+										<span className="text-sm font-medium">{item.label}</span>
+									</a>
+								</SidebarMenuButton>
+							</SidebarMenuItem>
+						))}
+					</SidebarMenu>
+				</SidebarContent>
 
-			<SidebarFooter className="p-4">
-				<SidebarMenu className="space-y-2">
-					*
-					<SidebarMenuItem>
-						<SidebarMenuButton className={getMenuItemClasses("/settings")}>
-							<a
-								href="/settings"
-								className="flex items-center gap-2 p-2 w-full"
-							>
-								<Settings className="size-5" />
-								<span>Settings</span>
-							</a>
-						</SidebarMenuButton>
-					</SidebarMenuItem>
-					<SidebarMenuItem>
-						<SidebarMenuButton className={getMenuItemClasses("/profile")}>
-							<a
-								href="/settings"
-								className="flex items-center gap-2 p-2 w-full"
-							>
-								<User className="size-5" />
-								<span>Profile</span>
-							</a>
-						</SidebarMenuButton>
-					</SidebarMenuItem>
-					<Separator className="my-2" />
-					<SidebarMenuItem>
-						<SidebarMenuButton className="text-gray-700 text-md hover:text-[#d4af37] hover:bg-gray-50 transition-colors duration-200">
-							<a href="/login" className="flex items-center gap-2 p-2 w-full">
-								<LogOut className="size-5" />
-								<span>Log Out</span>
-							</a>
-						</SidebarMenuButton>
-					</SidebarMenuItem>
-				</SidebarMenu>
-			</SidebarFooter>
+				<SidebarFooter className="px-3 py-4 mt-auto bg-white">
+					<SidebarMenu className="space-y-1.5">
+						{footerNavItems.map((item) => (
+							<SidebarMenuItem key={item.path}>
+								<SidebarMenuButton
+									className={cn(
+										"w-full rounded-none transition-all duration-200 py-2.5 bg-white",
+										isActive(item.path)
+											? "bg-gray-50 text-[#d4af37] font-medium"
+											: "text-gray-600 hover:text-[#d4af37] hover:bg-gray-50",
+									)}
+									tooltip={item.label}
+								>
+									<a
+										href={item.path}
+										className="flex items-center w-full group"
+									>
+										<item.icon
+											className={cn(
+												"size-5 mr-3",
+												isActive(item.path)
+													? "fill-[#d4af37]/10 text-[#d4af37]"
+													: "text-gray-500 group-hover:text-[#d4af37]",
+											)}
+										/>
+										<span className="text-sm font-medium">{item.label}</span>
+									</a>
+								</SidebarMenuButton>
+							</SidebarMenuItem>
+						))}
 
-			<SidebarRail />
-		</Sidebar>
+						<Separator className="my-3" />
+
+						<SidebarMenuItem>
+							<SidebarMenuButton
+								className="w-full rounded-none transition-all duration-200 py-2.5 text-gray-600 hover:text-red-500 hover:bg-red-50 bg-white"
+								tooltip="Log Out"
+							>
+								<a href="/login" className="flex items-center w-full group">
+									<LogOut className="size-5 mr-3 text-gray-500 group-hover:text-red-500" />
+									<span className="text-sm font-medium">Log Out</span>
+								</a>
+							</SidebarMenuButton>
+						</SidebarMenuItem>
+					</SidebarMenu>
+				</SidebarFooter>
+
+				<SidebarRail />
+			</Sidebar>
+		</>
 	);
 }

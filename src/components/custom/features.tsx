@@ -123,10 +123,10 @@ export default function Features() {
 					</div>
 					<Button
 						size="lg"
-						className="hover:bg-white bg-emerald-700  text-white hover:text-emerald-700 transition-colors duration-300 p-6"
+						className="hover:bg-white border border-white bg-emerald-700  text-white hover:text-emerald-700 transition-colors duration-300 p-6 rounded-full"
 					>
 						Join Community
-						<ArrowRight className="ml-2 h-4 w-4" />
+						<ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
 					</Button>
 				</div>
 				<div className="relative h-[300px] md:h-[400px] lg:h-[500px] order-1 md:order-none">

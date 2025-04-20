@@ -23,7 +23,6 @@ export function OrderBook() {
 
 			// Generate buy orders (below current price)
 			for (let i = 0; i < 15; i++) {
-				// Increased number of orders for scrolling
 				const price = basePrice - i * 0.5 - Math.random() * 0.2;
 				const amount = 0.01 + Math.random() * 0.5;
 				newBuyOrders.push({
@@ -33,10 +32,10 @@ export function OrderBook() {
 				});
 			}
 
-			// Generate sell orders (above current price)
+			// Generate sell orders (1–2 pips above buy orders)
 			for (let i = 0; i < 15; i++) {
-				// Increased number of orders for scrolling
-				const price = basePrice + i * 0.5 + Math.random() * 0.2;
+				const pipOffset = 0.01 + Math.random() * 0.01; // 1–2 pips
+				const price = newBuyOrders[i].price + pipOffset;
 				const amount = 0.01 + Math.random() * 0.5;
 				newSellOrders.push({
 					price: Math.round(price * 100) / 100,
@@ -61,7 +60,6 @@ export function OrderBook() {
 			setBuyOrders(newBuyOrders);
 			setSellOrders(newSellOrders);
 
-			// Update last price
 			const newPrice = basePrice * (0.999 + Math.random() * 0.002);
 			setLastPrice(Math.round(newPrice * 100) / 100);
 		};

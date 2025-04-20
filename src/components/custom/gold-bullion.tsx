@@ -5,7 +5,7 @@ import { UserRound, Zap } from "lucide-react";
 export default function GoldDashboard() {
 	return (
 		<main className=" w-full flex min-h-[700px] items-center justify-center bg-gradient-to-br from-emerald-950 to-emerald-900 p-4 font-sans text-white">
-			<div className=" max-w-8xl">
+			<div className=" max-w-7xl">
 				<div className="grid grid-cols-12 gap-4">
 					{/* Logo and Title Section */}
 					<div className="col-span-12 md:col-span-4 flex items-center gap-4">
@@ -90,7 +90,7 @@ export default function GoldDashboard() {
 					</div>
 
 					{/* Circulating Supply Section */}
-					<div className="hidden md:flex col-span-12 md:col-span-4 mt-4">
+					<div className="hidden md:grid col-span-12 md:col-span-4 mt-4">
 						<div className="text-sm text-emerald-300 tracking-wider">
 							Circulating supply
 						</div>

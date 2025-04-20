@@ -19,13 +19,12 @@ const tabContent = [
 	{
 		id: "investment",
 		title: "Investment Plans",
-		icon: <DollarSign className="h-5 w-5" />,
 		content: {
 			heading: "Investment Plans for Everyone",
 			description:
 				"Start with as little as $500 or scale up to $25,000. Whether you're new to investing or a seasoned pro, our tiered plans help you achieve your financial goals with ease.",
 			features: ["Live Charts", "Secure Trading", "Explore Tools"],
-			cta: null,
+			cta: "Start Investing",
 			image: {
 				src: "/image/handgold.png",
 				alt: "Investment plans dashboard",
@@ -35,7 +34,6 @@ const tabContent = [
 	{
 		id: "earnings",
 		title: "Daily Earnings",
-		icon: <BarChart3 className="h-5 w-5" />,
 		content: {
 			heading: "Daily Earnings, Just for You",
 			description:
@@ -51,7 +49,6 @@ const tabContent = [
 	{
 		id: "growth",
 		title: "Growth",
-		icon: <TrendingUp className="h-5 w-5" />,
 		content: {
 			heading: "Grow Your Wealth with Confidence",
 			description:
@@ -70,7 +67,7 @@ const SliderTabs = () => {
 	const [activeTab, setActiveTab] = useState("investment");
 
 	return (
-		<section className=" py-12 mx-auto ">
+		<section className="py-12 w-full max-w-7xl mx-auto">
 			<div className="container px-4 md:px-6">
 				<h2 className="text-3xl font-bold tracking-tighter text-center md:text-4xl">
 					Explore Our Financial Tools
@@ -78,54 +75,153 @@ const SliderTabs = () => {
 				<p className="mx-auto max-w-[700px] text-muted-foreground text-center mt-4">
 					Unlock your financial potential with our innovative tools.
 				</p>
-				<div className="grid grid-cols-1 md:grid-cols-2 gap-20 mt-10 lg:ml-16">
-					<div className="flex flex-col">
-						<div className=" space-x-2 flex overflow-x-auto pb-4">
+
+				{/* Mobile view - stacked layout */}
+				<div className="flex flex-col lg:hidden mt-8 space-y-8">
+					<div className="flex justify-center overflow-x-auto pb-4 no-scrollbar">
+						<div className="flex space-x-2">
 							{tabContent.map((tab) => (
 								<Button
 									key={tab.id}
 									variant={activeTab === tab.id ? "default" : "secondary"}
 									onClick={() => setActiveTab(tab.id)}
 									className={cn(
-										"w-fit shrink-0 ",
+										"flex items-center whitespace-nowrap px-3 py-2",
+										activeTab === tab.id
+											? "bg-emerald-700 text-primary-foreground rounded-full"
+											: "",
+									)}
+									size="sm"
+								>
+									{tab.icon}
+									<span>{tab.title}</span>
+								</Button>
+							))}
+						</div>
+					</div>
+
+					<motion.div
+						initial={{ opacity: 0, y: 10 }}
+						animate={{ opacity: 1, y: 0 }}
+						transition={{ duration: 0.3 }}
+						key={`image-${activeTab}`}
+						className="w-full flex justify-center px-4"
+					>
+						<div className="relative w-full max-w-md aspect-[4/3] rounded-xl overflow-hidden shadow-lg">
+							<Image
+								src={
+									tabContent.find((tab) => tab.id === activeTab)?.content.image
+										?.src || "/image/mint.png"
+								}
+								alt={
+									tabContent.find((tab) => tab.id === activeTab)?.content.image
+										?.alt || "Financial dashboard"
+								}
+								fill
+								className="object-cover"
+								sizes="(max-width: 768px) 100vw, 50vw"
+								priority
+							/>
+						</div>
+					</motion.div>
+
+					<Card className="border-none shadow-none">
+						<CardHeader className="px-4 pb-2">
+							<CardTitle className="text-2xl">
+								{
+									tabContent.find((tab) => tab.id === activeTab)?.content
+										.heading
+								}
+							</CardTitle>
+							<CardDescription className="text-sm mt-2">
+								{
+									tabContent.find((tab) => tab.id === activeTab)?.content
+										.description
+								}
+							</CardDescription>
+						</CardHeader>
+						<CardContent className="px-4 py-2">
+							{tabContent.find((tab) => tab.id === activeTab)?.content.features
+								.length > 0 && (
+								<ul className="list-disc pl-5 space-y-1">
+									{tabContent
+										.find((tab) => tab.id === activeTab)
+										?.content.features.map((feature, index) => (
+											<li key={index} className="text-sm">
+												{feature}
+											</li>
+										))}
+								</ul>
+							)}
+						</CardContent>
+						<CardFooter className="px-4 pt-2">
+							{tabContent.find((tab) => tab.id === activeTab)?.content.cta ? (
+								<a href="/register">
+									<Button className="px-4 py-2 bg-emerald-700 hover:bg-emerald-800">
+										{
+											tabContent.find((tab) => tab.id === activeTab)?.content
+												.cta
+										}
+									</Button>
+								</a>
+							) : null}
+						</CardFooter>
+					</Card>
+				</div>
+
+				{/* Desktop view - grid layout */}
+				<div className="hidden lg:grid grid-cols-2 gap-12 mt-10">
+					<div className="flex flex-col">
+						<div className="flex space-x-3 pb-6">
+							{tabContent.map((tab) => (
+								<Button
+									key={tab.id}
+									variant={activeTab === tab.id ? "default" : "secondary"}
+									onClick={() => setActiveTab(tab.id)}
+									className={cn(
+										"flex items-center",
 										activeTab === tab.id
 											? "bg-emerald-700 text-primary-foreground rounded-full"
 											: "",
 									)}
 								>
-									{tab.title}
+									{tab.icon}
+									<span>{tab.title}</span>
 								</Button>
 							))}
 						</div>
 
-						<Card className="mx-auto border-none shadow-none mt-4 ">
-							<CardHeader>
-								<CardTitle className="text-2xl md:text-3xl lg:text-4xl">
+						<Card className="border-none shadow-none mt-2">
+							<CardHeader className="px-0">
+								<CardTitle className="text-3xl">
 									{
 										tabContent.find((tab) => tab.id === activeTab)?.content
 											.heading
 									}
 								</CardTitle>
-								<CardDescription className="text-md  lg:text-lg">
+								<CardDescription className="text-lg mt-2">
 									{
 										tabContent.find((tab) => tab.id === activeTab)?.content
 											.description
 									}
 								</CardDescription>
 							</CardHeader>
-							<CardContent>
-								<ul className="list-disc pl-5">
-									{tabContent
-										.find((tab) => tab.id === activeTab)
-										?.content.features.map((feature, index) => (
-											<li key={index}>{feature}</li>
-										))}
-								</ul>
+							<CardContent className="px-0 py-4">
+								{tabContent.find((tab) => tab.id === activeTab)?.content
+									.features.length > 0 && (
+									<ul className="list-disc pl-5 space-y-2">
+										{tabContent
+											.find((tab) => tab.id === activeTab)
+											?.content.features.map((feature, index) => (
+												<li key={index}>{feature}</li>
+											))}
+									</ul>
+								)}
 							</CardContent>
-							<CardFooter>
+							<CardFooter className="px-0 pt-2">
 								{tabContent.find((tab) => tab.id === activeTab)?.content.cta ? (
 									<a href="/register">
-										<Button className="p-6 bg-emerald-700 hover:bg-emerald-800">
+										<Button className="px-6 py-6 bg-emerald-700 hover:bg-emerald-800">
 											{
 												tabContent.find((tab) => tab.id === activeTab)?.content
 													.cta
@@ -137,12 +233,13 @@ const SliderTabs = () => {
 						</Card>
 					</div>
 
-					<div className="bg-white/0 rounded-lg h-[400px]  md:h-auto overflow-hidden">
+					<div className="flex items-center justify-center">
 						<motion.div
 							initial={{ opacity: 0, scale: 0.95 }}
 							animate={{ opacity: 1, scale: 1 }}
 							transition={{ duration: 0.4 }}
-							key={activeTab} // This forces a re-render when tab changes
+							key={`desktop-${activeTab}`}
+							className="relative w-full max-w-xl aspect-[4/3] rounded-xl overflow-hidden shadow-lg"
 						>
 							<Image
 								src={
@@ -153,9 +250,10 @@ const SliderTabs = () => {
 									tabContent.find((tab) => tab.id === activeTab)?.content.image
 										?.alt || "Financial dashboard"
 								}
-								className="max-w-3xl h-auto object-cover rounded-xl shadow-md md:max-h-[450px]"
-								width={500}
-								height={500}
+								fill
+								className="object-cover"
+								sizes="(max-width: 1024px) 100vw, 50vw"
+								priority
 							/>
 						</motion.div>
 					</div>
